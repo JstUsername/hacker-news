@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { UseNewsListStateType } from './store.types.ts';
+import { UseNewsListStateType, NewsListType } from './store.types.ts';
 
 const newsListUrl = [
   `https://api.hnpwa.com/v0/newest/1.json?t=${new Date().getTime()}`,
@@ -13,14 +13,14 @@ export const useNewsListState = create<UseNewsListStateType>((set) => ({
   isLoading: false,
   updateNewsList: async () => {
     set({ isLoading: true });
-    try {
-      const fetchPromises = newsListUrl.map((url) => fetch(url).then((response) => response.json()));
-      const fetchResult = await Promise.all(fetchPromises);
-      const data = [].concat(...fetchResult);
-      const dataSliced = data.slice(0, 100);
-      set({ newsList: dataSliced });
-    } finally {
-      set({ isLoading: false });
+    let data: NewsListType[] | [] = [];
+    for (let i = 0; i < newsListUrl.length; i++) {
+      const response = await fetch(newsListUrl[i]);
+      let fetchPromise = await response.json();
+      i === 3 ? (fetchPromise = fetchPromise.slice(0, 10)) : null;
+      data = data.concat(fetchPromise);
+      set({ newsList: data });
+      i === 0 ? set({ isLoading: false }) : null;
     }
   },
 }));

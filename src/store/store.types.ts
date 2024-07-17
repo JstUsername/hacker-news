@@ -4,7 +4,7 @@ export interface UseNewsListStateType {
   isLoading: boolean;
 }
 
-interface NewsListType {
+export interface NewsListType {
   id: number;
   title: string;
   points: number;
