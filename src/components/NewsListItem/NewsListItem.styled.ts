@@ -6,7 +6,7 @@ export const NewsListItemWrapper = styled('div')`
   justify-content: space-between;
   gap: 40px;
   padding: 24px;
-  background: ${({ theme }) => theme.color.backgroundLight};
+  background: ${({ theme }) => theme.color.backgroundLightTransparent};
   cursor: pointer;
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 16px;
