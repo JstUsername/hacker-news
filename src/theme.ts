@@ -7,6 +7,7 @@ const theme: DefaultTheme = {
   },
   color: {
     backgroundLight: '#022741',
+    backgroundLightTransparent: 'rgba(2, 39, 65, 0.5)',
     backgroundDark: '#011C27',
     purple: '#B14ABF',
     yellow: '#F2E63C',
@@ -49,16 +50,17 @@ const GlobalStyle = createGlobalStyle`
     height: 8px;
   }
   *::-webkit-scrollbar-track {
-    background: ${theme.color.backgroundDark};
+    background: ${({ theme }) => theme.color.backgroundDark};
     border-radius: 4px;
   }
   *::-webkit-scrollbar-thumb {
-    background: ${theme.color.green};
+    background: ${({ theme }) => theme.color.green};
     border-radius: 4px;
   }
   @supports not selector(::-webkit-scrollbar) {
     * {
-      scrollbar-color: ${theme.color.green} ${theme.color.backgroundDark};
+      scrollbar-width: thin;
+      scrollbar-color: ${({ theme }) => theme.color.green} transparent;
     }
   }
 `;
