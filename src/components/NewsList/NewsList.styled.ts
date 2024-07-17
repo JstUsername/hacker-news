@@ -16,12 +16,15 @@ export const NewsListWrapper = styled('div')`
 `;
 
 export const LoaderWrapper = styled('div')`
-  position: absolute;
-  top: 50%;
-  left: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    height: calc(100vh - (88px + 64px));
+  }
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    height: calc(100vh - (72px + 48px));
+  }
 `;
 
 export const Loader = styled(HourGlass)`

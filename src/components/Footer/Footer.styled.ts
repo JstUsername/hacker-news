@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { StyledFooterProps } from './Footer.types.ts';
 
-export const StyledFooter = styled('footer')<StyledFooterProps>`
+export const StyledFooter = styled('footer')`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +14,6 @@ export const StyledFooter = styled('footer')<StyledFooterProps>`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     justify-content: space-between;
   }
-  position: ${(props) => (props.$isLoading ? 'absolute' : 'relative')};
   bottom: 0;
   left: 0;
   right: 0;
