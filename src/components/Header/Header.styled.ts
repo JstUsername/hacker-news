@@ -53,7 +53,7 @@ export const ButtonLink = styled('button')`
   }
 `;
 
-export const Link = styled('a')`
+export const StyledLink = styled('a')`
   cursor: pointer;
   text-decoration: none;
   ${({ theme }) => theme.typography.body};
