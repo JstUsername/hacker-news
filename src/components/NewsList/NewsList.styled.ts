@@ -10,6 +10,9 @@ export const NewsListWrapper = styled('div')`
     grid-template-columns: repeat(1, 1fr);
     padding: 16px 18px;
   }
+  @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 export const LoaderWrapper = styled('div')`
