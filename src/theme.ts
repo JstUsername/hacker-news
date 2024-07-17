@@ -41,7 +41,6 @@ const theme: DefaultTheme = {
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-    height: 100vh;
     background-color: ${({ theme }) => theme.color.backgroundDark};
     background-image: url(${({ theme }) => theme.svg.background});
   }
