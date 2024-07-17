@@ -6,7 +6,7 @@ const theme: DefaultTheme = {
     main: 'Source Code Pro, monospace',
   },
   color: {
-    backgroundLight: '#022741',
+    background: 'rgba(2, 39, 65, 0.75)',
     backgroundLightTransparent: 'rgba(2, 39, 65, 0.5)',
     backgroundDark: '#011C27',
     purple: '#B14ABF',

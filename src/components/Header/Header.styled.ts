@@ -24,7 +24,7 @@ export const StyledHeader = styled('header')`
   align-items: center;
   padding: 24px 32px;
   gap: 24px;
-  background: ${({ theme }) => theme.color.backgroundLight};
+  background: ${({ theme }) => theme.color.background};
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     padding: 16px 18px;
   }
