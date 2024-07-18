@@ -28,6 +28,11 @@ const theme: DefaultTheme = {
       fontSize: '16px',
       lineHeight: '1',
     },
+    body2: {
+      fontFamily: 'Source Code Pro, monospace',
+      fontSize: '20px',
+      lineHeight: '1',
+    },
   },
   breakpoints: {
     xs: '0',
