@@ -8,7 +8,7 @@ export default function Header() {
       <CroppedHNLogo title="Logo" />
       <HNLogo title="Logo" />
       <LinkWrapper>
-        <ButtonLink onClick={updateNewsList}>refreshNewsList()</ButtonLink>
+        <ButtonLink onClick={() => updateNewsList(false)}>refreshNewsList()</ButtonLink>
         <StyledLink href="https://github.com/JstUsername">/github</StyledLink>
         <StyledLink href="https://t.me/JstUser">/telegram</StyledLink>
         <StyledLink href="https://github.com/tastejs/hacker-news-pwas/">/api</StyledLink>
