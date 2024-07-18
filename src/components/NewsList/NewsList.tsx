@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
+import InternalServerError from '../InternalServerError/InternalServerError.tsx';
 import { NewsListWrapper, LoaderWrapper, Loader } from './NewsList.styled.ts';
 import NewsListItem from '../NewsListItem/NewsListItem.tsx';
 import { useNewsListState } from '../../store/store.ts';
 
 export default function NewsList() {
-  const { newsList, isLoading, getNewsList, updateNewsList } = useNewsListState();
+  const { newsList, isLoading, isServerDown, getNewsList, updateNewsList } = useNewsListState();
 
   useEffect(() => {
     getNewsList();
@@ -17,23 +18,29 @@ export default function NewsList() {
 
   return (
     <>
-      {isLoading ? (
-        <LoaderWrapper>
-          <Loader />
-        </LoaderWrapper>
+      {isServerDown ? (
+        <InternalServerError />
       ) : (
-        <NewsListWrapper>
-          {newsList.map((newsItem) => (
-            <NewsListItem
-              key={newsItem.id}
-              id={newsItem.id}
-              title={newsItem.title}
-              points={newsItem.points}
-              user={newsItem.user}
-              time_ago={newsItem.time_ago}
-            />
-          ))}
-        </NewsListWrapper>
+        <>
+          {isLoading ? (
+            <LoaderWrapper>
+              <Loader />
+            </LoaderWrapper>
+          ) : (
+            <NewsListWrapper>
+              {newsList.map((newsItem) => (
+                <NewsListItem
+                  key={newsItem.id}
+                  id={newsItem.id}
+                  title={newsItem.title}
+                  points={newsItem.points}
+                  user={newsItem.user}
+                  time_ago={newsItem.time_ago}
+                />
+              ))}
+            </NewsListWrapper>
+          )}
+        </>
       )}
     </>
   );
