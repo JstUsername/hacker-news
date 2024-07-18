@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { NewsListItemProps } from './NewsListItem.types.ts';
 import {
   NewsListItemWrapper,
@@ -12,8 +13,10 @@ import {
 } from './NewsListItem.styled.ts';
 
 export default function NewsListItem({ id, title, points, user, time_ago }: NewsListItemProps) {
+  const navigate = useNavigate();
+
   return (
-    <NewsListItemWrapper id={`${id}`} tabIndex={0}>
+    <NewsListItemWrapper tabIndex={0} onClick={() => navigate(`/news/${id}`)}>
       <NewsTitle>{title}</NewsTitle>
       <CardBottom>
         <PointsWrapper>
