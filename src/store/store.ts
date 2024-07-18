@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { UseNewsListStateType, NewsListType } from './store.types.ts';
+import { NewsItem, NewsListType, UseNewsItemType, UseNewsListStateType } from './store.types.ts';
 
 const newsListUrl = [
   'https://api.hnpwa.com/v0/newest/1.json',
@@ -49,5 +49,19 @@ export const useNewsListState = create<UseNewsListStateType>((set, get) => ({
   },
 }));
 
+export const useNewsItemState = create<UseNewsItemType>((set) => ({
+  newsItem: null,
+  itemLoading: false,
+  itemServerDown: false,
+  getNewsItem: async (id) => {
+    set({ itemLoading: true });
+    let data: NewsItem | null = null;
+    const response = await fetch(`https://api.hnpwa.com/v0/item/${id}.json`);
+    if (response.status === 500) {
+      set({ itemLoading: false, itemServerDown: true });
+      return;
+    }
+    data = await response.json();
+    set({ itemLoading: false, newsItem: data });
   },
 }));
