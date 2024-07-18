@@ -4,11 +4,11 @@ import HourGlass from '../../assets/hour-glass.svg?react';
 export const NewsListWrapper = styled('div')`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  padding: 24px 32px;
+  padding: 24px;
   gap: 18px;
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: repeat(1, 1fr);
-    padding: 16px 18px;
+    padding: 16px;
   }
   @media (min-width: ${({ theme }) => theme.breakpoints.lg}) {
     grid-template-columns: repeat(3, 1fr);
