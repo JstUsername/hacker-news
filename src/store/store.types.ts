@@ -1,9 +1,9 @@
 export interface UseNewsListStateType {
   newsList: NewsListType[] | [];
+  newsLoading: boolean;
+  newsServerDown: boolean;
   getNewsList: () => Promise<void>;
   updateNewsList: (auto: boolean) => Promise<void>;
-  isLoading: boolean;
-  isServerDown: boolean;
 }
 
 export interface NewsListType {

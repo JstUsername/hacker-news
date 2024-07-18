@@ -5,7 +5,7 @@ import NewsListItem from '../NewsListItem/NewsListItem.tsx';
 import { useNewsListState } from '../../store/store.ts';
 
 export default function NewsList() {
-  const { newsList, isLoading, isServerDown, getNewsList, updateNewsList } = useNewsListState();
+  const { newsList, newsLoading, newsServerDown, getNewsList, updateNewsList } = useNewsListState();
 
   useEffect(() => {
     getNewsList();
@@ -18,11 +18,11 @@ export default function NewsList() {
 
   return (
     <>
-      {isServerDown ? (
+      {newsServerDown ? (
         <InternalServerError />
       ) : (
         <>
-          {isLoading ? (
+          {newsLoading ? (
             <LoaderWrapper>
               <Loader />
             </LoaderWrapper>
