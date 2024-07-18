@@ -1,12 +1,15 @@
 import { StyledHeader, LinkWrapper, ButtonLink, StyledLink, HNLogo, CroppedHNLogo } from './Header.styled.ts';
 import { useNewsListState } from '../../store/store.ts';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const { updateNewsList } = useNewsListState();
+  const navigate = useNavigate();
+
   return (
     <StyledHeader>
       <CroppedHNLogo title="Logo" />
-      <HNLogo title="Logo" />
+      <HNLogo title="Logo" onClick={() => navigate('/')} />
       <LinkWrapper>
         <ButtonLink onClick={() => updateNewsList(false)}>refreshNewsList()</ButtonLink>
         <StyledLink href="https://github.com/JstUsername">/github</StyledLink>
