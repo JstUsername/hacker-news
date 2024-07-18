@@ -5,6 +5,7 @@ import CroppedLogo from '../../assets/logo-cropped.svg?react';
 export const HNLogo = styled(Logo)`
   display: block;
   flex-shrink: 0;
+  cursor: pointer;
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: none;
   }
@@ -22,11 +23,11 @@ export const StyledHeader = styled('header')`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 32px;
+  padding: 24px;
   gap: 24px;
   background: ${({ theme }) => theme.color.background};
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: 16px 18px;
+    padding: 16px;
   }
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     gap: 16px;
