@@ -4,10 +4,15 @@ import NewsListItem from '../NewsListItem/NewsListItem.tsx';
 import { useNewsListState } from '../../store/store.ts';
 
 export default function NewsList() {
-  const { newsList, isLoading, updateNewsList } = useNewsListState();
+  const { newsList, isLoading, getNewsList, updateNewsList } = useNewsListState();
 
   useEffect(() => {
-    updateNewsList();
+    getNewsList();
+  }, [getNewsList]);
+
+  useEffect(() => {
+    const autoUpdateInterval = setInterval(() => updateNewsList(true), 60000);
+    return () => clearInterval(autoUpdateInterval);
   }, [updateNewsList]);
 
   return (
