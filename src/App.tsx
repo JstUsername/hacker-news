@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { theme, GlobalStyle } from './theme.ts';
 import Layout from './components/Layout/Layout.tsx';
 import HomePage from './pages/HomePage/HomePage.tsx';
+import NewsItemPage from './pages/NewsItemPage/NewsItemPage.tsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.tsx';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
+            <Route path="/news/:id" element={<NewsItemPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
