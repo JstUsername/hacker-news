@@ -8,8 +8,8 @@ export default function NewsList() {
   const { newsList, newsLoading, newsServerDown, getNewsList, updateNewsList } = useNewsListState();
 
   useEffect(() => {
-    getNewsList();
-  }, [getNewsList]);
+    newsList.length === 0 ? getNewsList() : null;
+  }, [newsList, getNewsList]);
 
   useEffect(() => {
     const autoUpdateInterval = setInterval(() => updateNewsList(true), 60000);
