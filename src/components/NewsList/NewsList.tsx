@@ -16,32 +16,28 @@ export default function NewsList() {
     return () => clearInterval(autoUpdateInterval);
   }, [updateNewsList]);
 
+  if (newsServerDown) {
+    return <InternalServerError />;
+  }
+  if (newsLoading) {
+    return (
+      <LoaderWrapper>
+        <Loader />
+      </LoaderWrapper>
+    );
+  }
   return (
-    <>
-      {newsServerDown ? (
-        <InternalServerError />
-      ) : (
-        <>
-          {newsLoading ? (
-            <LoaderWrapper>
-              <Loader />
-            </LoaderWrapper>
-          ) : (
-            <NewsListWrapper>
-              {newsList.map((newsItem) => (
-                <NewsListItem
-                  key={newsItem.id}
-                  id={newsItem.id}
-                  title={newsItem.title}
-                  points={newsItem.points}
-                  user={newsItem.user}
-                  time_ago={newsItem.time_ago}
-                />
-              ))}
-            </NewsListWrapper>
-          )}
-        </>
-      )}
-    </>
+    <NewsListWrapper>
+      {newsList.map((newsItem) => (
+        <NewsListItem
+          key={newsItem.id}
+          id={newsItem.id}
+          title={newsItem.title}
+          points={newsItem.points}
+          user={newsItem.user}
+          time_ago={newsItem.time_ago}
+        />
+      ))}
+    </NewsListWrapper>
   );
 }

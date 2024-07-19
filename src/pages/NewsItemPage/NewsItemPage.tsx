@@ -24,51 +24,45 @@ export default function NewsItemPage() {
     getNewsItem(Number(id));
   }, [getNewsItem, id]);
 
-  return (
-    <>
-      {itemServerDown ? (
-        <InternalServerError />
-      ) : (
-        <>
-          {itemLoading ? (
-            <LoaderWrapper>
-              <Loader />
-            </LoaderWrapper>
-          ) : (
-            <>
-              {newsItem !== null ? (
-                <NewsItemWrapper>
-                  <ContentWrapper>
-                    <NewsItemTitle>{newsItem.title}</NewsItemTitle>
-                    <ContentBottomWrapper>
-                      <LinkToNews>
-                        Link: <a href={newsItem.url}>{newsItem.url}</a>
-                      </LinkToNews>
-                      <Points>{newsItem.points} points</Points>
-                      <ByTimeWrapper>
-                        <By>
-                          By: <span>{newsItem.user}</span>
-                        </By>
-                        <Time>{timestampToDate(newsItem.time)}</Time>
-                      </ByTimeWrapper>
-                    </ContentBottomWrapper>
-                  </ContentWrapper>
-                  <CommentsWrapper>
-                    <NewsItemTitle>
-                      Comments
-                      <span>{' ' + newsItem.comments_count}</span>
-                    </NewsItemTitle>
-                  </CommentsWrapper>
-                </NewsItemWrapper>
-              ) : (
-                <NotFoundPage />
-              )}
-            </>
-          )}
-        </>
-      )}
-    </>
-  );
+  if (itemServerDown) {
+    return <InternalServerError />;
+  }
+  if (itemLoading) {
+    return (
+      <LoaderWrapper>
+        <Loader />
+      </LoaderWrapper>
+    );
+  }
+  if (newsItem !== null) {
+    return (
+      <NewsItemWrapper>
+        <ContentWrapper>
+          <NewsItemTitle>{newsItem.title}</NewsItemTitle>
+          <ContentBottomWrapper>
+            <LinkToNews>
+              Link: <a href={newsItem.url}>{newsItem.url}</a>
+            </LinkToNews>
+            <Points>{newsItem.points} points</Points>
+            <ByTimeWrapper>
+              <By>
+                By: <span>{newsItem.user}</span>
+              </By>
+              <Time>{timestampToDate(newsItem.time)}</Time>
+            </ByTimeWrapper>
+          </ContentBottomWrapper>
+        </ContentWrapper>
+        <CommentsWrapper>
+          <NewsItemTitle>
+            Comments
+            <span>{' ' + newsItem.comments_count}</span>
+          </NewsItemTitle>
+        </CommentsWrapper>
+      </NewsItemWrapper>
+    );
+  } else {
+    return <NotFoundPage />;
+  }
 }
 
 const NewsItemWrapper = styled('div')`
