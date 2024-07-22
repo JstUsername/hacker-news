@@ -1,13 +1,28 @@
 import { useEffect } from 'react';
-import { useNewsItemState } from '../../store/store.ts';
 import { useParams } from 'react-router-dom';
+import { useNewsItemState, useNewsListState } from '../../store/store.ts';
 import InternalServerError from '../../components/InternalServerError/InternalServerError.tsx';
 import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled.ts';
-import styled from 'styled-components';
 import NotFoundPage from '../NotFoundPage/NotFoundPage.tsx';
+import CommentsItem from '../../components/CommentsItem/CommentsItem.tsx';
+import {
+  NewsItemWrapper,
+  CommentsLoaderWrapper,
+  ContentHeaderWrapper,
+  ContentBottomWrapper,
+  NewsItemTitle,
+  ContentWrapper,
+  ByTimeWrapper,
+  Time,
+  CommentsWrapper,
+  LinkToNews,
+  Points,
+  By,
+} from './NewsItemPage.styled.ts';
 
 export default function NewsItemPage() {
-  const { newsItem, itemServerDown, itemLoading, getNewsItem } = useNewsItemState();
+  const { newsItem, itemServerDown, itemLoading, commentsLoading, getNewsContent, getNewsItem } = useNewsItemState();
+  const { newsList } = useNewsListState();
   const { id } = useParams();
 
   const timestampToDate = (timestamp: number) => {
@@ -21,8 +36,14 @@ export default function NewsItemPage() {
   };
 
   useEffect(() => {
-    getNewsItem(Number(id));
-  }, [getNewsItem, id]);
+    getNewsItem(Number(id), newsList, false);
+    getNewsContent(Number(id), newsList);
+  }, [getNewsItem, getNewsContent, id, newsList]);
+
+  useEffect(() => {
+    const autoUpdateInterval = setInterval(() => getNewsItem(Number(id), newsList, true), 60000);
+    return () => clearInterval(autoUpdateInterval);
+  }, [getNewsItem, id, newsList]);
 
   if (itemServerDown) {
     return <InternalServerError />;
@@ -38,11 +59,13 @@ export default function NewsItemPage() {
     return (
       <NewsItemWrapper>
         <ContentWrapper>
-          <NewsItemTitle>{newsItem.title}</NewsItemTitle>
-          <ContentBottomWrapper>
+          <ContentHeaderWrapper>
+            <NewsItemTitle>{newsItem.title}</NewsItemTitle>
             <LinkToNews>
               Link: <a href={newsItem.url}>{newsItem.url}</a>
             </LinkToNews>
+          </ContentHeaderWrapper>
+          <ContentBottomWrapper>
             <Points>{newsItem.points} points</Points>
             <ByTimeWrapper>
               <By>
@@ -57,6 +80,17 @@ export default function NewsItemPage() {
             Comments
             <span>{' ' + newsItem.comments_count}</span>
           </NewsItemTitle>
+          {commentsLoading ? (
+            <CommentsLoaderWrapper>
+              <Loader />
+            </CommentsLoaderWrapper>
+          ) : (
+            <>
+              {newsItem.comments.map((comment) => (
+                <CommentsItem key={comment.id} comment={comment} />
+              ))}
+            </>
+          )}
         </CommentsWrapper>
       </NewsItemWrapper>
     );
@@ -64,115 +98,3 @@ export default function NewsItemPage() {
     return <NotFoundPage />;
   }
 }
-
-const NewsItemWrapper = styled('div')`
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  box-sizing: border-box;
-  padding: 24px;
-  gap: 18px;
-  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    min-height: calc(100vh - (88px + 64px));
-  }
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    min-height: calc(100vh - (72px + 48px));
-    padding: 16px;
-  }
-`;
-
-const ContentWrapper = styled('div')`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-self: stretch;
-  width: 100%;
-  overflow: hidden;
-  gap: 48px;
-  padding: 24px;
-  box-sizing: border-box;
-  background: ${({ theme }) => theme.color.backgroundLightTransparent};
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    padding: 16px;
-  }
-`;
-
-const ContentBottomWrapper = styled('div')`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 24px;
-`;
-
-const CommentsWrapper = styled('div')`
-  align-self: stretch;
-  gap: 24px;
-  padding: 24px;
-  box-sizing: border-box;
-  background: ${({ theme }) => theme.color.backgroundLightTransparent};
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    padding: 16px;
-  }
-`;
-
-const NewsItemTitle = styled('h1')`
-  ${({ theme }) => theme.typography.h1};
-  margin: 0;
-  word-break: break-word;
-  color: ${({ theme }) => theme.color.purple};
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: 24px;
-  }
-  span {
-    color: ${({ theme }) => theme.color.green};
-  }
-`;
-
-const LinkToNews = styled('span')`
-  ${({ theme }) => theme.typography.body2};
-  color: ${({ theme }) => theme.color.green};
-  line-height: 1.6;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  a {
-    color: ${({ theme }) => theme.color.green};
-    cursor: pointer;
-    white-space: nowrap;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
-
-const Points = styled('span')`
-  ${({ theme }) => theme.typography.body2};
-  color: ${({ theme }) => theme.color.yellow};
-`;
-
-const By = styled('span')`
-  ${({ theme }) => theme.typography.body2};
-  color: ${({ theme }) => theme.color.green};
-  span {
-    color: ${({ theme }) => theme.color.purple};
-  }
-`;
-
-const Time = styled('span')`
-  ${({ theme }) => theme.typography.body2};
-  color: ${({ theme }) => theme.color.yellow};
-`;
-
-const ByTimeWrapper = styled('div')`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-`;
