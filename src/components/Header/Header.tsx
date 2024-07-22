@@ -11,7 +11,7 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      <CroppedHNLogo title="Logo" />
+      <CroppedHNLogo title="Logo" onClick={() => navigate('/')} />
       <HNLogo title="Logo" onClick={() => navigate('/')} />
       <LinkWrapper>
         <ButtonLink

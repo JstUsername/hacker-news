@@ -14,6 +14,7 @@ export const HNLogo = styled(Logo)`
 export const CroppedHNLogo = styled(CroppedLogo)`
   display: none;
   flex-shrink: 0;
+  cursor: pointer;
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: block;
   }
