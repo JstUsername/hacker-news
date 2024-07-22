@@ -41,12 +41,12 @@ export const UserTimeAgoWrapper = styled('div')`
 `;
 
 export const Points = styled('span')`
-  ${({ theme }) => theme.typography.body};
+  ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.yellow};
 `;
 
 export const By = styled('span')`
-  ${({ theme }) => theme.typography.body};
+  ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.green};
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: none;
@@ -54,11 +54,11 @@ export const By = styled('span')`
 `;
 
 export const User = styled('span')`
-  ${({ theme }) => theme.typography.body};
+  ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.green};
 `;
 
 export const TimeAgo = styled('span')`
-  ${({ theme }) => theme.typography.body};
+  ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.green};
 `;

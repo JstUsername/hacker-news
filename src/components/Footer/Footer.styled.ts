@@ -22,7 +22,7 @@ export const StyledFooter = styled('footer')`
 export const StyledLink = styled('a')`
   cursor: pointer;
   text-decoration: none;
-  ${({ theme }) => theme.typography.body};
+  ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.green};
   &:hover {
     text-decoration: underline;
@@ -36,7 +36,7 @@ export const ApiLink = styled('a')`
   transform: translate(-50%, -50%);
   cursor: pointer;
   text-decoration: none;
-  ${({ theme }) => theme.typography.body};
+  ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.green};
   &:hover {
     text-decoration: underline;

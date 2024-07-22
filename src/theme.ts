@@ -19,7 +19,7 @@ const theme: DefaultTheme = {
       fontSize: '32px',
       lineHeight: '1',
     },
-    body: {
+    body1: {
       fontFamily: 'Source Code Pro, monospace',
       fontSize: '16px',
       lineHeight: '1',

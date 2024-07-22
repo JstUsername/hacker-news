@@ -18,7 +18,7 @@ export const CommentsItemUser = styled('h2')`
 `;
 
 export const CommentsItemContent = styled('div')`
-  ${({ theme }) => theme.typography.body};
+  ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.green};
   p {
     margin: 12px 0;
