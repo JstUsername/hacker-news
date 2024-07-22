@@ -9,8 +9,8 @@ export interface UseNewsListStateType {
 export interface NewsListType {
   id: number;
   title: string;
-  points?: number | null;
-  user?: string | null;
+  points: number | null;
+  user: string | null;
   time: number;
   time_ago: string;
   comments_count: number;
@@ -20,13 +20,16 @@ export interface NewsListType {
 }
 
 export interface UseNewsItemType {
-  newsItem: NewsItem | null;
+  newsItem: NewsItemType | null;
   itemLoading: boolean;
+  commentsLoading: boolean;
   itemServerDown: boolean;
-  getNewsItem: (id: number) => Promise<void>;
+  getNewsItem: (id: number, newsList: NewsListType[], auto: boolean) => Promise<void>;
+  getNewsContent: (id: number, newsList: NewsListType[]) => void;
+  setExpandVisible: (id: number, newsItem: NewsItemType | null) => void;
 }
 
-export interface NewsItem {
+export interface NewsItemType {
   id: number;
   title: string;
   points: number | null;
@@ -39,7 +42,9 @@ export interface NewsItem {
   type: string;
   url?: string;
   domain?: string;
-  comments: NewsItem[];
+  comments: NewsItemType[];
   level: number;
   comments_count: number;
+  visible?: boolean;
+  expand?: boolean;
 }
