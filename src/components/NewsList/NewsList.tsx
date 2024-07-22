@@ -2,10 +2,20 @@ import { useEffect } from 'react';
 import InternalServerError from '../InternalServerError/InternalServerError.tsx';
 import { NewsListWrapper, LoaderWrapper, Loader } from './NewsList.styled.ts';
 import NewsListItem from '../NewsListItem/NewsListItem.tsx';
-import { useNewsListState } from '../../store/store.ts';
+import {
+  useSelectorGetNewsList,
+  useSelectorNewsList,
+  useSelectorNewsLoading,
+  useSelectorNewsServerDown,
+  useSelectorUpdateNewsList,
+} from '../../store/store.ts';
 
 export default function NewsList() {
-  const { newsList, newsLoading, newsServerDown, getNewsList, updateNewsList } = useNewsListState();
+  const newsList = useSelectorNewsList();
+  const getNewsList = useSelectorGetNewsList();
+  const updateNewsList = useSelectorUpdateNewsList();
+  const newsLoading = useSelectorNewsLoading();
+  const newsServerDown = useSelectorNewsServerDown();
 
   useEffect(() => {
     newsList.length === 0 ? getNewsList() : null;

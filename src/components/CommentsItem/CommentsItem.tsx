@@ -1,5 +1,5 @@
 import { CommentsListProps } from './CommentsItem.types.ts';
-import { useNewsItemState } from '../../store/store.ts';
+import { useSelectorNewsItem, useSelectorSetExpandVisible } from '../../store/store.ts';
 import {
   CommentsItemWrapper,
   CommentsItemContent,
@@ -10,7 +10,8 @@ import {
 } from './CommentsItem.styled.ts';
 
 export default function CommentsItem({ comment }: CommentsListProps) {
-  const { newsItem, setExpandVisible } = useNewsItemState();
+  const newsItem = useSelectorNewsItem();
+  const setExpandVisible = useSelectorSetExpandVisible();
 
   const handleClickExpand = (id: number) => {
     setExpandVisible(id, newsItem);

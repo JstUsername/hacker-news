@@ -1,6 +1,14 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useNewsItemState, useNewsListState } from '../../store/store.ts';
+import {
+  useSelectorCommentsLoading,
+  useSelectorGetNewsContent,
+  useSelectorGetNewsItem,
+  useSelectorItemLoading,
+  useSelectorItemServerDown,
+  useSelectorNewsItem,
+  useSelectorNewsList,
+} from '../../store/store.ts';
 import InternalServerError from '../../components/InternalServerError/InternalServerError.tsx';
 import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled.ts';
 import NotFoundPage from '../NotFoundPage/NotFoundPage.tsx';
@@ -21,8 +29,14 @@ import {
 } from './NewsItemPage.styled.ts';
 
 export default function NewsItemPage() {
-  const { newsItem, itemServerDown, itemLoading, commentsLoading, getNewsContent, getNewsItem } = useNewsItemState();
-  const { newsList } = useNewsListState();
+  const newsList = useSelectorNewsList();
+  const newsItem = useSelectorNewsItem();
+  const itemServerDown = useSelectorItemServerDown();
+  const itemLoading = useSelectorItemLoading();
+  const commentsLoading = useSelectorCommentsLoading();
+  const getNewsItem = useSelectorGetNewsItem();
+  const getNewsContent = useSelectorGetNewsContent();
+
   const { id } = useParams();
 
   const timestampToDate = (timestamp: number) => {

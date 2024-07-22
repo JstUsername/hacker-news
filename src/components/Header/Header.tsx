@@ -1,12 +1,12 @@
 import { StyledHeader, LinkWrapper, ButtonLink, StyledLink, HNLogo, CroppedHNLogo } from './Header.styled.ts';
-import { useNewsItemState, useNewsListState } from '../../store/store.ts';
+import { useSelectorGetNewsItem, useSelectorNewsList, useSelectorUpdateNewsList } from '../../store/store.ts';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export default function Header() {
-  const { updateNewsList } = useNewsListState();
+  const newsList = useSelectorNewsList();
+  const getNewsItem = useSelectorGetNewsItem();
+  const updateNewsList = useSelectorUpdateNewsList();
   const navigate = useNavigate();
-  const { getNewsItem } = useNewsItemState();
-  const { newsList } = useNewsListState();
   const { id } = useParams();
 
   return (

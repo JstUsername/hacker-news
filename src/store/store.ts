@@ -8,7 +8,7 @@ const newsListUrl = [
   'https://api.hnpwa.com/v0/newest/4.json',
 ];
 
-export const useNewsListState = create<UseNewsListStateType>((set, get) => ({
+const useNewsListState = create<UseNewsListStateType>((set, get) => ({
   newsList: [],
   newsLoading: false,
   newsServerDown: false,
@@ -49,7 +49,13 @@ export const useNewsListState = create<UseNewsListStateType>((set, get) => ({
   },
 }));
 
-export const useNewsItemState = create<UseNewsItemType>((set) => ({
+export const useSelectorNewsList = () => useNewsListState((state) => state.newsList);
+export const useSelectorNewsLoading = () => useNewsListState((state) => state.newsLoading);
+export const useSelectorNewsServerDown = () => useNewsListState((state) => state.newsServerDown);
+export const useSelectorGetNewsList = () => useNewsListState((state) => state.getNewsList);
+export const useSelectorUpdateNewsList = () => useNewsListState((state) => state.updateNewsList);
+
+const useNewsItemState = create<UseNewsItemType>((set) => ({
   newsItem: null,
   itemLoading: false,
   commentsLoading: false,
@@ -122,3 +128,11 @@ export const useNewsItemState = create<UseNewsItemType>((set) => ({
     toggleExpandVisible(newData);
   },
 }));
+
+export const useSelectorNewsItem = () => useNewsItemState((state) => state.newsItem);
+export const useSelectorItemLoading = () => useNewsItemState((state) => state.itemLoading);
+export const useSelectorCommentsLoading = () => useNewsItemState((state) => state.commentsLoading);
+export const useSelectorItemServerDown = () => useNewsItemState((state) => state.itemServerDown);
+export const useSelectorGetNewsContent = () => useNewsItemState((state) => state.getNewsContent);
+export const useSelectorGetNewsItem = () => useNewsItemState((state) => state.getNewsItem);
+export const useSelectorSetExpandVisible = () => useNewsItemState((state) => state.setExpandVisible);
