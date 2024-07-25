@@ -39,14 +39,7 @@ export default function NewsList() {
   return (
     <NewsListWrapper>
       {newsList.map((newsItem) => (
-        <NewsListItem
-          key={newsItem.id}
-          id={newsItem.id}
-          title={newsItem.title}
-          points={newsItem.points}
-          user={newsItem.user}
-          time_ago={newsItem.time_ago}
-        />
+        <NewsListItem key={newsItem.id} {...newsItem} />
       ))}
     </NewsListWrapper>
   );
