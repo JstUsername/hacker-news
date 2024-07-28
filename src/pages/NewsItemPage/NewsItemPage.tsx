@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { fromUnixTime, lightFormat } from 'date-fns';
 import {
   useSelectorCommentsLoading,
   useSelectorGetNewsContent,
@@ -40,13 +41,8 @@ export default function NewsItemPage() {
   const { id } = useParams();
 
   const timestampToDate = (timestamp: number) => {
-    const date = new Date(timestamp * 1000);
-    const year = date.getFullYear() - 2000;
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    return `${hours}:${minutes} ${day}.${month}.${year}`;
+    const date = fromUnixTime(timestamp);
+    return lightFormat(date, 'HH:mm dd.MM.yy').toString();
   };
 
   useEffect(() => {
