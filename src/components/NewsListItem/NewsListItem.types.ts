@@ -3,5 +3,5 @@ export interface NewsListItemProps {
   title: string;
   points?: number | null;
   user?: string | null;
-  time_ago: string;
+  time: number;
 }
