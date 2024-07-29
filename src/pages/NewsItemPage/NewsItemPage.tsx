@@ -32,6 +32,7 @@ export default function NewsItemPage() {
   const newsItem = useSelectorNewsItem();
   const itemServerDown = useSelectorItemServerDown();
   const commentsLoading = useSelectorCommentsLoading();
+  const itemPageNotFound = useSelectorItemPageNotFound();
   const getNewsItem = useSelectorGetNewsItem();
   const getNewsContent = useSelectorGetNewsContent();
   const { id } = useParams();
@@ -59,6 +60,9 @@ export default function NewsItemPage() {
     throw new Error('Internal Server Error');
   }
 
+  if (itemPageNotFound) {
+    throw new Error('Page Not Found');
+  }
   return (
     <Suspense
       fallback={
