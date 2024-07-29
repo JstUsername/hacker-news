@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { fromUnixTime, lightFormat } from 'date-fns';
 import {
@@ -30,15 +30,15 @@ import {
 } from './NewsItemPage.styled.ts';
 
 export default function NewsItemPage() {
+  const NotFoundPage = lazy(() => import('../NotFoundPage/NotFoundPage.tsx'));
   const newsList = useSelectorNewsList();
   const newsItem = useSelectorNewsItem();
   const itemServerDown = useSelectorItemServerDown();
-  const itemLoading = useSelectorItemLoading();
   const commentsLoading = useSelectorCommentsLoading();
   const getNewsItem = useSelectorGetNewsItem();
   const getNewsContent = useSelectorGetNewsContent();
-
   const { id } = useParams();
+  const hasMounted = useRef(false);
 
   const timestampToDate = (timestamp: number) => {
     const date = fromUnixTime(timestamp);
@@ -46,8 +46,11 @@ export default function NewsItemPage() {
   };
 
   useEffect(() => {
-    getNewsItem(Number(id), newsList, false);
-    getNewsContent(Number(id), newsList);
+    if (!hasMounted.current) {
+      getNewsItem(Number(id), newsList, false);
+      getNewsContent(Number(id), newsList);
+      hasMounted.current = true;
+    }
   }, [getNewsItem, getNewsContent, id, newsList]);
 
   useEffect(() => {
