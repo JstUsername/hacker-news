@@ -23,6 +23,7 @@ export interface UseNewsItemType {
   itemLoading: boolean;
   commentsLoading: boolean;
   itemServerDown: boolean;
+  itemPageNotFound: boolean;
   getNewsItem: (id: number, newsList: NewsListType[], auto: boolean) => Promise<void>;
   getNewsContent: (id: number, newsList: NewsListType[]) => void;
   setExpandVisible: (id: number, newsItem: NewsItemType | null) => void;

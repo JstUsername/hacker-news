@@ -37,6 +37,7 @@ const useNewsItemState = create<UseNewsItemType>((set) => ({
   itemLoading: false,
   commentsLoading: false,
   itemServerDown: false,
+  itemPageNotFound: false,
   getNewsContent: (id, newsList) => {
     let foundNews = newsList.find((news) => news.id === id);
     if (foundNews !== undefined) {
@@ -56,6 +57,9 @@ const useNewsItemState = create<UseNewsItemType>((set) => ({
       return;
     }
     data = await response.json();
+    if (data === null) {
+      set({ itemPageNotFound: true });
+    }
     const addVisibleField = (commentsList: NewsItemType) => {
       switch (commentsList.level) {
         case undefined:
@@ -110,6 +114,7 @@ export const useSelectorNewsItem = () => useNewsItemState((state) => state.newsI
 export const useSelectorItemLoading = () => useNewsItemState((state) => state.itemLoading);
 export const useSelectorCommentsLoading = () => useNewsItemState((state) => state.commentsLoading);
 export const useSelectorItemServerDown = () => useNewsItemState((state) => state.itemServerDown);
+export const useSelectorItemPageNotFound = () => useNewsItemState((state) => state.itemPageNotFound);
 export const useSelectorGetNewsContent = () => useNewsItemState((state) => state.getNewsContent);
 export const useSelectorGetNewsItem = () => useNewsItemState((state) => state.getNewsItem);
 export const useSelectorSetExpandVisible = () => useNewsItemState((state) => state.setExpandVisible);
