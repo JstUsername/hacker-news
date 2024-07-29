@@ -1,11 +1,11 @@
 import { StyledHeader, LinkWrapper, ButtonLink, StyledLink, HNLogo, CroppedHNLogo } from './Header.styled.ts';
-import { useSelectorGetNewsItem, useSelectorNewsList, useSelectorUpdateNewsList } from '../../store/store.ts';
+import { useSelectorGetNewsItem, useSelectorGetNewsList, useSelectorNewsList } from '../../store/store.ts';
 import { useParams, Link } from 'react-router-dom';
 
 export default function Header() {
   const newsList = useSelectorNewsList();
   const getNewsItem = useSelectorGetNewsItem();
-  const updateNewsList = useSelectorUpdateNewsList();
+  const getNewsList = useSelectorGetNewsList();
   const { id } = useParams();
 
   return (
@@ -15,9 +15,7 @@ export default function Header() {
         <HNLogo title="Logo" />
       </Link>
       <LinkWrapper>
-        <ButtonLink
-          onClick={() => (id === undefined ? updateNewsList(false) : getNewsItem(Number(id), newsList, false))}
-        >
+        <ButtonLink onClick={() => (id === undefined ? getNewsList() : getNewsItem(Number(id), newsList, false))}>
           {id === undefined ? 'refreshNewsList()' : 'updateCurrentNews()'}
         </ButtonLink>
         <StyledLink href="https://github.com/JstUsername">/github</StyledLink>
