@@ -6,7 +6,13 @@ export const NewsListWrapper = styled('div')`
   grid-template-columns: repeat(2, 1fr);
   padding: 24px;
   gap: 18px;
+
+  @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
+    min-height: calc(100vh - (88px + 64px));
+    grid-template-rows: repeat(2, 1fr);
+  }
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    min-height: calc(100vh - (72px + 48px));
     grid-template-columns: repeat(1, 1fr);
     padding: 16px;
   }
