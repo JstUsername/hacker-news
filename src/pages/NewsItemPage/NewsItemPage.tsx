@@ -5,14 +5,11 @@ import {
   useSelectorCommentsLoading,
   useSelectorGetNewsContent,
   useSelectorGetNewsItem,
-  useSelectorItemLoading,
   useSelectorItemServerDown,
   useSelectorNewsItem,
   useSelectorNewsList,
 } from '../../store/store.ts';
-import InternalServerError from '../../components/InternalServerError/InternalServerError.tsx';
 import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled.ts';
-import NotFoundPage from '../NotFoundPage/NotFoundPage.tsx';
 import CommentsItem from '../../components/CommentsItem/CommentsItem.tsx';
 import {
   NewsItemWrapper,
@@ -59,55 +56,57 @@ export default function NewsItemPage() {
   }, [getNewsItem, id, newsList]);
 
   if (itemServerDown) {
-    return <InternalServerError />;
+    throw new Error('Internal Server Error');
   }
-  if (itemLoading) {
-    return (
-      <LoaderWrapper>
-        <Loader />
-      </LoaderWrapper>
-    );
-  }
-  if (newsItem !== null) {
-    return (
-      <NewsItemWrapper>
-        <ContentWrapper>
-          <ContentHeaderWrapper>
-            <NewsItemTitle>{newsItem.title}</NewsItemTitle>
-            <LinkToNews>
-              Link: <a href={newsItem.url}>{newsItem.url}</a>
-            </LinkToNews>
-          </ContentHeaderWrapper>
-          <ContentBottomWrapper>
-            <Points>{newsItem.points} points</Points>
-            <ByTimeWrapper>
-              <By>
-                By: <span>{newsItem.user}</span>
-              </By>
-              <Time>{timestampToDate(newsItem.time)}</Time>
-            </ByTimeWrapper>
-          </ContentBottomWrapper>
-        </ContentWrapper>
-        <CommentsWrapper>
-          <NewsItemTitle>
-            Comments
-            <span>{' ' + newsItem.comments_count}</span>
-          </NewsItemTitle>
-          {commentsLoading ? (
-            <CommentsLoaderWrapper>
-              <Loader />
-            </CommentsLoaderWrapper>
-          ) : (
-            <>
-              {newsItem.comments.map((comment) => (
-                <CommentsItem key={comment.id} comment={comment} />
-              ))}
-            </>
-          )}
-        </CommentsWrapper>
-      </NewsItemWrapper>
-    );
-  } else {
-    return <NotFoundPage />;
-  }
+
+  return (
+    <Suspense
+      fallback={
+        <LoaderWrapper>
+          <Loader />
+        </LoaderWrapper>
+      }
+    >
+      {newsItem === null ? (
+        <NotFoundPage />
+      ) : (
+        <NewsItemWrapper>
+          <ContentWrapper>
+            <ContentHeaderWrapper>
+              <NewsItemTitle>{newsItem.title}</NewsItemTitle>
+              <LinkToNews>
+                Link: <a href={newsItem.url}>{newsItem.url}</a>
+              </LinkToNews>
+            </ContentHeaderWrapper>
+            <ContentBottomWrapper>
+              <Points>{newsItem.points} points</Points>
+              <ByTimeWrapper>
+                <By>
+                  By: <span>{newsItem.user}</span>
+                </By>
+                <Time>{timestampToDate(newsItem.time)}</Time>
+              </ByTimeWrapper>
+            </ContentBottomWrapper>
+          </ContentWrapper>
+          <CommentsWrapper>
+            <NewsItemTitle>
+              Comments
+              <span>{' ' + newsItem.comments_count}</span>
+            </NewsItemTitle>
+            {commentsLoading ? (
+              <CommentsLoaderWrapper>
+                <Loader />
+              </CommentsLoaderWrapper>
+            ) : (
+              <>
+                {newsItem.comments.map((comment) => (
+                  <CommentsItem key={comment.id} comment={comment} />
+                ))}
+              </>
+            )}
+          </CommentsWrapper>
+        </NewsItemWrapper>
+      )}
+    </Suspense>
+  );
 }
