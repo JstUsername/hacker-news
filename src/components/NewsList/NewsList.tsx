@@ -26,9 +26,9 @@ export default function NewsList() {
   }, [getNewsList]);
 
   useEffect(() => {
-    const autoUpdateInterval = setInterval(() => updateNewsList(true), 60000);
+    const autoUpdateInterval = setInterval(() => getNewsList(), 60000);
     return () => clearInterval(autoUpdateInterval);
-  }, [updateNewsList]);
+  }, [getNewsList]);
 
   if (newsServerDown) {
     return <InternalServerError />;
