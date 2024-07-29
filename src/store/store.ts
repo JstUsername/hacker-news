@@ -8,52 +8,29 @@ const newsListUrl = [
   'https://api.hnpwa.com/v0/newest/4.json',
 ];
 
-const useNewsListState = create<UseNewsListStateType>((set, get) => ({
+const useNewsListState = create<UseNewsListStateType>((set) => ({
   newsList: [],
   newsLoading: false,
   newsServerDown: false,
   getNewsList: async () => {
-    set({ newsLoading: true });
     let data: NewsListType[] | [] = [];
-    for (let i = 0; i < newsListUrl.length; i++) {
-      const response = await fetch(`${newsListUrl[i]}?t=${new Date().getTime()}`);
+    const fetchPromises = newsListUrl.map(async (url) => {
+      const response = await fetch(`${url}?t=${new Date().getTime()}`);
       if (response.status === 500) {
-        set({ newsLoading: false, newsServerDown: true });
+        set({ newsServerDown: true });
         return;
       }
-      let fetchPromise = await response.json();
-      i === 3 ? (fetchPromise = fetchPromise.slice(0, 10)) : null;
-      data = data.concat(fetchPromise);
-      set({ newsList: data });
-      i === 0 ? set({ newsLoading: false }) : null;
-    }
-  },
-  updateNewsList: async (auto) => {
-    !auto ? set({ newsLoading: true }) : null;
-    const response = await fetch(`${newsListUrl[0]}?t=${new Date().getTime()}`);
-    if (response.status === 500) {
-      !auto ? set({ newsLoading: false }) : null;
-      set({ newsServerDown: true });
-      return;
-    }
-    let fetchPromise = await response.json();
-    const newData = fetchPromise.filter((newNewsItem: NewsListType) =>
-      get().newsList.every((oldNewsItem) => newNewsItem.id !== oldNewsItem.id),
-    );
-    if (newData.length === 0) {
-      !auto ? set({ newsLoading: false }) : null;
-      return;
-    }
-    set({ newsList: newData.concat(get().newsList).slice(0, 100) });
-    !auto ? set({ newsLoading: false }) : null;
+      return response.json();
+    });
+    const promisesResults = await Promise.all(fetchPromises);
+    data = data.concat(...promisesResults);
+    set({ newsList: data });
   },
 }));
 
 export const useSelectorNewsList = () => useNewsListState((state) => state.newsList);
-export const useSelectorNewsLoading = () => useNewsListState((state) => state.newsLoading);
 export const useSelectorNewsServerDown = () => useNewsListState((state) => state.newsServerDown);
 export const useSelectorGetNewsList = () => useNewsListState((state) => state.getNewsList);
-export const useSelectorUpdateNewsList = () => useNewsListState((state) => state.updateNewsList);
 
 const useNewsItemState = create<UseNewsItemType>((set) => ({
   newsItem: null,
