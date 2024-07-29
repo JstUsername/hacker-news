@@ -13,11 +13,11 @@ export default function NewsList() {
   const hasMounted = useRef(false);
 
   useEffect(() => {
-    if (!hasMounted.current) {
+    if (!hasMounted.current && newsList.length === 0) {
       getNewsList();
       hasMounted.current = true;
     }
-  }, [getNewsList]);
+  }, [newsList, getNewsList]);
 
   useEffect(() => {
     const autoUpdateInterval = setInterval(() => getNewsList(), 60000);
