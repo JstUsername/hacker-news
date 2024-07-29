@@ -1,21 +1,15 @@
-import { useEffect } from 'react';
-import InternalServerError from '../InternalServerError/InternalServerError.tsx';
-import { NewsListWrapper, LoaderWrapper, Loader } from './NewsList.styled.ts';
+import { useEffect, useRef, lazy, Suspense } from 'react';
+import { LoaderWrapper, Loader } from './NewsList.styled.ts';
 import NewsListItem from '../NewsListItem/NewsListItem.tsx';
-import {
-  useSelectorGetNewsList,
-  useSelectorNewsList,
-  useSelectorNewsLoading,
-  useSelectorNewsServerDown,
-  useSelectorUpdateNewsList,
-} from '../../store/store.ts';
+import { useSelectorGetNewsList, useSelectorNewsList, useSelectorNewsServerDown } from '../../store/store.ts';
 
 export default function NewsList() {
+  const NewsListWrapper = lazy(() =>
+    import('./NewsList.styled.ts').then((module) => ({ default: module.NewsListWrapper })),
+  );
   const newsList = useSelectorNewsList();
-  const getNewsList = useSelectorGetNewsList();
-  const updateNewsList = useSelectorUpdateNewsList();
-  const newsLoading = useSelectorNewsLoading();
   const newsServerDown = useSelectorNewsServerDown();
+  const getNewsList = useSelectorGetNewsList();
   const hasMounted = useRef(false);
 
   useEffect(() => {
@@ -31,20 +25,22 @@ export default function NewsList() {
   }, [getNewsList]);
 
   if (newsServerDown) {
-    return <InternalServerError />;
+    throw new Error('Internal Server Error');
   }
-  if (newsLoading) {
-    return (
-      <LoaderWrapper>
-        <Loader />
-      </LoaderWrapper>
-    );
-  }
+
   return (
-    <NewsListWrapper>
-      {newsList.map((newsItem) => (
-        <NewsListItem key={newsItem.id} {...newsItem} />
-      ))}
-    </NewsListWrapper>
+    <Suspense
+      fallback={
+        <LoaderWrapper>
+          <Loader />
+        </LoaderWrapper>
+      }
+    >
+      <NewsListWrapper>
+        {newsList.map((newsItem) => (
+          <NewsListItem key={newsItem.id} {...newsItem} />
+        ))}
+      </NewsListWrapper>
+    </Suspense>
   );
 }
