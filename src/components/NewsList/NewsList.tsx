@@ -16,10 +16,14 @@ export default function NewsList() {
   const updateNewsList = useSelectorUpdateNewsList();
   const newsLoading = useSelectorNewsLoading();
   const newsServerDown = useSelectorNewsServerDown();
+  const hasMounted = useRef(false);
 
   useEffect(() => {
-    newsList.length === 0 ? getNewsList() : null;
-  }, [newsList, getNewsList]);
+    if (!hasMounted.current) {
+      getNewsList();
+      hasMounted.current = true;
+    }
+  }, [getNewsList]);
 
   useEffect(() => {
     const autoUpdateInterval = setInterval(() => updateNewsList(true), 60000);
