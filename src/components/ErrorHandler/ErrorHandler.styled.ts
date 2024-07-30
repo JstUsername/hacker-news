@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-export const InternalServerErrorWrapper = styled('div')`
+export const ErrorWrapper = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,21 +15,19 @@ export const InternalServerErrorWrapper = styled('div')`
   }
 `;
 
-export const InternalServerErrorEmoji = styled('div')`
+export const ErrorEmoji = styled('div')`
   ${({ theme }) => theme.typography.h1};
   font-size: 48px;
   color: ${({ theme }) => theme.color.purple};
 `;
 
-export const InternalServerErrorText = styled('h1')`
+export const ErrorText = styled('h1')`
   ${({ theme }) => theme.typography.h1};
   margin: 0;
   color: ${({ theme }) => theme.color.green};
 `;
 
-export const ButtonLink = styled('button')`
-  border: none;
-  background: none;
+export const HomeLink = styled(Link)`
   cursor: pointer;
   ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.yellow};
@@ -36,4 +35,5 @@ export const ButtonLink = styled('button')`
   &:hover {
     color: ${({ theme }) => theme.color.purple};
   }
+  text-decoration: none;
 `;
