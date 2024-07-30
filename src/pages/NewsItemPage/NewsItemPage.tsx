@@ -34,11 +34,11 @@ export default function NewsItemPage() {
   }, [getNewsItem, id, newsList]);
 
   if (itemServerDown) {
-    throw new Error('Internal Server Error');
+    throw new Error('Internal server error');
   }
 
   if (itemPageNotFound) {
-    throw new Error('Page Not Found');
+    throw new Error('Page not found');
   }
 
   return (

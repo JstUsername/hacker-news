@@ -25,7 +25,7 @@ export default function NewsList() {
   }, [getNewsList]);
 
   if (newsServerDown) {
-    throw new Error('Internal Server Error');
+    throw new Error('Internal server error');
   }
 
   return (
