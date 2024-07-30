@@ -27,6 +27,7 @@ export interface UseNewsItemType {
   getNewsItem: (id: number, newsList: NewsListType[], auto: boolean) => Promise<void>;
   getNewsContent: (id: number, newsList: NewsListType[]) => void;
   setExpandVisible: (id: number, newsItem: NewsItemType | null) => void;
+  resetNotFoundPage: () => void;
 }
 
 export interface NewsItemType {
