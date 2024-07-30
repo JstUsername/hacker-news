@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledFooter = styled('footer')`
+  width: 100%;
+  box-sizing: border-box;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -14,9 +16,6 @@ export const StyledFooter = styled('footer')`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     justify-content: space-between;
   }
-  bottom: 0;
-  left: 0;
-  right: 0;
 `;
 
 export const StyledLink = styled('a')`
