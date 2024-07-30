@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelectorResetNotFoundPage } from './store/store.ts';
 import { ThemeProvider } from 'styled-components';
-import { theme, GlobalStyle } from './theme.ts';
+import { theme } from './theme.ts';
+import { GlobalStyle } from './styles/GlobalStyle.ts';
 import { ErrorBoundary } from 'react-error-boundary';
 import Layout from './components/Layout/Layout.tsx';
 import HomePage from './pages/HomePage/HomePage.tsx';
