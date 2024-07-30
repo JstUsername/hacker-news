@@ -15,7 +15,7 @@ export const ErrorWrapper = styled('div')`
   }
 `;
 
-export const ErrorEmoji = styled('div')`
+export const ErrorEmoji = styled('span')`
   ${({ theme }) => theme.typography.h1};
   font-size: 48px;
   color: ${({ theme }) => theme.color.purple};
