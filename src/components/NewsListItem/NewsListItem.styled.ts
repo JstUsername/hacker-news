@@ -1,13 +1,14 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-export const NewsListItemWrapper = styled('div')`
+export const NewsListItemWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 40px;
   padding: 24px;
   background: ${({ theme }) => theme.color.backgroundLightTransparent};
-  cursor: pointer;
+  text-decoration: none;
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 16px;
   }
