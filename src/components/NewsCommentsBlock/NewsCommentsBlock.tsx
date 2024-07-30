@@ -9,26 +9,24 @@ export default function NewsCommentsBlock() {
   const newsItem = useSelectorNewsItem();
 
   return (
-    <Suspense
-      fallback={
-        <CommentsWrapper>
-          <CommentsLoaderWrapper>
-            <Loader />
-          </CommentsLoaderWrapper>
-        </CommentsWrapper>
-      }
-    >
-      {newsItem !== null && (
-        <CommentsWrapper>
-          <NewsItemTitle>
-            Comments
-            <NewsItemTitleAdditional>{' ' + newsItem.comments_count}</NewsItemTitleAdditional>
-          </NewsItemTitle>
+    newsItem !== null && (
+      <CommentsWrapper>
+        <NewsItemTitle>
+          Comments
+          <NewsItemTitleAdditional>{' ' + newsItem.comments_count}</NewsItemTitleAdditional>
+        </NewsItemTitle>
+        <Suspense
+          fallback={
+            <CommentsLoaderWrapper>
+              <Loader />
+            </CommentsLoaderWrapper>
+          }
+        >
           {newsItem.comments.map((comment) => (
             <CommentsItem key={comment.id} comment={comment} />
           ))}
-        </CommentsWrapper>
-      )}
-    </Suspense>
+        </Suspense>
+      </CommentsWrapper>
+    )
   );
 }
