@@ -32,15 +32,12 @@ export default function CommentsItem({ comment }: CommentsListProps) {
         </ExpandWrapper>
         <CommentsItemContent dangerouslySetInnerHTML={{ __html: comment.content }} />
       </div>
-      {comment.comments.length > 0 && (
-        <>
-          {comment.comments.map((childComment) => (
-            <CommentsChildItemWrapper key={childComment.id} $isVisible={childComment.visible}>
-              <CommentsItem comment={childComment} />
-            </CommentsChildItemWrapper>
-          ))}
-        </>
-      )}
+      {comment.comments.length > 0 &&
+        comment.comments.map((childComment) => (
+          <CommentsChildItemWrapper key={childComment.id} $isVisible={childComment.visible}>
+            <CommentsItem comment={childComment} />
+          </CommentsChildItemWrapper>
+        ))}
     </CommentsItemWrapper>
   );
 }
