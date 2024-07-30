@@ -1,4 +1,5 @@
-import { StyledHeader, LinkWrapper, ButtonLink, StyledLink, HNLogo, CroppedHNLogo } from './Header.styled.ts';
+import { StyledHeader, LinkWrapper, StyledLink, HNLogo, CroppedHNLogo } from './Header.styled.ts';
+import { RefreshButton } from '../../commons/RefreshButton/RefreshButton.ts';
 import { useSelectorGetNewsItem, useSelectorGetNewsList, useSelectorNewsList } from '../../store/store.ts';
 import { useParams, Link } from 'react-router-dom';
 
@@ -15,9 +16,9 @@ export default function Header() {
         <HNLogo title="Logo" />
       </Link>
       <LinkWrapper>
-        <ButtonLink onClick={() => (id === undefined ? getNewsList() : getNewsItem(Number(id), newsList, false))}>
+        <RefreshButton onClick={() => (id === undefined ? getNewsList() : getNewsItem(Number(id), newsList, false))}>
           {id === undefined ? 'refreshNewsList()' : 'updateCurrentNews()'}
-        </ButtonLink>
+        </RefreshButton>
         <StyledLink href="https://github.com/JstUsername">/github</StyledLink>
         <StyledLink href="https://t.me/JstUser">/telegram</StyledLink>
         <StyledLink href="https://github.com/tastejs/hacker-news-pwas/">/api</StyledLink>
