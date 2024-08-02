@@ -2,7 +2,7 @@ import { useSelectorCommentsLoading, useSelectorNewsItem } from '../../store/sto
 import { Loader } from '../NewsList/NewsList.styled.ts';
 import { CommentsWrapper, CommentsLoaderWrapper } from './NewsCommentsBlock.styled.ts';
 import CommentsItem from '../CommentsItem/CommentsItem.tsx';
-import { NewsItemTitle, NewsItemTitleAdditional } from '../../commons/NewsItemTitle.ts';
+import { NewsItemTitle, NewsItemTitleAdditional } from '../../commons/NewsItemTitle/NewsItemTitle.ts';
 
 export default function NewsCommentsBlock() {
   const newsItem = useSelectorNewsItem();

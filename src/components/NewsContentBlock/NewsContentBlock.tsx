@@ -9,7 +9,7 @@ import {
   Points,
   Time,
 } from './NewsContentBlock.styled.ts';
-import { NewsItemTitle } from '../../commons/NewsItemTitle.ts';
+import { NewsItemTitle } from '../../commons/NewsItemTitle/NewsItemTitle.ts';
 import { useSelectorNewsItem } from '../../store/store.ts';
 
 export default function NewsContentBlock() {
