@@ -10,7 +10,6 @@ const newsListUrl = [
 
 const useNewsListState = create<UseNewsListStateType>((set) => ({
   newsList: [],
-  newsLoading: false,
   newsServerDown: false,
   getNewsList: async () => {
     let data: NewsListType[] | [] = [];
