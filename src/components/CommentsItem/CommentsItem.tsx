@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { CommentsListProps } from './CommentsItem.types.ts';
-import { useSelectorNewsItem, useSelectorSetExpandVisible } from '../../store/states/newsItemState/newsItemState.ts';
+import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState.ts';
 import {
   CommentsItemWrapper,
   CommentsItemContent,
@@ -12,10 +13,28 @@ import { NewsItemType } from '../../store/states/newsItemState/newsItemState.typ
 
 export default function CommentsItem({ comment }: CommentsListProps) {
   const newsItem = useSelectorNewsItem();
-  const setExpandVisible = useSelectorSetExpandVisible();
+  const [expandVisible, setExpandVisible] = useState(newsItem);
+
+  const toggleExpandVisible = (id: number) => {
+    if (expandVisible === null) return;
+    const newData = { ...expandVisible };
+    const toggleExpandVisible = (obj: NewsItemType) => {
+      if (obj.id === id) {
+        obj.expand = !obj.expand;
+        obj.comments.map((childComments) => {
+          childComments.visible = !childComments.visible;
+        });
+        setExpandVisible({ ...newData });
+      }
+      if (obj.comments && obj.comments.length > 0) {
+        obj.comments.forEach(toggleExpandVisible);
+      }
+    };
+    toggleExpandVisible(newData);
+  };
 
   const handleClickExpand = (id: number) => {
-    setExpandVisible(id, newsItem);
+    toggleExpandVisible(id);
   };
 
   return (
