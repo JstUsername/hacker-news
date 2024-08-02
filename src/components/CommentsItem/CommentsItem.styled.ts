@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { CommentsChildItemWrapperProps, ExpandIconProps } from './CommentsItem.types.ts';
 import ArrowIcon from '../../assets/pixel-arrow.svg?react';
 
 export const CommentsItemWrapper = styled('div')`
@@ -33,8 +32,8 @@ export const CommentsItemContent = styled('div')`
   }
 `;
 
-export const CommentsChildItemWrapper = styled('div')<CommentsChildItemWrapperProps>`
-  display: ${(props) => (props.$isVisible ? 'block' : 'none')};
+export const CommentsChildItemWrapper = styled('div')<{ $isVisible: boolean | undefined }>`
+  display: ${({ $isVisible }) => ($isVisible ? 'block' : 'none')};
 `;
 
 export const ExpandWrapper = styled('div')`
@@ -43,11 +42,11 @@ export const ExpandWrapper = styled('div')`
   gap: 12px;
 `;
 
-export const ExpandIcon = styled(ArrowIcon)<ExpandIconProps>`
+export const ExpandIcon = styled(ArrowIcon)<{ $isVisibleIcon: boolean; $isExpand: boolean | undefined }>`
   width: 20px;
   height: 16px;
   fill: ${({ theme }) => theme.color.yellow};
-  display: ${(props) => (props.$isVisibleIcon ? 'block' : 'none')};
+  display: ${({ $isVisibleIcon }) => ($isVisibleIcon ? 'block' : 'none')};
   cursor: pointer;
-  transform: ${(props) => (props.$isExpand ? 'rotate(-180deg)' : 'rotate(0deg)')};
+  transform: ${({ $isExpand }) => ($isExpand ? 'rotate(-180deg)' : 'rotate(0deg)')};
 `;
