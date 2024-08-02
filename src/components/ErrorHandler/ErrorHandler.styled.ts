@@ -8,14 +8,12 @@ export const ErrorWrapper = styled('div')`
   align-items: center;
   gap: 18px;
 
-  // @NOTE: 88px - высота header, 64px - высота footer (при ширине экрана ОТ 1024px)
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    height: calc(100vh - (88px + 64px));
+    height: ${({ theme }) => theme.height.max};
   }
 
-  // @NOTE: 72px - высота header, 48px - высота footer (при ширине экрана ДО 1024px)
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    height: calc(100vh - (72px + 48px));
+    height: ${({ theme }) => theme.height.min};
   }
 `;
 
