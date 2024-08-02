@@ -53,11 +53,16 @@ export default function CommentsItem({ comment }: CommentsListProps) {
         <CommentsItemContent dangerouslySetInnerHTML={{ __html: comment.content }} />
       </div>
       {comment.comments.length > 0 &&
-        comment.comments.map((childComment: NewsItemType) => (
-          <CommentsChildItemWrapper key={childComment.id} $isVisible={childComment.visible}>
-            <CommentsItem comment={childComment} />
-          </CommentsChildItemWrapper>
-        ))}
+        comment.comments.map((childComment: NewsItemType) => {
+          if (childComment.deleted || childComment.dead) {
+            return null;
+          }
+          return (
+            <CommentsChildItemWrapper key={childComment.id} $isVisible={childComment.visible}>
+              <CommentsItem comment={childComment} />
+            </CommentsChildItemWrapper>
+          );
+        })}
     </CommentsItemWrapper>
   );
 }
