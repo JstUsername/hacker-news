@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NewsItemWrapper = styled('div')`
+const NewsItemWrapper = styled('div')`
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   grid-template-rows: auto;
@@ -26,3 +26,5 @@ export const NewsItemWrapper = styled('div')`
     grid-template-rows: repeat(1, 1fr);
   }
 `;
+
+export default NewsItemWrapper;
