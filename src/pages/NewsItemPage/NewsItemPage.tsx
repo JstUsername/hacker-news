@@ -1,12 +1,12 @@
 import { useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelectorNewsList } from '../../store/states/newsListState/newsListState.ts';
 import {
   useSelectorGetNewsContent,
   useSelectorGetNewsItem,
   useSelectorItemPageNotFound,
   useSelectorItemServerDown,
-  useSelectorNewsList,
-} from '../../store/store.ts';
+} from '../../store/states/newsItemState/newsItemState.ts';
 import NewsContentBlock from '../../components/NewsContentBlock/NewsContentBlock.tsx';
 import NewsCommentsBlock from '../../components/NewsCommentsBlock/NewsCommentsBlock.tsx';
 import { NewsItemWrapper } from './NewsItemPage.styled.ts';

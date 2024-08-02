@@ -1,5 +1,5 @@
 import { CommentsListProps } from './CommentsItem.types.ts';
-import { useSelectorNewsItem, useSelectorSetExpandVisible } from '../../store/store.ts';
+import { useSelectorNewsItem, useSelectorSetExpandVisible } from '../../store/states/newsItemState/newsItemState.ts';
 import {
   CommentsItemWrapper,
   CommentsItemContent,
@@ -8,6 +8,7 @@ import {
   ExpandWrapper,
   ExpandIcon,
 } from './CommentsItem.styled.ts';
+import { NewsItemType } from '../../store/states/newsItemState/newsItemState.types.ts';
 
 export default function CommentsItem({ comment }: CommentsListProps) {
   const newsItem = useSelectorNewsItem();
@@ -33,7 +34,7 @@ export default function CommentsItem({ comment }: CommentsListProps) {
         <CommentsItemContent dangerouslySetInnerHTML={{ __html: comment.content }} />
       </div>
       {comment.comments.length > 0 &&
-        comment.comments.map((childComment) => (
+        comment.comments.map((childComment: NewsItemType) => (
           <CommentsChildItemWrapper key={childComment.id} $isVisible={childComment.visible}>
             <CommentsItem comment={childComment} />
           </CommentsChildItemWrapper>

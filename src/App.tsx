@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useSelectorResetNotFoundPage } from './store/store.ts';
+import { useSelectorResetNotFoundPage } from './store/states/newsItemState/newsItemState.ts';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme.ts';
 import { GlobalStyle } from './styles/GlobalStyle.ts';

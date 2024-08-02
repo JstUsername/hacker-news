@@ -1,4 +1,4 @@
-import { useSelectorCommentsLoading, useSelectorNewsItem } from '../../store/store.ts';
+import { useSelectorCommentsLoading, useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState.ts';
 import { Loader } from '../NewsList/NewsList.styled.ts';
 import { CommentsWrapper, CommentsLoaderWrapper } from './NewsCommentsBlock.styled.ts';
 import CommentsItem from '../CommentsItem/CommentsItem.tsx';

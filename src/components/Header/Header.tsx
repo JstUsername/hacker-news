@@ -1,6 +1,7 @@
 import { StyledHeader, LinkWrapper, StyledLink, HNLogo, CroppedHNLogo } from './Header.styled.ts';
 import { RefreshButton } from '../../commons/RefreshButton/RefreshButton.ts';
-import { useSelectorGetNewsItem, useSelectorGetNewsList, useSelectorNewsList } from '../../store/store.ts';
+import { useSelectorGetNewsList, useSelectorNewsList } from '../../store/states/newsListState/newsListState.ts';
+import { useSelectorGetNewsItem } from '../../store/states/newsItemState/newsItemState.ts';
 import { useParams, Link } from 'react-router-dom';
 
 export default function Header() {

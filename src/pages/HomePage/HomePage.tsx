@@ -1,6 +1,10 @@
 import { Suspense, useEffect, useRef, lazy } from 'react';
 import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled.ts';
-import { useSelectorGetNewsList, useSelectorNewsList, useSelectorNewsServerDown } from '../../store/store.ts';
+import {
+  useSelectorGetNewsList,
+  useSelectorNewsList,
+  useSelectorNewsServerDown,
+} from '../../store/states/newsListState/newsListState.ts';
 const NewsList = lazy(() => import('../../components/NewsList/NewsList.tsx'));
 
 export default function HomePage() {
