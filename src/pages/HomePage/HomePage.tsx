@@ -1,24 +1,19 @@
-import { Suspense, useEffect, useRef, lazy } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
+import NewsList from '../../components/NewsList/NewsList.tsx';
 import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled.ts';
-import {
-  useSelectorGetNewsList,
-  useSelectorNewsList,
-  useSelectorNewsServerDown,
-} from '../../store/states/newsListState/newsListState.ts';
-const NewsList = lazy(() => import('../../components/NewsList/NewsList.tsx'));
+import { useSelectorGetNewsList, useSelectorNewsServerDown } from '../../store/states/newsListState/newsListState.ts';
 
 export default function HomePage() {
-  const newsList = useSelectorNewsList();
   const newsServerDown = useSelectorNewsServerDown();
   const getNewsList = useSelectorGetNewsList();
   const hasMounted = useRef(false);
 
   useEffect(() => {
-    if (!hasMounted.current && newsList.length === 0) {
+    if (!hasMounted.current) {
       getNewsList();
       hasMounted.current = true;
     }
-  }, [newsList, getNewsList]);
+  }, [getNewsList]);
 
   useEffect(() => {
     const autoUpdateInterval = setInterval(() => getNewsList(), 60000);
