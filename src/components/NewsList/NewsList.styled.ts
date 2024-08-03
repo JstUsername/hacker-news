@@ -8,13 +8,11 @@ export const NewsListWrapper = styled('div')`
   gap: 18px;
   box-sizing: border-box;
 
-  // @NOTE: 88px - высота header, 64px - высота footer (при ширине экрана ОТ 1024px)
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
     min-height: ${({ theme }) => theme.height.max};
     grid-template-rows: repeat(2, 1fr);
   }
 
-  // @NOTE: 72px - высота header, 48px - высота footer (при ширине экрана ДО 1024px)
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     min-height: ${({ theme }) => theme.height.min};
     grid-template-columns: repeat(1, 1fr);
