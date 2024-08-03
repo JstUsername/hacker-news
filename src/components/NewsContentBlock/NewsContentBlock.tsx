@@ -10,6 +10,7 @@ import {
   LinkToNews,
   Points,
   Time,
+  User,
 } from './NewsContentBlock.styled';
 import { NewsItemTitle } from '../../commons/NewsItemTitle/NewsItemTitle';
 import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState';
@@ -35,7 +36,7 @@ export default function NewsContentBlock() {
           <Points>{newsItem.points} points</Points>
           <ByTimeWrapper>
             <By>
-              By: <span>{newsItem.user}</span>
+              By: <User>{newsItem.user}</User>
             </By>
             <Time>{timestampToDate(newsItem.time)}</Time>
           </ByTimeWrapper>

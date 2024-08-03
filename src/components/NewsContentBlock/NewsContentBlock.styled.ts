@@ -52,9 +52,10 @@ export const Points = styled('span')`
 export const By = styled('span')`
   ${({ theme }) => theme.typography.body2};
   color: ${({ theme }) => theme.color.green};
-  span {
-    color: ${({ theme }) => theme.color.purple};
-  }
+`;
+
+export const User = styled('span')`
+  color: ${({ theme }) => theme.color.purple};
 `;
 
 export const Time = styled('span')`
