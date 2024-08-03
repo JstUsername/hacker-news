@@ -1,10 +1,10 @@
 export interface UseNewsItemType {
-  newsItem: NewsItemType | null;
+  newsItem: Promise<NewsItemType | null>;
   itemLoading: boolean;
   commentsLoading: boolean;
   itemServerDown: boolean;
   itemPageNotFound: boolean;
-  getNewsItem: (id: number) => Promise<void>;
+  getNewsItem: (id: number) => void;
   resetNotFoundPage: () => void;
 }
 
@@ -27,3 +27,11 @@ export interface NewsItemType {
   visible?: boolean;
   expand?: boolean;
 }
+
+export type SetTypeItem = (
+  partial:
+    | UseNewsItemType
+    | Partial<UseNewsItemType>
+    | ((state: UseNewsItemType) => UseNewsItemType | Partial<UseNewsItemType>),
+  replace?: boolean | undefined,
+) => void;

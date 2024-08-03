@@ -1,7 +1,7 @@
 export interface UseNewsListStateType {
-  newsList: NewsListType[] | [];
+  newsList: Promise<NewsListType[] | []>;
   newsServerDown: boolean;
-  getNewsList: () => Promise<void>;
+  getNewsList: () => void;
 }
 
 export interface NewsListType {
@@ -16,3 +16,11 @@ export interface NewsListType {
   url?: string;
   domain?: string;
 }
+
+export type SetTypeList = (
+  partial:
+    | UseNewsListStateType
+    | Partial<UseNewsListStateType>
+    | ((state: UseNewsListStateType) => UseNewsListStateType | Partial<UseNewsListStateType>),
+  replace?: boolean | undefined,
+) => void;
