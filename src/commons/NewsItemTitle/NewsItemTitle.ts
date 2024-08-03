@@ -5,6 +5,7 @@ export const NewsItemTitle = styled('h1')`
   margin: 0;
   word-break: break-word;
   color: ${({ theme }) => theme.color.purple};
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     font-size: 24px;
   }

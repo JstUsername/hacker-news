@@ -10,9 +10,11 @@ export const StyledFooter = styled('footer')`
   padding: 24px 32px;
   gap: 24px;
   background: ${({ theme }) => theme.color.background};
+
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     padding: 16px 18px;
   }
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     justify-content: space-between;
   }
@@ -23,6 +25,7 @@ export const StyledLink = styled('a')`
   text-decoration: none;
   ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.green};
+
   &:hover {
     text-decoration: underline;
   }
@@ -37,6 +40,7 @@ export const ApiLink = styled('a')`
   text-decoration: none;
   ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.green};
+
   &:hover {
     text-decoration: underline;
   }

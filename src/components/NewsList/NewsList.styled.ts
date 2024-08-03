@@ -51,6 +51,7 @@ export const Loader = styled(HourGlass)`
     0% {
       transform: rotate(0);
     }
+
     100% {
       transform: rotate(180deg);
     }

@@ -12,10 +12,12 @@ const fetchNewsList = async (set: SetTypeList) => {
   let data: NewsListType[] = [];
   const fetchPromises = newsListUrl.map(async (url) => {
     const response = await fetch(`${url}?t=${new Date().getTime()}`);
+
     if (response.status === 500) {
       set({ newsServerDown: true });
       return;
     }
+
     return response.json();
   });
   const promisesResults = await Promise.all(fetchPromises);

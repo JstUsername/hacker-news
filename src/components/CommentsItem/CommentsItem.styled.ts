@@ -19,12 +19,14 @@ export const CommentsItemUser = styled('h2')`
 export const CommentsItemContent = styled('div')`
   ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.green};
+
   p {
     margin: 12px 0;
     line-height: 1.2;
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   a {
     color: ${({ theme }) => theme.color.green};
     cursor: pointer;

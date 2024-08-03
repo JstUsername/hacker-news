@@ -11,6 +11,7 @@ export const ContentWrapper = styled('div')`
   padding: 24px;
   box-sizing: border-box;
   background: ${({ theme }) => theme.color.backgroundLightTransparent};
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 16px;
   }
@@ -68,6 +69,7 @@ export const ByTimeWrapper = styled('div')`
   justify-content: space-between;
   align-items: center;
   gap: 24px;
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     flex-direction: column;
     align-items: flex-start;

@@ -11,6 +11,7 @@ export const CommentsWrapper = styled('div')`
   background: ${({ theme }) => theme.color.backgroundLightTransparent};
   overflow: auto;
   overflow-x: hidden;
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 16px;
   }

@@ -9,6 +9,7 @@ export const NewsListItemWrapper = styled(Link)`
   padding: 24px;
   background: ${({ theme }) => theme.color.backgroundLightTransparent};
   text-decoration: none;
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     padding: 16px;
   }
@@ -19,6 +20,7 @@ export const NewsTitle = styled('h1')`
   margin: 0;
   word-break: break-word;
   color: ${({ theme }) => theme.color.purple};
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     font-size: 24px;
   }
@@ -49,6 +51,7 @@ export const Points = styled('span')`
 export const By = styled('span')`
   ${({ theme }) => theme.typography.body1};
   color: ${({ theme }) => theme.color.green};
+
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: none;
   }
