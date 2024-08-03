@@ -21,7 +21,7 @@ const fetchNewsList = async (set: SetTypeList) => {
     return response.json();
   });
   const promisesResults = await Promise.all(fetchPromises);
-  return data.concat(...promisesResults);
+  return [data, ...promisesResults].flat();
 };
 
 const useNewsListState = create<UseNewsListStateType>((set) => ({
