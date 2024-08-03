@@ -1,5 +1,5 @@
-import { ErrorWrapper, ErrorText, ErrorEmoji, HomeLink } from './ErrorHandler.styled.ts';
-import { RefreshButton } from '../../commons/RefreshButton/RefreshButton.ts';
+import { ErrorWrapper, ErrorText, ErrorEmoji, HomeLink } from './ErrorHandler.styled';
+import { RefreshButton } from '../../commons/RefreshButton/RefreshButton';
 
 interface ErrorHandlerProps {
   error: Error;

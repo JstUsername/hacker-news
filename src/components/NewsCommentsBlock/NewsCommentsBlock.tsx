@@ -1,9 +1,8 @@
 import { use } from 'react';
-import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState.ts';
-import { CommentsWrapper } from './NewsCommentsBlock.styled.ts';
-import CommentsItem from '../CommentsItem/CommentsItem.tsx';
-import { NewsItemTitle, NewsItemTitleAdditional } from '../../commons/NewsItemTitle/NewsItemTitle.ts';
-import { NewsItemType } from '../../store/states/newsItemState/newsItemState.types.ts';
+import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState';
+import { CommentsWrapper } from './NewsCommentsBlock.styled';
+import CommentsItem from '../CommentsItem/CommentsItem';
+import { NewsItemTitle, NewsItemTitleAdditional } from '../../commons/NewsItemTitle/NewsItemTitle';
 
 export default function NewsCommentsBlock() {
   const newsItem = use(useSelectorNewsItem());

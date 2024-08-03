@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useRef } from 'react';
-import NewsList from '../../components/NewsList/NewsList.tsx';
-import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled.ts';
-import { useSelectorGetNewsList, useSelectorNewsServerDown } from '../../store/states/newsListState/newsListState.ts';
+import NewsList from '../../components/NewsList/NewsList';
+import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled';
+import { useSelectorGetNewsList, useSelectorNewsServerDown } from '../../store/states/newsListState/newsListState';
 
 export default function HomePage() {
   const newsServerDown = useSelectorNewsServerDown();

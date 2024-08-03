@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useSelectorResetNotFoundPage } from './store/states/newsItemState/newsItemState.ts';
+import { useSelectorResetNotFoundPage } from './store/states/newsItemState/newsItemState';
 import { ThemeProvider } from 'styled-components';
-import { theme } from './theme.ts';
-import { GlobalStyle } from './styles/GlobalStyle.ts';
+import { theme } from './theme';
+import { GlobalStyle } from './styles/GlobalStyle';
 import { ErrorBoundary } from 'react-error-boundary';
-import Layout from './components/Layout/Layout.tsx';
-import HomePage from './pages/HomePage/HomePage.tsx';
-import NewsItemPage from './pages/NewsItemPage/NewsItemPage.tsx';
-import ErrorHandler from './components/ErrorHandler/ErrorHandler.tsx';
+import Layout from './components/Layout/Layout';
+import HomePage from './pages/HomePage/HomePage';
+import NewsItemPage from './pages/NewsItemPage/NewsItemPage';
+import ErrorHandler from './components/ErrorHandler/ErrorHandler';
 
 function App() {
   const resetNotFoundPage = useSelectorResetNotFoundPage();

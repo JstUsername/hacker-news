@@ -1,7 +1,7 @@
 import { use } from 'react';
-import { NewsListWrapper } from './NewsList.styled.ts';
-import NewsListItem from '../NewsListItem/NewsListItem.tsx';
-import { useSelectorNewsList } from '../../store/states/newsListState/newsListState.ts';
+import { NewsListWrapper } from './NewsList.styled';
+import NewsListItem from '../NewsListItem/NewsListItem';
+import { useSelectorNewsList } from '../../store/states/newsListState/newsListState';
 
 export default function NewsList() {
   const newsList = use(useSelectorNewsList());

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { UseNewsListStateType, NewsListType, SetTypeList } from './newsListState.types.ts';
+import { UseNewsListStateType, NewsListType, SetTypeList } from './newsListState.types';
 
 const newsListUrl = [
   'https://api.hnpwa.com/v0/newest/1.json',

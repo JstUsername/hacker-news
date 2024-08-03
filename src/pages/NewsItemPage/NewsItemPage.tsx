@@ -4,11 +4,11 @@ import {
   useSelectorGetNewsItem,
   useSelectorItemServerDown,
   useSelectorItemPageNotFound,
-} from '../../store/states/newsItemState/newsItemState.ts';
-import NewsItemWrapper from './NewsItemPage.styled.ts';
-import NewsContentBlock from '../../components/NewsContentBlock/NewsContentBlock.tsx';
-import NewsCommentsBlock from '../../components/NewsCommentsBlock/NewsCommentsBlock.tsx';
-import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled.ts';
+} from '../../store/states/newsItemState/newsItemState';
+import NewsItemWrapper from './NewsItemPage.styled';
+import NewsContentBlock from '../../components/NewsContentBlock/NewsContentBlock';
+import NewsCommentsBlock from '../../components/NewsCommentsBlock/NewsCommentsBlock';
+import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled';
 
 export default function NewsItemPage() {
   const itemServerDown = useSelectorItemServerDown();

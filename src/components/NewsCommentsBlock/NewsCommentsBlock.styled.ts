@@ -15,13 +15,3 @@ export const CommentsWrapper = styled('div')`
     padding: 16px;
   }
 `;
-
-export const CommentsLoaderWrapper = styled('div')`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-`;

@@ -1,4 +1,4 @@
-import { NewsListItemProps } from './NewsListItem.types.ts';
+import { NewsListItemProps } from './NewsListItem.types';
 import { fromUnixTime, formatDistanceToNow } from 'date-fns';
 import {
   NewsListItemWrapper,
@@ -10,7 +10,7 @@ import {
   By,
   User,
   CardBottom,
-} from './NewsListItem.styled.ts';
+} from './NewsListItem.styled';
 
 export default function NewsListItem({ id, title, points, user, time }: NewsListItemProps) {
   const timestampToAgo = (timestamp: number) => {

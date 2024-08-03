@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CommentsListProps } from './CommentsItem.types.ts';
+import { CommentsListProps } from './CommentsItem.types';
 import {
   CommentsItemWrapper,
   CommentsItemContent,
@@ -7,8 +7,8 @@ import {
   CommentsChildItemWrapper,
   ExpandWrapper,
   ExpandIcon,
-} from './CommentsItem.styled.ts';
-import { NewsItemType } from '../../store/states/newsItemState/newsItemState.types.ts';
+} from './CommentsItem.styled';
+import { NewsItemType } from '../../store/states/newsItemState/newsItemState.types';
 
 export default function CommentsItem({ comment }: CommentsListProps) {
   const [isExpandVisible, setIsExpandVisible] = useState(false);

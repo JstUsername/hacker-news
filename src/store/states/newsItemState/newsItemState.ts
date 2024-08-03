@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { NewsItemType, UseNewsItemType, SetTypeItem } from './newsItemState.types.ts';
+import { NewsItemType, UseNewsItemType, SetTypeItem } from './newsItemState.types';
 
 const fetchNewsItem = async (set: SetTypeItem, id: number) => {
   let data: NewsItemType | null = null;

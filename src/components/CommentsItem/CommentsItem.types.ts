@@ -1,4 +1,4 @@
-import { NewsItemType } from '../../store/states/newsItemState/newsItemState.types.ts';
+import { NewsItemType } from '../../store/states/newsItemState/newsItemState.types';
 
 export interface CommentsListProps {
   comment: NewsItemType;

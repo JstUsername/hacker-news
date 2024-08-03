@@ -9,9 +9,9 @@ import {
   LinkToNews,
   Points,
   Time,
-} from './NewsContentBlock.styled.ts';
-import { NewsItemTitle } from '../../commons/NewsItemTitle/NewsItemTitle.ts';
-import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState.ts';
+} from './NewsContentBlock.styled';
+import { NewsItemTitle } from '../../commons/NewsItemTitle/NewsItemTitle';
+import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState';
 
 export default function NewsContentBlock() {
   const newsItem = use(useSelectorNewsItem());

@@ -1,4 +1,4 @@
-import { StyledFooter, StyledLink, ApiLink } from './Footer.styled.ts';
+import { StyledFooter, StyledLink, ApiLink } from './Footer.styled';
 
 export default function Footer() {
   return (

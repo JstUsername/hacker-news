@@ -1,11 +1,10 @@
-import { StyledHeader, LinkWrapper, StyledLink, HNLogo, CroppedHNLogo } from './Header.styled.ts';
-import { RefreshButton } from '../../commons/RefreshButton/RefreshButton.ts';
-import { useSelectorGetNewsList, useSelectorNewsList } from '../../store/states/newsListState/newsListState.ts';
-import { useSelectorGetNewsItem } from '../../store/states/newsItemState/newsItemState.ts';
+import { StyledHeader, LinkWrapper, StyledLink, HNLogo, CroppedHNLogo } from './Header.styled';
+import { RefreshButton } from '../../commons/RefreshButton/RefreshButton';
+import { useSelectorGetNewsList } from '../../store/states/newsListState/newsListState';
+import { useSelectorGetNewsItem } from '../../store/states/newsItemState/newsItemState';
 import { useParams, Link } from 'react-router-dom';
 
 export default function Header() {
-  const newsList = useSelectorNewsList();
   const getNewsItem = useSelectorGetNewsItem();
   const getNewsList = useSelectorGetNewsList();
   const { id } = useParams();
@@ -17,7 +16,7 @@ export default function Header() {
         <HNLogo title="Logo" />
       </Link>
       <LinkWrapper>
-        <RefreshButton onClick={() => (id === undefined ? getNewsList() : getNewsItem(Number(id), newsList, false))}>
+        <RefreshButton onClick={() => (id === undefined ? getNewsList() : getNewsItem(Number(id)))}>
           {id === undefined ? 'refreshNewsList()' : 'updateCurrentNews()'}
         </RefreshButton>
         <StyledLink href="https://github.com/JstUsername">/github</StyledLink>
