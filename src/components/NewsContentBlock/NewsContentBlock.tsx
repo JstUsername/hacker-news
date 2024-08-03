@@ -6,6 +6,7 @@ import {
   ContentBottomWrapper,
   ContentHeaderWrapper,
   ContentWrapper,
+  LinkToNewsWrapper,
   LinkToNews,
   Points,
   Time,
@@ -26,9 +27,9 @@ export default function NewsContentBlock() {
       <ContentWrapper>
         <ContentHeaderWrapper>
           <NewsItemTitle>{newsItem.title}</NewsItemTitle>
-          <LinkToNews>
-            Link: <a href={newsItem.url}>{newsItem.url}</a>
-          </LinkToNews>
+          <LinkToNewsWrapper>
+            Link: <LinkToNews href={newsItem.url}>{newsItem.url}</LinkToNews>
+          </LinkToNewsWrapper>
         </ContentHeaderWrapper>
         <ContentBottomWrapper>
           <Points>{newsItem.points} points</Points>

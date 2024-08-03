@@ -29,18 +29,19 @@ export const ContentBottomWrapper = styled('div')`
   gap: 24px;
 `;
 
-export const LinkToNews = styled('span')`
+export const LinkToNewsWrapper = styled('span')`
   ${({ theme }) => theme.typography.body2};
   color: ${({ theme }) => theme.color.green};
   line-height: 1.6;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  a {
-    color: ${({ theme }) => theme.color.green};
-    cursor: pointer;
-    white-space: nowrap;
-  }
+`;
+
+export const LinkToNews = styled('a')`
+  color: ${({ theme }) => theme.color.green};
+  cursor: pointer;
+  white-space: nowrap;
 `;
 
 export const Points = styled('span')`
