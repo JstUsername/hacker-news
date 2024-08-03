@@ -1,4 +1,3 @@
-//@ts-ignore
 import { use } from 'react';
 import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState.ts';
 import { CommentsWrapper } from './NewsCommentsBlock.styled.ts';
@@ -16,7 +15,7 @@ export default function NewsCommentsBlock() {
           Comments
           <NewsItemTitleAdditional>{' ' + newsItem.comments_count}</NewsItemTitleAdditional>
         </NewsItemTitle>
-        {newsItem.comments?.map((comment: NewsItemType) => {
+        {newsItem.comments?.map((comment) => {
           if (comment.deleted || comment.dead) {
             return null;
           }

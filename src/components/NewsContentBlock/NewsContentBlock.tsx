@@ -1,4 +1,3 @@
-//@ts-ignore
 import { use } from 'react';
 import { fromUnixTime, lightFormat } from 'date-fns';
 import {
