@@ -11,12 +11,6 @@ const fetchNewsItem = async (set: SetTypeItem, id: number) => {
   }
 
   data = await response.json();
-
-  if (data === null) {
-    set({ itemPageNotFound: true });
-    return null;
-  }
-
   return data;
 };
 
@@ -25,19 +19,12 @@ const useNewsItemState = create<UseNewsItemType>((set) => ({
   itemLoading: false,
   commentsLoading: false,
   itemServerDown: false,
-  itemPageNotFound: false,
 
   getNewsItem: (id) => {
     set({ newsItem: fetchNewsItem(set, id) });
-  },
-
-  resetNotFoundPage: () => {
-    set({ itemPageNotFound: false });
   },
 }));
 
 export const useSelectorNewsItem = () => useNewsItemState((state) => state.newsItem);
 export const useSelectorItemServerDown = () => useNewsItemState((state) => state.itemServerDown);
-export const useSelectorItemPageNotFound = () => useNewsItemState((state) => state.itemPageNotFound);
 export const useSelectorGetNewsItem = () => useNewsItemState((state) => state.getNewsItem);
-export const useSelectorResetNotFoundPage = () => useNewsItemState((state) => state.resetNotFoundPage);

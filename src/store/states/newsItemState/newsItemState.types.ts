@@ -3,9 +3,7 @@ export interface UseNewsItemType {
   itemLoading: boolean;
   commentsLoading: boolean;
   itemServerDown: boolean;
-  itemPageNotFound: boolean;
   getNewsItem: (id: number) => void;
-  resetNotFoundPage: () => void;
 }
 
 export interface NewsItemType {
