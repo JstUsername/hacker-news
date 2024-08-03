@@ -1,5 +1,6 @@
-import { NewsItemType } from '../../store/store.types.ts';
+import { NewsItemType } from '../../store/states/newsItemState/newsItemState.types.ts';
 
 export interface CommentsListProps {
   comment: NewsItemType;
+  toggleExpandVisible: (id: number) => void;
 }

@@ -20,6 +20,37 @@ export default function NewsCommentsBlock() {
     });
   }, []);
 
+  const toggleExpandVisible = (id: number, comments = commentItems as NewsItemType[]) => {
+    const updateComments = (comments: NewsItemType[]): NewsItemType[] => {
+      return comments.map((comment) => {
+        if (comment.id === id) {
+          const newExpand = !comment.expand;
+          return {
+            ...comment,
+            expand: newExpand,
+            comments: comment.comments.map((childComment) => ({
+              ...childComment,
+              visible: newExpand,
+            })),
+          };
+        } else if (comment.comments.length > 0) {
+          return {
+            ...comment,
+            comments: updateComments(comment.comments),
+          };
+        }
+        return comment;
+      });
+    };
+    setCommentItems(updateComments(comments));
+  };
+
+  useEffect(() => {
+    if (newsItem?.comments) {
+      setCommentItems(addFieldsToComments(newsItem?.comments));
+    }
+  }, [addFieldsToComments, newsItem]);
+
   return (
     newsItem !== null && (
       <CommentsWrapper>
@@ -27,11 +58,11 @@ export default function NewsCommentsBlock() {
           Comments
           <NewsItemTitleAdditional>{' ' + newsItem.comments_count}</NewsItemTitleAdditional>
         </NewsItemTitle>
-        {newsItem.comments.map((comment) => {
+        {commentItems?.map((comment) => {
           if (comment.deleted || comment.dead) {
             return null;
           }
-          return <CommentsItem key={comment.id} comment={comment} />;
+          return <CommentsItem key={comment.id} comment={comment} toggleExpandVisible={toggleExpandVisible} />;
         })}
       </CommentsWrapper>
     )
