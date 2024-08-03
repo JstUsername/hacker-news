@@ -1,3 +1,5 @@
+//@ts-ignore
+import { use } from 'react';
 import { fromUnixTime, lightFormat } from 'date-fns';
 import {
   By,
@@ -13,7 +15,7 @@ import { NewsItemTitle } from '../../commons/NewsItemTitle/NewsItemTitle.ts';
 import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState.ts';
 
 export default function NewsContentBlock() {
-  const newsItem = useSelectorNewsItem();
+  const newsItem = use(useSelectorNewsItem());
 
   const timestampToDate = (timestamp: number) => {
     const date = fromUnixTime(timestamp);
