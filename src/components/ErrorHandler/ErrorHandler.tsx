@@ -1,18 +1,20 @@
+import { useErrorBoundary } from 'react-error-boundary';
 import { ErrorWrapper, ErrorText, ErrorEmoji, HomeLink } from './ErrorHandler.styled';
 import { RefreshButton } from '../../commons/RefreshButton/RefreshButton';
 
 interface ErrorHandlerProps {
   error: Error;
-  resetErrorBoundary: () => void;
 }
 
-export default function ErrorHandler({ error, resetErrorBoundary }: ErrorHandlerProps) {
+export default function ErrorHandler({ error }: ErrorHandlerProps) {
+  const { resetBoundary } = useErrorBoundary();
+
   return (
     <ErrorWrapper>
       <ErrorEmoji>{error.message === 'Page not found' ? '(ó﹏ò｡)' : '(╥﹏╥)'}</ErrorEmoji>
       <ErrorText>{error.message}</ErrorText>
       {error.message === 'Page not found' ? (
-        <HomeLink to="/" onClick={() => resetErrorBoundary()}>
+        <HomeLink to="/" onClick={resetBoundary}>
           goHome()
         </HomeLink>
       ) : (

@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useSelectorResetNotFoundPage } from './store/states/newsItemState/newsItemState';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import { GlobalStyle } from './styles/GlobalStyle';
@@ -10,7 +9,6 @@ import NewsItemPage from './pages/NewsItemPage/NewsItemPage';
 import ErrorHandler from './components/ErrorHandler/ErrorHandler';
 
 function App() {
-  const resetNotFoundPage = useSelectorResetNotFoundPage();
   return (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
@@ -28,15 +26,12 @@ function App() {
             <Route
               path="/news/:id"
               element={
-                <ErrorBoundary FallbackComponent={ErrorHandler} onReset={resetNotFoundPage}>
+                <ErrorBoundary FallbackComponent={ErrorHandler}>
                   <NewsItemPage />
                 </ErrorBoundary>
               }
             />
-            <Route
-              path="*"
-              element={<ErrorHandler error={new Error('Page not found')} resetErrorBoundary={() => undefined} />}
-            />
+            <Route path="*" element={<ErrorHandler error={new Error('Page not found')} />} />
           </Route>
         </Routes>
       </ThemeProvider>
