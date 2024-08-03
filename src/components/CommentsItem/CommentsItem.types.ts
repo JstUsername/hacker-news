@@ -2,5 +2,4 @@ import { NewsItemType } from '../../store/states/newsItemState/newsItemState.typ
 
 export interface CommentsListProps {
   comment: NewsItemType;
-  toggleExpandVisible: (id: number) => void;
 }

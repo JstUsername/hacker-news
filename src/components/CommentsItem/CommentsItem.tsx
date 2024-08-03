@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { CommentsListProps } from './CommentsItem.types.ts';
 import {
   CommentsItemWrapper,
@@ -9,10 +10,8 @@ import {
 } from './CommentsItem.styled.ts';
 import { NewsItemType } from '../../store/states/newsItemState/newsItemState.types.ts';
 
-export default function CommentsItem({ comment, toggleExpandVisible }: CommentsListProps) {
-  const handleClickExpand = (id: number) => {
-    toggleExpandVisible(id);
-  };
+export default function CommentsItem({ comment }: CommentsListProps) {
+  const [isExpandVisible, setIsExpandVisible] = useState(false);
 
   return (
     <CommentsItemWrapper>
@@ -20,26 +19,25 @@ export default function CommentsItem({ comment, toggleExpandVisible }: CommentsL
         <ExpandWrapper>
           <ExpandIcon
             $isVisibleIcon={comment.comments.length !== 0}
-            $isExpand={comment.expand}
+            $isExpand={isExpandVisible}
             onClick={() => {
-              handleClickExpand(comment.id);
+              setIsExpandVisible(!isExpandVisible);
             }}
           />
           <CommentsItemUser>{comment.user}</CommentsItemUser>
         </ExpandWrapper>
         <CommentsItemContent dangerouslySetInnerHTML={{ __html: comment.content }} />
       </div>
-      {comment.comments.length > 0 &&
-        comment.comments.map((childComment: NewsItemType) => {
-          if (childComment.deleted || childComment.dead) {
-            return null;
-          }
-          return (
-            <CommentsChildItemWrapper key={childComment.id} $isVisible={childComment.visible}>
-              <CommentsItem comment={childComment} toggleExpandVisible={toggleExpandVisible} />
-            </CommentsChildItemWrapper>
-          );
-        })}
+      {comment.comments?.map((childComment: NewsItemType) => {
+        if (childComment.deleted || childComment.dead) {
+          return null;
+        }
+        return (
+          <CommentsChildItemWrapper key={childComment.id} $isVisible={isExpandVisible}>
+            <CommentsItem comment={childComment} />
+          </CommentsChildItemWrapper>
+        );
+      })}
     </CommentsItemWrapper>
   );
 }
