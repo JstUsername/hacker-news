@@ -9,7 +9,7 @@ const newsListUrl = [
 ];
 
 const fetchNewsList = async (set: SetTypeList) => {
-  let data: NewsListType[] | [] = [];
+  let data: NewsListType[] = [];
   const fetchPromises = newsListUrl.map(async (url) => {
     const response = await fetch(`${url}?t=${new Date().getTime()}`);
     if (response.status === 500) {

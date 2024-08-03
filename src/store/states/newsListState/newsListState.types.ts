@@ -1,5 +1,5 @@
 export interface UseNewsListStateType {
-  newsList: Promise<NewsListType[] | []>;
+  newsList: Promise<NewsListType[]>;
   newsServerDown: boolean;
   getNewsList: () => void;
 }
