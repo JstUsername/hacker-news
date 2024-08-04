@@ -31,7 +31,14 @@ function App() {
                 </ErrorBoundary>
               }
             />
-            <Route path="*" element={<ErrorHandler error={new Error('Page not found')} />} />
+            <Route
+              path="*"
+              element={
+                <ErrorBoundary FallbackComponent={ErrorHandler}>
+                  <ErrorHandler error={new Error('Page not found')} />
+                </ErrorBoundary>
+              }
+            />
           </Route>
         </Routes>
       </ThemeProvider>
