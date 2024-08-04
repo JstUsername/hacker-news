@@ -1,12 +1,9 @@
-import { use } from 'react';
-import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState';
 import { CommentsWrapper } from './NewsCommentsBlock.styled';
 import CommentsItem from '../CommentsItem/CommentsItem';
 import { NewsItemTitle, NewsItemTitleAdditional } from '../../commons/NewsItemTitle/NewsItemTitle';
+import { NewsCommentsBlockProps } from './NewsCommentsBlock.types';
 
-export default function NewsCommentsBlock() {
-  const newsItem = use(useSelectorNewsItem());
-
+export default function NewsCommentsBlock({ newsItem }: NewsCommentsBlockProps) {
   return (
     newsItem !== null && (
       <CommentsWrapper>

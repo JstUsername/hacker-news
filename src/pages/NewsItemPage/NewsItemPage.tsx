@@ -1,10 +1,8 @@
 import { useEffect, useRef, useState, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelectorGetNewsItem, useSelectorItemServerDown } from '../../store/states/newsItemState/newsItemState';
-import NewsItemWrapper from './NewsItemPage.styled';
-import NewsContentBlock from '../../components/NewsContentBlock/NewsContentBlock';
-import NewsCommentsBlock from '../../components/NewsCommentsBlock/NewsCommentsBlock';
 import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled';
+import NewsItem from '../../components/NewsItem/NewsItem';
 
 export default function NewsItemPage() {
   const itemServerDown = useSelectorItemServerDown();
@@ -42,10 +40,7 @@ export default function NewsItemPage() {
         </LoaderWrapper>
       }
     >
-      <NewsItemWrapper>
-        <NewsContentBlock setIsPageNotFound={setIsPageNotFound} />
-        <NewsCommentsBlock />
-      </NewsItemWrapper>
+      <NewsItem setIsPageNotFound={setIsPageNotFound} />
     </Suspense>
   );
 }

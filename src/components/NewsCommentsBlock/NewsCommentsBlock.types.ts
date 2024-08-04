@@ -1,5 +1,5 @@
 import { NewsItemType } from '../../store/states/newsItemState/newsItemState.types';
 
-export interface NewsContentBlockProps {
+export interface NewsCommentsBlockProps {
   newsItem: NewsItemType | null;
 }
