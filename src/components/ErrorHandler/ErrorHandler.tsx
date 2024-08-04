@@ -1,10 +1,7 @@
+import { ErrorHandlerProps } from './ErrorHandler.types';
 import { useErrorBoundary } from 'react-error-boundary';
 import { ErrorWrapper, ErrorText, ErrorEmoji, HomeLink } from './ErrorHandler.styled';
 import { RefreshButton } from '../../commons/RefreshButton/RefreshButton';
-
-interface ErrorHandlerProps {
-  error: Error;
-}
 
 export default function ErrorHandler({ error }: ErrorHandlerProps) {
   const { resetBoundary } = useErrorBoundary();
