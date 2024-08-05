@@ -34,10 +34,6 @@ export const CommentsItemContent = styled('div')`
   }
 `;
 
-export const CommentsChildItemWrapper = styled('div')<{ $isVisible: boolean | undefined }>`
-  display: ${({ $isVisible }) => ($isVisible ? 'block' : 'none')};
-`;
-
 export const ExpandWrapper = styled('div')`
   display: flex;
   align-items: center;
