@@ -45,25 +45,6 @@ export const LinkToNews = styled('a')`
   white-space: nowrap;
 `;
 
-export const Points = styled('span')`
-  ${({ theme }) => theme.typography.body2};
-  color: ${({ theme }) => theme.color.yellow};
-`;
-
-export const By = styled('span')`
-  ${({ theme }) => theme.typography.body2};
-  color: ${({ theme }) => theme.color.green};
-`;
-
-export const User = styled('span')`
-  color: ${({ theme }) => theme.color.purple};
-`;
-
-export const Time = styled('span')`
-  ${({ theme }) => theme.typography.body2};
-  color: ${({ theme }) => theme.color.yellow};
-`;
-
 export const ByTimeWrapper = styled('div')`
   display: flex;
   justify-content: space-between;

@@ -1,15 +1,12 @@
 import { timestampToDate } from '../../utils/timestampToDate';
+import { Text } from '../../commons/Text/Text';
 import {
-  By,
   ByTimeWrapper,
   ContentBottomWrapper,
   ContentHeaderWrapper,
   ContentWrapper,
   LinkToNews,
   LinkToNewsWrapper,
-  Points,
-  Time,
-  User,
 } from './NewsContentBlock.styled';
 import { NewsItemTitle } from '../../commons/NewsItemTitle/NewsItemTitle';
 import { NewsContentBlockProps } from './NewsContentBlock.types';
@@ -25,12 +22,19 @@ export default function NewsContentBlock({ newsItem }: NewsContentBlockProps) {
           </LinkToNewsWrapper>
         </ContentHeaderWrapper>
         <ContentBottomWrapper>
-          <Points>{newsItem.points} points</Points>
+          <Text $variant="body2" color="yellow">
+            {newsItem.points} points
+          </Text>
           <ByTimeWrapper>
-            <By>
-              By: <User>{newsItem.user}</User>
-            </By>
-            <Time>{timestampToDate(newsItem.time)}</Time>
+            <Text $variant="body2" color="green">
+              By:{' '}
+              <Text $variant="body2" color="purple">
+                {newsItem.user}
+              </Text>
+            </Text>
+            <Text $variant="body2" color="yellow">
+              {timestampToDate(newsItem.time)}
+            </Text>
           </ByTimeWrapper>
         </ContentBottomWrapper>
       </ContentWrapper>
