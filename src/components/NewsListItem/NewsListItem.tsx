@@ -1,5 +1,5 @@
 import { NewsListItemProps } from './NewsListItem.types';
-import { fromUnixTime, formatDistanceToNow } from 'date-fns';
+import { timestampToAgo } from '../../utils/timestampToAgo';
 import {
   NewsListItemWrapper,
   NewsTitle,
@@ -13,11 +13,6 @@ import {
 } from './NewsListItem.styled';
 
 export default function NewsListItem({ id, title, points, user, time }: NewsListItemProps) {
-  const timestampToAgo = (timestamp: number) => {
-    const date = fromUnixTime(timestamp);
-    return formatDistanceToNow(date, { addSuffix: true }).toString();
-  };
-
   return (
     <NewsListItemWrapper to={`/news/${id}`}>
       <NewsTitle>{title}</NewsTitle>
