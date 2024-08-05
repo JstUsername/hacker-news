@@ -1,22 +1,30 @@
 import { ErrorHandlerProps } from './ErrorHandler.types';
+import { notFoundError } from '../../constants';
 import { useErrorBoundary } from 'react-error-boundary';
-import { ErrorWrapper, ErrorText, ErrorEmoji, HomeLink } from './ErrorHandler.styled';
+import { useNavigate } from 'react-router-dom';
+import { ErrorWrapper, ErrorText, ErrorEmoji } from './ErrorHandler.styled';
 import { RefreshButton } from '../../commons/RefreshButton/RefreshButton';
 
 export default function ErrorHandler({ error }: ErrorHandlerProps) {
   const { resetBoundary } = useErrorBoundary();
+  const navigate = useNavigate();
+
+  const resetError = () => {
+    if (error.message === notFoundError) {
+      resetBoundary();
+      navigate('/');
+    } else {
+      window.location.reload();
+    }
+  };
 
   return (
     <ErrorWrapper>
-      <ErrorEmoji>{error.message === 'Page not found' ? '(ó﹏ò｡)' : '(╥﹏╥)'}</ErrorEmoji>
+      <ErrorEmoji>{error.message === notFoundError ? '(ó﹏ò｡)' : '(╥﹏╥)'}</ErrorEmoji>
       <ErrorText>{error.message}</ErrorText>
-      {error.message === 'Page not found' ? (
-        <HomeLink to="/" onClick={resetBoundary}>
-          goHome()
-        </HomeLink>
-      ) : (
-        <RefreshButton onClick={() => window.location.reload()}>reloadPage()</RefreshButton>
-      )}
+      <RefreshButton onClick={() => resetError()}>
+        {error.message === notFoundError ? 'goHome()' : 'reloadPage()'}
+      </RefreshButton>
     </ErrorWrapper>
   );
 }

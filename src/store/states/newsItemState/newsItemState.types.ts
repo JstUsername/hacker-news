@@ -1,8 +1,5 @@
 export interface UseNewsItemType {
   newsItem: Promise<NewsItemType | null>;
-  itemLoading: boolean;
-  commentsLoading: boolean;
-  itemServerDown: boolean;
   getNewsItem: (id: number) => void;
 }
 
@@ -25,11 +22,3 @@ export interface NewsItemType {
   visible?: boolean;
   expand?: boolean;
 }
-
-export type SetTypeItem = (
-  partial:
-    | UseNewsItemType
-    | Partial<UseNewsItemType>
-    | ((state: UseNewsItemType) => UseNewsItemType | Partial<UseNewsItemType>),
-  replace?: boolean | undefined,
-) => void;

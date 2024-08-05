@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelectorGetNewsItem, useSelectorItemServerDown } from '../../store/states/newsItemState/newsItemState';
+import { useSelectorGetNewsItem } from '../../store/states/newsItemState/newsItemState';
+import { notFoundError } from '../../constants';
 import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled';
 import NewsItem from '../../components/NewsItem/NewsItem';
 
 export default function NewsItemPage() {
-  const itemServerDown = useSelectorItemServerDown();
   const getNewsItem = useSelectorGetNewsItem();
   const { id } = useParams();
   const hasMounted = useRef(false);
@@ -24,12 +24,8 @@ export default function NewsItemPage() {
     return () => clearInterval(autoUpdateInterval);
   }, [getNewsItem, id]);
 
-  if (itemServerDown) {
-    throw new Error('Internal server error');
-  }
-
   if (isPageNotFound) {
-    throw new Error('Page not found');
+    throw new Error(notFoundError);
   }
 
   return (

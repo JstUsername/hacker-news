@@ -21,7 +21,7 @@ export default function NewsContentBlock({ newsItem }: NewsContentBlockProps) {
   };
 
   return (
-    newsItem !== null && (
+    !!newsItem && (
       <ContentWrapper>
         <ContentHeaderWrapper>
           <NewsItemTitle>{newsItem.title}</NewsItemTitle>

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { UseNewsListStateType, NewsListType, SetTypeList } from './newsListState.types';
+import { UseNewsListStateType, NewsListType } from './newsListState.types';
+import { wentWrongError } from '../../../constants';
 
 const newsListUrl = [
   'https://api.hnpwa.com/v0/newest/1.json',
@@ -8,14 +9,12 @@ const newsListUrl = [
   'https://api.hnpwa.com/v0/newest/4.json',
 ];
 
-const fetchNewsList = async (set: SetTypeList) => {
+const fetchNewsList = async () => {
   let data: NewsListType[] = [];
   const fetchPromises = newsListUrl.map(async (url) => {
     const response = await fetch(`${url}?t=${new Date().getTime()}`);
-
-    if (response.status === 500) {
-      set({ newsServerDown: true });
-      return;
+    if (response.status !== 200) {
+      throw new Error(wentWrongError);
     }
 
     return response.json();
@@ -26,10 +25,8 @@ const fetchNewsList = async (set: SetTypeList) => {
 
 const useNewsListState = create<UseNewsListStateType>((set) => ({
   newsList: new Promise((resolve) => resolve([])),
-  newsServerDown: false,
-  getNewsList: () => set({ newsList: fetchNewsList(set) }),
+  getNewsList: () => set({ newsList: fetchNewsList() }),
 }));
 
 export const useSelectorNewsList = () => useNewsListState((state) => state.newsList);
-export const useSelectorNewsServerDown = () => useNewsListState((state) => state.newsServerDown);
 export const useSelectorGetNewsList = () => useNewsListState((state) => state.getNewsList);
