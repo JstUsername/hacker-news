@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { UseNewsListStateType, NewsListType } from './newsListState.types';
+import { UseNewsListStateType } from './newsListState.types';
 import { wentWrongError } from '../../../constants';
 
 const newsListUrl = [
@@ -10,7 +10,6 @@ const newsListUrl = [
 ];
 
 const fetchNewsList = async () => {
-  let data: NewsListType[] = [];
   const fetchPromises = newsListUrl.map(async (url) => {
     const response = await fetch(`${url}?t=${new Date().getTime()}`);
     if (response.status !== 200) {
@@ -20,7 +19,7 @@ const fetchNewsList = async () => {
     return response.json();
   });
   const promisesResults = await Promise.all(fetchPromises);
-  return [data, ...promisesResults].flat();
+  return promisesResults.flat();
 };
 
 const useNewsListState = create<UseNewsListStateType>((set) => ({
