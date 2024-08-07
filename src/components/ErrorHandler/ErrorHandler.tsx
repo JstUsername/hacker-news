@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 import { ErrorWrapper, ErrorText, ErrorEmoji } from './ErrorHandler.styled';
 import { RefreshButton } from '../../commons/RefreshButton/RefreshButton';
 
-export default function ErrorHandler({ error }: ErrorHandlerProps) {
+export default function ErrorHandler({ error, clearLayout }: ErrorHandlerProps) {
   const { resetBoundary } = useErrorBoundary();
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ export default function ErrorHandler({ error }: ErrorHandlerProps) {
 
   return (
     <>
-      <Header resetBoundary={resetBoundary} />
+      {!clearLayout && <Header resetBoundary={resetBoundary} />}
       <ErrorWrapper>
         <ErrorEmoji>{error.message === notFoundError ? '(ó﹏ò｡)' : '(╥﹏╥)'}</ErrorEmoji>
         <ErrorText>{error.message}</ErrorText>
@@ -30,7 +30,7 @@ export default function ErrorHandler({ error }: ErrorHandlerProps) {
           {error.message === notFoundError ? 'goHome()' : 'reloadPage()'}
         </RefreshButton>
       </ErrorWrapper>
-      <Footer />
+      {!clearLayout && <Footer />}
     </>
   );
 }
