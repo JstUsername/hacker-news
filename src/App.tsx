@@ -13,34 +13,15 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route
-              index
-              element={
-                <ErrorBoundary FallbackComponent={ErrorHandler}>
-                  <HomePage />
-                </ErrorBoundary>
-              }
-            />
-            <Route
-              path="/news/:id"
-              element={
-                <ErrorBoundary FallbackComponent={ErrorHandler}>
-                  <NewsItemPage />
-                </ErrorBoundary>
-              }
-            />
-            <Route
-              path="*"
-              element={
-                <ErrorBoundary FallbackComponent={ErrorHandler}>
-                  <ErrorHandler error={new Error('Page not found')} />
-                </ErrorBoundary>
-              }
-            />
-          </Route>
-        </Routes>
+        <ErrorBoundary FallbackComponent={ErrorHandler}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<HomePage />} />
+              <Route path="/news/:id" element={<NewsItemPage />} />
+              <Route path="*" element={<ErrorHandler error={new Error('Page not found')} />} />
+            </Route>
+          </Routes>
+        </ErrorBoundary>
       </ThemeProvider>
     </BrowserRouter>
   );

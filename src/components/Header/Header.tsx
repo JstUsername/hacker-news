@@ -4,14 +4,14 @@ import { useSelectorGetNewsList } from '../../store/states/newsListState/newsLis
 import { useSelectorGetNewsItem } from '../../store/states/newsItemState/newsItemState';
 import { useParams, Link } from 'react-router-dom';
 
-export default function Header() {
+export default function Header({ resetBoundary }: { resetBoundary?: () => void }) {
   const getNewsItem = useSelectorGetNewsItem();
   const getNewsList = useSelectorGetNewsList();
   const { id } = useParams();
 
   return (
     <StyledHeader>
-      <Link to="/">
+      <Link to="/" onClick={resetBoundary}>
         <CroppedHNLogo title="Logo" />
         <HNLogo title="Logo" />
       </Link>
