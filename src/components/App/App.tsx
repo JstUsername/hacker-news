@@ -20,7 +20,7 @@ function App() {
               <Route path="/" element={<Layout />}>
                 <Route index element={<HomePage />} />
                 <Route path="/news/:id" element={<NewsItemPage />} />
-                <Route path="*" element={<ErrorHandler error={new Error('Page not found')} clearLayout={true} />} />
+                <Route path="*" element={<ErrorHandler error={new Error('Page not found')} clearLayout />} />
               </Route>
             </Routes>
           </ErrorBoundary>
