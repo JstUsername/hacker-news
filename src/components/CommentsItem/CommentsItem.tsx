@@ -32,11 +32,7 @@ export default function CommentsItem({ comment }: CommentsListProps) {
           if (childComment.deleted || childComment.dead) {
             return null;
           }
-          return (
-            <div key={childComment.id}>
-              <CommentsItem comment={childComment} />
-            </div>
-          );
+          return <CommentsItem key={childComment.id} comment={childComment} />;
         })}
     </CommentsItemWrapper>
   );
