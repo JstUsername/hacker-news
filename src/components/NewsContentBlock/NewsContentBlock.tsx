@@ -1,4 +1,4 @@
-import { timestampToDate } from '../../utils/timestampToDate';
+import { timestampToDate } from '../../utils/dateUtils';
 import { Text } from '../../commons/Text/Text';
 import {
   ByTimeWrapper,

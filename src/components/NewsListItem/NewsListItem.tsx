@@ -1,5 +1,5 @@
 import { NewsListItemProps } from './NewsListItem.types';
-import { timestampToAgo } from '../../utils/timestampToAgo';
+import { timestampToAgo } from '../../utils/dateUtils';
 import { Text } from '../../commons/Text/Text';
 import { NewsListItemWrapper, NewsTitle, PointsWrapper, UserTimeAgoWrapper, CardBottom } from './NewsListItem.styled';
 
