@@ -40,11 +40,12 @@ export const ExpandWrapper = styled('div')`
   gap: 12px;
 `;
 
-export const ExpandIcon = styled(ArrowIcon)<{ $isVisibleIcon: boolean; $isExpand: boolean | undefined }>`
+export const ExpandIcon = styled(ArrowIcon)<{ $isVisibleIcon: boolean; $isExpand?: boolean }>`
   width: 20px;
   height: 16px;
   fill: ${({ theme }) => theme.color.yellow};
   display: ${({ $isVisibleIcon }) => ($isVisibleIcon ? 'block' : 'none')};
   cursor: pointer;
   transform: ${({ $isExpand }) => ($isExpand ? 'rotate(-180deg)' : 'rotate(0deg)')};
+  transition: transform 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 `;
