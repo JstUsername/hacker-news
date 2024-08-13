@@ -9,12 +9,12 @@ export const NewsListWrapper = styled('div')`
   box-sizing: border-box;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    min-height: ${({ theme }) => theme.height.max};
+    min-height: ${({ theme }) => theme.heights.mainContentDesktop};
     grid-template-rows: repeat(2, 1fr);
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    min-height: ${({ theme }) => theme.height.min};
+    min-height: ${({ theme }) => theme.heights.mainContentMobile};
     grid-template-columns: repeat(1, 1fr);
     padding: 16px;
   }
@@ -30,11 +30,11 @@ export const LoaderWrapper = styled('div')`
   align-items: center;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    height: ${({ theme }) => theme.height.max};
+    height: ${({ theme }) => theme.heights.mainContentDesktop};
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    height: ${({ theme }) => theme.height.min};
+    height: ${({ theme }) => theme.heights.mainContentMobile};
   }
 `;
 

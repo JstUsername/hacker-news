@@ -12,12 +12,12 @@ const NewsItemWrapper = styled('div')`
   gap: 18px;
 
   @media (min-width: ${({ theme }) => theme.breakpoints.md}) {
-    height: ${({ theme }) => theme.height.max};
+    height: ${({ theme }) => theme.heights.mainContentDesktop};
     grid-template-rows: repeat(2, 1fr);
   }
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    min-height: ${({ theme }) => theme.height.min};
+    min-height: ${({ theme }) => theme.heights.mainContentMobile};
     padding: 16px;
   }
 

@@ -37,11 +37,11 @@ const theme: DefaultTheme = {
     lg: '1440px',
     xl: '1920px',
   },
-  height: {
+  heights: {
     // @NOTE: 72px - высота header, 48px - высота footer (при ширине экрана ДО 1024px)
-    min: 'calc(100vh - (72px + 48px))',
+    mainContentMobile: 'calc(100vh - (72px + 48px))',
     // @NOTE: 88px - высота header, 64px - высота footer (при ширине экрана ОТ 1024px)
-    max: 'calc(100vh - (88px + 64px))',
+    mainContentDesktop: 'calc(100vh - (88px + 64px))',
   },
 };
 
