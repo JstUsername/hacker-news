@@ -1,35 +1,23 @@
 {
   "name": "hacker-news",
   "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "workspaces": [
+    "app/*"
+  ],
   "scripts": {
-    "start": "vite",
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@fontsource/source-code-pro": "^5.0.18",
-    "date-fns": "^3.6.0",
-    "react": "^19.0.0-rc-8269d55d-20240802",
-    "react-dom": "^19.0.0-rc-8269d55d-20240802",
-    "react-error-boundary": "^4.0.13",
-    "react-router-dom": "^6.24.1",
-    "styled-components": "^6.1.11",
-    "use-async-resource": "^2.2.2",
-    "zustand": "^4.5.4"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "check-build": "turbo run check-build"
   },
   "devDependencies": {
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@types/styled-components": "^5.1.34",
+    "@eslint/eslintrc": "^3.1.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@typescript-eslint/eslint-plugin": "^7.16.0",
     "@typescript-eslint/parser": "^7.16.0",
-    "@vitejs/plugin-react-swc": "^3.5.0",
     "@web-bee-ru/eslint-plugin": "^0.6.3",
-    "eslint": "^8.57.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-import-resolver-node": "^0.3.9",
@@ -40,8 +28,8 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "eslint-plugin-unicorn": "^54.0.0",
     "prettier": "^3.3.3",
-    "typescript": "^5.2.2",
-    "vite": "^5.3.1",
-    "vite-plugin-svgr": "^4.2.0"
-  }
+    "turbo": "^2.2.3",
+    "typescript": "^5.2.2"
+  },
+  "packageManager": "npm@10.9.0"
 }

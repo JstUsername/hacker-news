@@ -1,0 +1,32 @@
+{
+  "name": "@hacker-news/react",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -b && vite build",
+    "dev": "vite",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "start": "vite",
+    "check-build": "tsc --build --noEmit --incremental false"
+  },
+  "dependencies": {
+    "@fontsource/source-code-pro": "^5.0.18",
+    "date-fns": "^3.6.0",
+    "react": "^19.0.0-beta-26f2496093-20240514",
+    "react-dom": "^19.0.0-beta-26f2496093-20240514",
+    "react-error-boundary": "^4.1.2",
+    "react-router-dom": "^6.24.1",
+    "styled-components": "^6.1.11",
+    "use-async-resource": "^2.2.2",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/styled-components": "^5.1.34",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "vite": "^5.3.1",
+    "vite-plugin-svgr": "^4.2.0"
+  }
+}
