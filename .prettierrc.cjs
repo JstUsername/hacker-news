@@ -9,4 +9,6 @@ module.exports = {
   bracketSpacing: true,
   arrowParens: 'always',
   endOfLine: 'lf',
+  importOrderParserPlugins: ['typescript', 'decorators-legacy'],
+  plugins: ['@trivago/prettier-plugin-sort-imports'],
 };

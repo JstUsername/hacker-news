@@ -1,6 +1,7 @@
-# Build artifacts
 /node_modules
-/dist
-/src/types/**/*.json
-/src/types/**/*.yaml
-/public
+/app/*/node_modules
+/app/*/dist
+/app/*/src/types/**/*.json
+/app/*/src/types/**/*.yaml
+/app/*/public
+README.md
