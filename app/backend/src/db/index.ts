@@ -1,1 +1,2 @@
-export { sequelize } from './db';
+export * from './db';
+export * from './seeders';
