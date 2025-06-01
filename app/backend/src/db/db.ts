@@ -1,4 +1,5 @@
-import { Sequelize } from 'sequelize';
+import { Sequelize } from 'sequelize-typescript';
+import { ItemsModel } from '~/entities/items';
 
 const database = process.env.POSTGRES_DB || '';
 const user = process.env.POSTGRES_USER || '';
@@ -10,4 +11,6 @@ export const sequelize = new Sequelize(database, user, password, {
   dialect: 'postgres',
   host,
   port,
+  logging: false,
+  models: [ItemsModel],
 });
