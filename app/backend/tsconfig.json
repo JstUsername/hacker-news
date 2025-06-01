@@ -3,6 +3,8 @@
   "compilerOptions": {
     "moduleResolution": "Node",
     "lib": ["ES2020"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "paths": {
       "~/*": ["./src/*"]
     }
