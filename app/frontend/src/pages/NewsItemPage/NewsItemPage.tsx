@@ -1,32 +1,21 @@
 import NewsItem from '../../components/NewsItem/NewsItem';
 import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled';
-import { notFoundError } from '../../constants';
 import { useSelectorGetNewsItem } from '../../store/states/newsItemState/newsItemState';
-import { useEffect, useRef, useState, Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 export default function NewsItemPage() {
-  const getNewsItem = useSelectorGetNewsItem();
   const { id } = useParams();
-  const hasMounted = useRef(false);
-  const [isPageNotFound, setIsPageNotFound] = useState(false);
-
-  useEffect(() => {
-    if (!hasMounted.current) {
-      getNewsItem(Number(id));
-      hasMounted.current = true;
-    }
-    setIsPageNotFound((prev) => !prev && true);
-  }, [getNewsItem, id]);
+  const getNewsItem = useSelectorGetNewsItem();
 
   useEffect(() => {
     const autoUpdateInterval = setInterval(() => getNewsItem(Number(id)), 60000);
     return () => clearInterval(autoUpdateInterval);
   }, [getNewsItem, id]);
 
-  if (isPageNotFound) {
-    throw new Error(notFoundError);
-  }
+  useEffect(() => {
+    getNewsItem(Number(id));
+  }, [getNewsItem, id]);
 
   return (
     <Suspense
@@ -36,7 +25,7 @@ export default function NewsItemPage() {
         </LoaderWrapper>
       }
     >
-      <NewsItem setIsPageNotFound={setIsPageNotFound} />
+      <NewsItem />
     </Suspense>
   );
 }

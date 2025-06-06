@@ -1,7 +1,6 @@
 import '@fontsource/source-code-pro';
-import { DefaultTheme } from 'styled-components';
 
-const theme: DefaultTheme = {
+const theme = {
   fonts: {
     main: 'Source Code Pro, monospace',
   },
