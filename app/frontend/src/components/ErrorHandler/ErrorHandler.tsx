@@ -1,8 +1,9 @@
 import { RefreshButton } from '../../commons/RefreshButton/RefreshButton';
-import { notFoundError } from '../../constants';
+import { NOT_FOUND_ERROR } from '../../constants/errorMessages';
+import { useSelectorResetNewsItem } from '../../store/states/newsItemState/newsItemState';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
-import { ErrorWrapper, ErrorText, ErrorEmoji } from './ErrorHandler.styled';
+import { ErrorEmoji, ErrorText, ErrorWrapper } from './ErrorHandler.styled';
 import { ErrorHandlerProps } from './ErrorHandler.types';
 import { useErrorBoundary } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
@@ -10,10 +11,12 @@ import { useNavigate } from 'react-router-dom';
 export default function ErrorHandler({ error, clearLayout }: ErrorHandlerProps) {
   const { resetBoundary } = useErrorBoundary();
   const navigate = useNavigate();
+  const resetNewsItem = useSelectorResetNewsItem();
 
   const resetError = () => {
-    if (error.message === notFoundError) {
+    if (error.message === NOT_FOUND_ERROR) {
       resetBoundary();
+      resetNewsItem();
       navigate('/');
     } else {
       window.location.reload();
@@ -24,10 +27,10 @@ export default function ErrorHandler({ error, clearLayout }: ErrorHandlerProps) 
     <>
       {!clearLayout && <Header resetBoundary={resetBoundary} />}
       <ErrorWrapper>
-        <ErrorEmoji>{error.message === notFoundError ? '(ó﹏ò｡)' : '(╥﹏╥)'}</ErrorEmoji>
+        <ErrorEmoji>{error.message === NOT_FOUND_ERROR ? '(ó﹏ò｡)' : '(╥﹏╥)'}</ErrorEmoji>
         <ErrorText>{error.message}</ErrorText>
-        <RefreshButton onClick={() => resetError()}>
-          {error.message === notFoundError ? 'goHome()' : 'reloadPage()'}
+        <RefreshButton onClick={resetError}>
+          {error.message === NOT_FOUND_ERROR ? 'goHome()' : 'reloadPage()'}
         </RefreshButton>
       </ErrorWrapper>
       {!clearLayout && <Footer />}
