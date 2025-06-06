@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hacker-news-frontend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hacker-news-frontend
+  template:
+    metadata:
+      labels:
+        app: hacker-news-frontend
+    spec:
+      containers:
+        - name: hacker-news-frontend
+          image: g4ndy/hacker-news-frontend:20-alpine
+          ports:
+            - containerPort: 80
+          env:
+            - name: API_URL
+              value: http://hacker-news-backend-service:3001
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 100m
+            limits:
+              memory: 256Mi
+              cpu: 250m

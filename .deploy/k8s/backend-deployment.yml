@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hacker-news-backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hacker-news-backend
+  template:
+    metadata:
+      labels:
+        app: hacker-news-backend
+    spec:
+      containers:
+        - name: hacker-news-backend
+          image: g4ndy/hacker-news-backend:20-alpine
+          ports:
+            - containerPort: 3001
+          envFrom:
+            - secretRef:
+                name: hacker-news-backend-secret
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 100m
+            limits:
+              memory: 256Mi
+              cpu: 250m
