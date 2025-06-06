@@ -1,28 +1,29 @@
-import { wentWrongError } from '../../../constants';
+import { NOT_FOUND_ERROR, WENT_WRONG_ERROR } from '../../../constants/errorMessages';
+import { createEmptyPromise } from '../../../utils/promises';
 import { UseNewsListStateType } from './newsListState.types';
 import { create } from 'zustand';
 
-const EXPRESS_HOST = import.meta.env.VITE_EXPRESS_HOST || 'localhost';
-const EXPRESS_PORT = parseInt(import.meta.env.VITE_EXPRESS_PORT || '3001');
-
-const newsListUrl = [`http://${EXPRESS_HOST}:${EXPRESS_PORT}/api/newest`];
+const newsListUrl = ['/api/newest'];
 
 const fetchNewsList = async () => {
   const fetchPromises = newsListUrl.map(async (url) => {
     const response = await fetch(`${url}?t=${new Date().getTime()}`);
-    if (response.status !== 200) {
-      throw new Error(wentWrongError);
-    }
-
+    if (response.status === 404) throw new Error(NOT_FOUND_ERROR);
+    if (response.status !== 200) throw new Error(WENT_WRONG_ERROR);
     return response.json();
   });
+
   const promisesResults = await Promise.all(fetchPromises);
   return promisesResults.flat();
 };
 
 const useNewsListState = create<UseNewsListStateType>((set) => ({
-  newsList: new Promise((resolve) => resolve([])),
-  getNewsList: () => set({ newsList: fetchNewsList() }),
+  newsList: createEmptyPromise([]),
+
+  getNewsList: () => {
+    const newsListPromise = fetchNewsList();
+    set({ newsList: newsListPromise });
+  },
 }));
 
 export const useSelectorNewsList = () => useNewsListState((state) => state.newsList);

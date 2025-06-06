@@ -2,17 +2,10 @@ import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemSt
 import NewsCommentsBlock from '../NewsCommentsBlock/NewsCommentsBlock';
 import NewsContentBlock from '../NewsContentBlock/NewsContentBlock';
 import NewsItemWrapper from './NewsItem.styled';
-import { NewsItemProps } from './NewsItem.types';
-import { useEffect, use } from 'react';
+import { use } from 'react';
 
-export default function NewsItem({ setIsPageNotFound }: NewsItemProps) {
+export default function NewsItem() {
   const newsItem = use(useSelectorNewsItem());
-
-  useEffect(() => {
-    if (newsItem === null) {
-      setIsPageNotFound(true);
-    }
-  }, [setIsPageNotFound, newsItem]);
 
   return (
     <NewsItemWrapper>
