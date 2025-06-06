@@ -1,6 +1,7 @@
 export interface UseNewsItemType {
   newsItem: Promise<NewsItemType | null>;
   getNewsItem: (id: number) => void;
+  resetNewsItem: () => void;
 }
 
 export interface NewsItemType {

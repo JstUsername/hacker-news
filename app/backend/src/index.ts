@@ -1,7 +1,7 @@
 import cors from 'cors';
 import express from 'express';
 import { styleText } from 'node:util';
-import { sequelize, seedDatabase } from '~/db';
+import { seedDatabase, sequelize } from '~/db';
 import { router } from '~/router';
 
 const app = express();
@@ -26,4 +26,4 @@ const start = async () => {
   }
 };
 
-await start();
+void start();

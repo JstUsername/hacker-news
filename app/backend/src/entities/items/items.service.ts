@@ -1,4 +1,4 @@
-import { ItemsModel } from './items.model.ts';
+import { ItemsModel } from './items.model';
 import { InferAttributes } from 'sequelize';
 import { NotFoundError } from '~/const';
 
