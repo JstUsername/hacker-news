@@ -1,7 +1,3 @@
-<<<<<<<< HEAD:app/frontend/src/commons/Loader/Loader.ts
-import styled from 'styled-components';
-import HourGlass from '~/assets/icons/hour-glass-icon.svg?react';
-========
 import HourGlass from '../../assets/hour-glass.svg?react';
 import styled from 'styled-components';
 
@@ -27,7 +23,6 @@ export const NewsListWrapper = styled('div')`
     grid-template-columns: repeat(3, 1fr);
   }
 `;
->>>>>>>> 0bb5e18 (feat(turborepo, express, sequelize, postgresql, husky): реализован монорепозиторий, добавлена основа для серверной части, перенастроены конфигурации eslint, prettier, typescript, добавлен docker-compose с БД):app/frontend/src/components/NewsList/NewsList.styled.ts
 
 export const LoaderWrapper = styled('div')`
   display: flex;
