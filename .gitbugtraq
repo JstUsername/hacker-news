@@ -1,0 +1,3 @@
+[bugtraq "yougile"]
+url = https://ru.yougile.com/team/e2c1e69ac005/#HCKN-%BUGID%
+logregex = HCKN-(\d+)
