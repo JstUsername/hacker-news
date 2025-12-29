@@ -1,9 +1,9 @@
-import { Text } from '../../commons/Text/Text';
-import { timestampToAgo } from '../../utils/dateUtils';
-import { NewsListItemWrapper, NewsTitle, PointsWrapper, UserTimeAgoWrapper, CardBottom } from './NewsListItem.styled';
+import { CardBottom, NewsListItemWrapper, NewsTitle, PointsWrapper, UserTimeAgoWrapper } from './NewsListItem.styled';
 import { NewsListItemProps } from './NewsListItem.types';
+import { Text } from '~/commons';
+import { timestampToAgo } from '~/utils';
 
-export default function NewsListItem({ id, title, points, user, time }: NewsListItemProps) {
+export const NewsListItem = ({ id, title, points, user, time }: NewsListItemProps) => {
   return (
     <NewsListItemWrapper to={`/news/${id}`}>
       <NewsTitle>{title}</NewsTitle>
@@ -24,4 +24,4 @@ export default function NewsListItem({ id, title, points, user, time }: NewsList
       </CardBottom>
     </NewsListItemWrapper>
   );
-}
+};

@@ -1,13 +1,24 @@
-import { RefreshButton } from '../../commons/RefreshButton/RefreshButton';
-import { useSelectorGetNewsItem } from '../../store/states/newsItemState/newsItemState';
-import { useSelectorGetNewsList } from '../../store/states/newsListState/newsListState';
-import { StyledHeader, LinkWrapper, StyledLink, HNLogo, CroppedHNLogo } from './Header.styled';
-import { useParams, Link } from 'react-router-dom';
+import {
+  CroppedHNLogo,
+  HeaderActions,
+  HNLogo,
+  ProfileButton,
+  StyledAvatarIcon,
+  StyledHeader,
+  StyledLink,
+} from './Header.styled';
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
+import { Link, useParams } from 'react-router-dom';
+import { RefreshButton } from '~/commons';
+import { ProfileActions } from '~/components/ProfileActions';
+import { useSelectorGetNewsItem, useSelectorGetNewsList } from '~/store';
 
-export default function Header({ resetBoundary }: { resetBoundary?: () => void }) {
+export const Header = ({ resetBoundary }: { resetBoundary?: () => void }) => {
+  const { id } = useParams();
   const getNewsItem = useSelectorGetNewsItem();
   const getNewsList = useSelectorGetNewsList();
-  const { id } = useParams();
+  const [showProfileActions, setShowProfileActions] = useState(false);
 
   return (
     <StyledHeader>
@@ -15,14 +26,17 @@ export default function Header({ resetBoundary }: { resetBoundary?: () => void }
         <CroppedHNLogo title="Logo" />
         <HNLogo title="Logo" />
       </Link>
-      <LinkWrapper>
+      <HeaderActions>
         <RefreshButton onClick={() => (id === undefined ? getNewsList() : getNewsItem(Number(id)))}>
           {id === undefined ? 'refreshNewsList()' : 'updateCurrentNews()'}
         </RefreshButton>
         <StyledLink href="https://github.com/JstUsername">/github</StyledLink>
         <StyledLink href="https://t.me/JstUser">/telegram</StyledLink>
-        <StyledLink href="https://github.com/tastejs/hacker-news-pwas/">/api</StyledLink>
-      </LinkWrapper>
+        <ProfileButton onClick={() => setShowProfileActions((prev) => !prev)}>
+          <StyledAvatarIcon />
+        </ProfileButton>
+      </HeaderActions>
+      {showProfileActions && createPortal(<ProfileActions />, document.body)}
     </StyledHeader>
   );
-}
+};

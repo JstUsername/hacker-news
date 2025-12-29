@@ -1,10 +1,10 @@
-import { useSelectorNewsItem } from '../../store/states/newsItemState/newsItemState';
-import NewsCommentsBlock from '../NewsCommentsBlock/NewsCommentsBlock';
-import NewsContentBlock from '../NewsContentBlock/NewsContentBlock';
-import NewsItemWrapper from './NewsItem.styled';
+import { NewsCommentsBlock } from '../NewsCommentsBlock';
+import { NewsContentBlock } from '../NewsContentBlock';
+import { NewsItemWrapper } from './NewsItem.styled';
 import { use } from 'react';
+import { useSelectorNewsItem } from '~/store';
 
-export default function NewsItem() {
+export const NewsItem = () => {
   const newsItem = use(useSelectorNewsItem());
 
   return (
@@ -13,4 +13,4 @@ export default function NewsItem() {
       <NewsCommentsBlock newsItem={newsItem} />
     </NewsItemWrapper>
   );
-}
+};

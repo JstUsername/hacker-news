@@ -11,13 +11,14 @@ import {
   PrimaryKey,
   Table,
 } from 'sequelize-typescript';
+import { timestampToAgo } from '~/utils';
 
-interface ItemModelCreate extends Omit<ItemsModel, keyof Model | 'id' | 'content' | 'comments'> {
+interface ItemsModelCreate extends Omit<ItemsModel, keyof Model | 'id' | 'timeAgo' | 'content' | 'comments'> {
   content?: string;
 }
 
 @Table({ tableName: 'items' })
-export class ItemsModel extends Model<ItemsModel, ItemModelCreate> {
+export class ItemsModel extends Model<ItemsModel, ItemsModelCreate> {
   @PrimaryKey
   @AutoIncrement
   @Column(DataType.INTEGER)
@@ -36,8 +37,14 @@ export class ItemsModel extends Model<ItemsModel, ItemModelCreate> {
   @Column(DataType.INTEGER)
   declare time: number;
 
-  @Column(DataType.STRING)
-  declare time_ago: string;
+  @Column({
+    type: DataType.VIRTUAL,
+    get(this: ItemsModel): string {
+      const time = this.getDataValue('time');
+      return timestampToAgo(time);
+    },
+  })
+  declare timeAgo: string;
 
   @Column(DataType.STRING)
   declare type: 'link' | 'comment';
@@ -54,12 +61,12 @@ export class ItemsModel extends Model<ItemsModel, ItemModelCreate> {
   @Column(DataType.BOOLEAN)
   declare dead?: boolean;
 
-  @HasMany(() => ItemsModel, { as: 'comments', foreignKey: 'parent_id' })
+  @HasMany(() => ItemsModel, { as: 'comments', foreignKey: 'parentId' })
   declare comments: Array<InferAttributes<ItemsModel>>;
 
   @Default(0)
   @Column(DataType.INTEGER)
-  declare comments_count: number;
+  declare commentsCount: number;
 
   @Column(DataType.STRING)
   declare url?: string;
@@ -69,9 +76,9 @@ export class ItemsModel extends Model<ItemsModel, ItemModelCreate> {
 
   @ForeignKey(() => ItemsModel)
   @Column(DataType.INTEGER)
-  declare parent_id?: number;
+  declare parentId?: number;
 
-  @BelongsTo(() => ItemsModel, { as: 'parent', foreignKey: 'parent_id' })
+  @BelongsTo(() => ItemsModel, { as: 'parent', foreignKey: 'parentId' })
   declare parent?: ItemsModel;
 
   toJSON() {
@@ -85,8 +92,8 @@ export class ItemsModel extends Model<ItemsModel, ItemModelCreate> {
       delete attributes.domain;
     }
 
-    if (attributes.parent_id === null) {
-      delete attributes.parent_id;
+    if (attributes.parentId === null) {
+      delete attributes.parentId;
     }
 
     if (attributes.type === 'link') {
@@ -97,7 +104,7 @@ export class ItemsModel extends Model<ItemsModel, ItemModelCreate> {
     if (attributes.type === 'comment') {
       delete attributes.title;
       delete attributes.points;
-      delete attributes.parent_id;
+      delete attributes.parentId;
 
       if (!attributes.deleted) {
         delete attributes.deleted;
@@ -118,17 +125,17 @@ export class ItemsModel extends Model<ItemsModel, ItemModelCreate> {
       points: attributes.points,
       user: attributes.user,
       time: attributes.time,
-      time_ago: attributes.time_ago,
+      timeAgo: attributes.timeAgo,
       type: attributes.type,
       content: attributes.content,
       deleted: attributes.deleted,
       dead: attributes.dead,
       comments: attributes.comments,
-      comments_count: attributes.comments_count,
+      commentsCount: attributes.commentsCount,
       level: attributes.level,
       url: attributes.url,
       domain: attributes.domain,
-      parent_id: attributes.parent_id,
+      parentId: attributes.parentId,
     };
   }
 }

@@ -1,10 +1,10 @@
-import NewsItem from '../../components/NewsItem/NewsItem';
-import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled';
-import { useSelectorGetNewsItem } from '../../store/states/newsItemState/newsItemState';
 import { Suspense, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Loader, LoaderWrapper } from '~/commons';
+import { NewsItem } from '~/components/NewsItem';
+import { useSelectorGetNewsItem } from '~/store';
 
-export default function NewsItemPage() {
+export const NewsItemPage = () => {
   const { id } = useParams();
   const getNewsItem = useSelectorGetNewsItem();
 
@@ -28,4 +28,4 @@ export default function NewsItemPage() {
       <NewsItem />
     </Suspense>
   );
-}
+};

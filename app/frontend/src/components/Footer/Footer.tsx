@@ -1,11 +1,10 @@
-import { StyledFooter, StyledLink, ApiLink } from './Footer.styled';
+import { StyledFooter, StyledLink } from './Footer.styled';
 
-export default function Footer() {
+export const Footer = () => {
   return (
     <StyledFooter>
       <StyledLink href="https://github.com/JstUsername">/github</StyledLink>
-      <ApiLink href="https://github.com/tastejs/hacker-news-pwas/">/api</ApiLink>
       <StyledLink href="https://t.me/JstUser">/telegram</StyledLink>
     </StyledFooter>
   );
-}
+};

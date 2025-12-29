@@ -1,6 +1,7 @@
-import CroppedLogo from '../../assets/logo-cropped.svg?react';
-import Logo from '../../assets/logo.svg?react';
 import styled from 'styled-components';
+import AvatarIcon from '~/assets/icons/avatar-icon.svg?react';
+import CroppedLogo from '~/assets/logos/logo-cropped.svg?react';
+import Logo from '~/assets/logos/logo.svg?react';
 
 export const HNLogo = styled(Logo)`
   display: block;
@@ -39,8 +40,9 @@ export const StyledHeader = styled('header')`
   }
 `;
 
-export const LinkWrapper = styled('div')`
+export const HeaderActions = styled('div')`
   display: flex;
+  align-items: center;
   gap: 24px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
@@ -60,5 +62,25 @@ export const StyledLink = styled('a')`
 
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     display: none;
+  }
+`;
+
+export const ProfileButton = styled('button')`
+  width: fit-content;
+  height: fit-content;
+  background: transparent;
+  border: none;
+  padding: 0;
+`;
+
+export const StyledAvatarIcon = styled(AvatarIcon)`
+  cursor: pointer;
+
+  path {
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover path {
+    fill: ${({ theme }) => theme.color.yellow};
   }
 `;
