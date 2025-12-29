@@ -10,6 +10,7 @@ RUN npm ci -w=@hacker-news/frontend --include-workspace-root
 FROM deps AS build
 ARG API_URL
 ENV API_URL=${API_URL}
+COPY packages packages
 COPY tsconfig.base.json tsconfig.base.json
 COPY app/frontend app/frontend
 RUN npm run build -w=@hacker-news/frontend

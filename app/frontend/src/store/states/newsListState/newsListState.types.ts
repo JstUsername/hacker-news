@@ -9,8 +9,8 @@ export interface NewsListType {
   points: number | null;
   user: string | null;
   time: number;
-  time_ago: string;
-  comments_count: number;
+  timeAgo: string;
+  commentsCount: number;
   type: string;
   url?: string;
   domain?: string;

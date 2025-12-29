@@ -1,9 +1,9 @@
-import NewsList from '../../components/NewsList/NewsList';
-import { Loader, LoaderWrapper } from '../../components/NewsList/NewsList.styled';
-import { useSelectorGetNewsList } from '../../store/states/newsListState/newsListState';
 import { Suspense, useEffect } from 'react';
+import { Loader, LoaderWrapper } from '~/commons';
+import { NewsList } from '~/components/NewsList';
+import { useSelectorGetNewsList } from '~/store';
 
-export default function HomePage() {
+export const HomePage = () => {
   const getNewsList = useSelectorGetNewsList();
 
   useEffect(() => {
@@ -26,4 +26,4 @@ export default function HomePage() {
       <NewsList />
     </Suspense>
   );
-}
+};

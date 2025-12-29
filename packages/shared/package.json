@@ -1,0 +1,8 @@
+{
+  "name": "@hacker-news/shared",
+  "private": true,
+  "scripts": {
+    "check-build": "tsc --noEmit --incremental false",
+    "lint": "eslint \"./src/**/*.{js,ts}\""
+  }
+}

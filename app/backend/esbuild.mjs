@@ -1,10 +1,17 @@
-import * as esbuild from 'esbuild';
+import esbuild from 'esbuild';
+import fg from 'fast-glob';
 
-esbuild.buildSync({
-  entryPoints: ['./src/index.ts'],
-  bundle: true,
-  platform: 'node',
-  packages: 'external',
-  outdir: './dist',
-  allowOverwrite: true,
-});
+(async () => {
+  const DATABASE_FILES =  await fg('src/databases/**/*');
+
+  esbuild.buildSync({
+    entryPoints: ['./src/server.ts', ...DATABASE_FILES],
+    bundle: true,
+    platform: 'node',
+    packages: 'external',
+    outdir: './dist',
+    allowOverwrite: true,
+    entryNames: '[dir]/[name]',
+    outbase: 'src',
+  });
+})();

@@ -1,15 +1,15 @@
-import { NewsItemTitle, NewsItemTitleAdditional } from '../../commons/NewsItemTitle/NewsItemTitle';
-import CommentsItem from '../CommentsItem/CommentsItem';
+import { CommentsItem } from '../CommentsItem';
 import { CommentsWrapper } from './NewsCommentsBlock.styled';
 import { NewsCommentsBlockProps } from './NewsCommentsBlock.types';
+import { NewsItemTitle, NewsItemTitleAdditional } from '~/commons';
 
-export default function NewsCommentsBlock({ newsItem }: NewsCommentsBlockProps) {
+export const NewsCommentsBlock = ({ newsItem }: NewsCommentsBlockProps) => {
   return (
     newsItem !== null && (
       <CommentsWrapper>
         <NewsItemTitle>
           Comments
-          <NewsItemTitleAdditional>{' ' + newsItem.comments_count}</NewsItemTitleAdditional>
+          <NewsItemTitleAdditional>{' ' + newsItem.commentsCount}</NewsItemTitleAdditional>
         </NewsItemTitle>
         {newsItem.comments?.map((comment) => {
           if (comment.deleted || comment.dead) {
@@ -20,4 +20,4 @@ export default function NewsCommentsBlock({ newsItem }: NewsCommentsBlockProps) 
       </CommentsWrapper>
     )
   );
-}
+};
