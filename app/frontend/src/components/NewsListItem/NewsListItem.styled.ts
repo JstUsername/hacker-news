@@ -41,4 +41,10 @@ export const UserTimeAgoWrapper = styled('div')`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;

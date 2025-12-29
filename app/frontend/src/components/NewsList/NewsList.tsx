@@ -1,9 +1,9 @@
-import { useSelectorNewsList } from '../../store/states/newsListState/newsListState';
-import NewsListItem from '../NewsListItem/NewsListItem';
+import { NewsListItem } from '../NewsListItem';
 import { NewsListWrapper } from './NewsList.styled';
 import { use } from 'react';
+import { useSelectorNewsList } from '~/store';
 
-export default function NewsList() {
+export const NewsList = () => {
   const newsList = use(useSelectorNewsList());
 
   return (
@@ -13,4 +13,4 @@ export default function NewsList() {
       ))}
     </NewsListWrapper>
   );
-}
+};

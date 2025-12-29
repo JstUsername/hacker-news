@@ -43,6 +43,11 @@ npm install
 
 > [!TIP]
 > Перед запуском не забудьте создать .env файлы в директориях `/app/backend` и `/app/frontend`. Примеры приведены в .env.example.
+> 
+> Для генерации `JWT_ACCESS_SECRET` и `JWT_REFRESH_SECRET` воспользуйтесь:
+> ```sh
+> node -e "console.log(require('crypto').randomBytes(32).toString('hex'));"
+> ```
 
 ### Запуск приложения
 

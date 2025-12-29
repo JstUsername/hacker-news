@@ -1,34 +1,35 @@
-import { getItemById, getNewestNews } from './items.service';
-import { Request, Response } from 'express';
-import { styleText } from 'node:util';
-import { AppError, BadRequestError, STATUS_CODES } from '~/const';
+import { ItemsService } from './items.service';
+import { NextFunction, Request, Response } from 'express';
+import { STATUS_CODES } from '~/constants';
 
-export const getNewest = async (_req: Request, res: Response) => {
-  try {
-    const newest = await getNewestNews();
-    res.status(STATUS_CODES.Success).json(newest);
-  } catch (err) {
-    res.status(STATUS_CODES.InternalServerError).json({ error: 'Failed to retrieve the latest news' });
-    console.error(styleText('red', 'Error retrieving the latest news.'), err);
-  }
-};
+const itemsService = new ItemsService();
 
-export const getItem = async (req: Request, res: Response) => {
-  try {
-    const { id } = req.params;
-    const itemId = parseInt(id, 10);
-    if (isNaN(itemId)) throw new BadRequestError('Invalid ID format');
-    const item = await getItemById(itemId);
-    res.status(STATUS_CODES.Success).json(item);
-  } catch (err) {
-    if (err instanceof AppError) {
-      res.status(err.statusCode).json({ error: err.message });
-    } else {
-      res
-        .status(STATUS_CODES.InternalServerError)
-        .json({ error: 'An unexpected error occurred. Please try again later.' });
-
-      console.error(styleText('red', 'Unexpected error:'), err);
+export class ItemsController {
+  async getNewest(_req: Request, res: Response, next: NextFunction) {
+    try {
+      const newest = await itemsService.getNewestNews();
+      res.status(STATUS_CODES.Success).json(newest);
+    } catch (err) {
+      next(err);
     }
   }
-};
+
+  async getItem(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const item = await itemsService.getItemById(+id);
+      res.status(STATUS_CODES.Success).json(item);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async generateItems(_req: Request, res: Response, next: NextFunction) {
+    try {
+      await itemsService.generateItems({ force: true });
+      res.status(STATUS_CODES.Success).json({ message: 'Items successfully generated' });
+    } catch (err) {
+      next(err);
+    }
+  }
+}

@@ -1,0 +1,7 @@
+const path = require('path');
+const IS_DEVELOPMENT = (process.env.NODE_ENV || 'development') === 'development'
+
+module.exports = {
+  'config': path.resolve(IS_DEVELOPMENT ? 'src/databases/postgres/sequelize.config.js' : 'dist/databases/postgres/sequelize.config.js'),
+  'migrations-path': path.resolve(IS_DEVELOPMENT ? 'src/databases/postgres/migrations' : 'dist/databases/postgres/migrations'),
+};

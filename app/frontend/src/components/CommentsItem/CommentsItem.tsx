@@ -1,15 +1,14 @@
-import { NewsItemType } from '../../store/states/newsItemState/newsItemState.types';
 import {
-  CommentsItemWrapper,
   CommentsItemContent,
   CommentsItemUser,
-  ExpandWrapper,
+  CommentsItemWrapper,
   ExpandIcon,
+  ExpandWrapper,
 } from './CommentsItem.styled';
 import { CommentsListProps } from './CommentsItem.types';
 import { useState } from 'react';
 
-export default function CommentsItem({ comment }: CommentsListProps) {
+export const CommentsItem = ({ comment }: CommentsListProps) => {
   const [isExpand, setIsExpand] = useState(false);
 
   return (
@@ -19,22 +18,17 @@ export default function CommentsItem({ comment }: CommentsListProps) {
           <ExpandIcon
             $isVisibleIcon={comment.comments.length !== 0}
             $isExpand={isExpand}
-            onClick={() => {
-              setIsExpand(!isExpand);
-            }}
+            onClick={() => setIsExpand(!isExpand)}
           />
           <CommentsItemUser>{comment.user}</CommentsItemUser>
         </ExpandWrapper>
         <CommentsItemContent dangerouslySetInnerHTML={{ __html: comment.content }} />
       </div>
       {isExpand &&
-        comment.comments?.map((childComment: NewsItemType) => {
-          if (childComment.deleted || childComment.dead) {
-            return null;
-          }
-
+        comment.comments?.map((childComment) => {
+          if (childComment.deleted || childComment.dead) return null;
           return <CommentsItem key={childComment.id} comment={childComment} />;
         })}
     </CommentsItemWrapper>
   );
-}
+};
