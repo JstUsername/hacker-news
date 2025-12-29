@@ -10,7 +10,7 @@ export interface NewsItemType {
   points: number | null;
   user: string | null;
   time: number;
-  time_ago: string;
+  timeAgo: string;
   content: string;
   deleted?: boolean;
   dead?: boolean;
@@ -19,7 +19,7 @@ export interface NewsItemType {
   domain?: string;
   comments: NewsItemType[];
   level: number;
-  comments_count: number;
+  commentsCount: number;
   visible?: boolean;
   expand?: boolean;
 }

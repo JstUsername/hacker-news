@@ -1,6 +1,3 @@
-import { NewsItemTitle } from '../../commons/NewsItemTitle/NewsItemTitle';
-import { Text } from '../../commons/Text/Text';
-import { timestampToDate } from '../../utils/dateUtils';
 import {
   ByTimeWrapper,
   ContentBottomWrapper,
@@ -10,8 +7,10 @@ import {
   LinkToNewsWrapper,
 } from './NewsContentBlock.styled';
 import { NewsContentBlockProps } from './NewsContentBlock.types';
+import { NewsItemTitle, Text } from '~/commons';
+import { timestampToDate } from '~/utils';
 
-export default function NewsContentBlock({ newsItem }: NewsContentBlockProps) {
+export const NewsContentBlock = ({ newsItem }: NewsContentBlockProps) => {
   return (
     !!newsItem && (
       <ContentWrapper>
@@ -40,4 +39,4 @@ export default function NewsContentBlock({ newsItem }: NewsContentBlockProps) {
       </ContentWrapper>
     )
   );
-}
+};

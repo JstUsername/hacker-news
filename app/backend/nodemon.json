@@ -1,4 +1,5 @@
 {
+  "watch": ["src", ".env", "nodemon.json"],
   "ext": "ts",
-  "exec": "tsx ./src/index.ts"
+  "exec": "tsx ./src/server.ts"
 }

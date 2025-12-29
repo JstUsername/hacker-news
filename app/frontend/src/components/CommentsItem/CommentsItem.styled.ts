@@ -1,5 +1,5 @@
-import ArrowIcon from '../../assets/pixel-arrow.svg?react';
 import styled from 'styled-components';
+import ArrowIcon from '~/assets/icons/arrow-icon.svg?react';
 
 export const CommentsItemWrapper = styled('div')`
   display: flex;
