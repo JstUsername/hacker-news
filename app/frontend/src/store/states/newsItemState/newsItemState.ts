@@ -3,9 +3,6 @@ import { create } from 'zustand';
 import { NOT_FOUND_ERROR, WENT_WRONG_ERROR } from '~/constants';
 import { createEmptyPromise } from '~/utils';
 
-const EXPRESS_HOST = import.meta.env.VITE_EXPRESS_HOST || 'localhost';
-const EXPRESS_PORT = parseInt(import.meta.env.VITE_EXPRESS_PORT || '3001');
-
 const fetchNewsItem = async (id: number) => {
   let data: NewsItemType | null = null;
   const response = await fetch(`/api/items/${id}`);
