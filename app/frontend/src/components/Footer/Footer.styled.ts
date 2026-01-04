@@ -19,29 +19,3 @@ export const StyledFooter = styled('footer')`
     justify-content: space-between;
   }
 `;
-
-export const StyledLink = styled('a')`
-  cursor: pointer;
-  text-decoration: none;
-  ${({ theme }) => theme.typography.body1};
-  color: ${({ theme }) => theme.color.green};
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-export const ApiLink = styled('a')`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-  text-decoration: none;
-  ${({ theme }) => theme.typography.body1};
-  color: ${({ theme }) => theme.color.green};
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;

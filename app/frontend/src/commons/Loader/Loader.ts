@@ -40,8 +40,8 @@ export const LoaderWrapper = styled('div')`
 
 export const Loader = styled(HourGlass)`
   position: absolute;
-  height: 48px;
-  width: 48px;
+  height: ${({ height }) => height || 48}px;
+  width: ${({ width }) => width || 48}px;
   fill: ${({ theme }) => theme.color.yellow};
   animation: rotate-center 0.75s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite both;
   transform-box: fill-box;

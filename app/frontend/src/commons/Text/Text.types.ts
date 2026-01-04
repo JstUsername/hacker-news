@@ -1,4 +1,6 @@
+import { theme } from '~/theme';
+
 export interface TextProps {
   $variant?: 'h1' | 'body1' | 'body2';
-  color?: 'background' | 'backgroundLightTransparent' | 'backgroundDark' | 'purple' | 'yellow' | 'green';
+  color?: keyof typeof theme.color;
 }

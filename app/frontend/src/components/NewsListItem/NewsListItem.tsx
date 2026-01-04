@@ -9,15 +9,15 @@ export const NewsListItem = ({ id, title, points, user, time }: NewsListItemProp
       <NewsTitle>{title}</NewsTitle>
       <CardBottom>
         <PointsWrapper>
-          <Text $variant="body1" color="yellow">
+          <Text $variant="body2" color="yellow">
             {points} points{' '}
           </Text>
         </PointsWrapper>
         <UserTimeAgoWrapper>
-          <Text $variant="body1" color="green">
+          <Text $variant="body2" color="green">
             {user}
           </Text>
-          <Text $variant="body1" color="green">
+          <Text $variant="body2" color="green">
             {timestampToAgo(time)}
           </Text>
         </UserTimeAgoWrapper>

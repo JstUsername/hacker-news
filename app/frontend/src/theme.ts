@@ -11,6 +11,7 @@ const theme = {
     purple: '#B14ABF',
     yellow: '#F2E63C',
     green: '#41BF9A',
+    error: '#DA626B',
   },
   typography: {
     h1: {
@@ -20,12 +21,12 @@ const theme = {
     },
     body1: {
       fontFamily: 'Source Code Pro, monospace',
-      fontSize: '16px',
+      fontSize: '20px',
       lineHeight: '1',
     },
     body2: {
       fontFamily: 'Source Code Pro, monospace',
-      fontSize: '20px',
+      fontSize: '16px',
       lineHeight: '1',
     },
   },

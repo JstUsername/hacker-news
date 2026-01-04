@@ -24,6 +24,7 @@ export const CroppedHNLogo = styled(CroppedLogo)`
 `;
 
 export const StyledHeader = styled('header')`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -51,6 +52,7 @@ export const HeaderActions = styled('div')`
 `;
 
 export const StyledLink = styled('a')`
+  display: inline-flex;
   cursor: pointer;
   text-decoration: none;
   ${({ theme }) => theme.typography.body1};

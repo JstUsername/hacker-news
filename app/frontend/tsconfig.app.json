@@ -8,6 +8,7 @@
     "types": ["react/experimental"],
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "paths": {
+      "@hacker-news/*": ["../../*"],
       "~/*": ["./src/*"]
     }
   },
