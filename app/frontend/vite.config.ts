@@ -9,6 +9,7 @@ export default defineConfig({
   plugins: [react(), svgr()],
   resolve: {
     alias: {
+      '@hacker-news': path.resolve(__dirname, '../../'),
       '~': path.resolve(__dirname, './src/'),
     },
   },

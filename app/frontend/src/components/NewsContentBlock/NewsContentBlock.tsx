@@ -21,17 +21,17 @@ export const NewsContentBlock = ({ newsItem }: NewsContentBlockProps) => {
           </LinkToNewsWrapper>
         </ContentHeaderWrapper>
         <ContentBottomWrapper>
-          <Text $variant="body2" color="yellow">
+          <Text $variant="body1" color="yellow">
             {newsItem.points} points
           </Text>
           <ByTimeWrapper>
-            <Text $variant="body2" color="green">
+            <Text $variant="body1" color="green">
               By:{' '}
-              <Text $variant="body2" color="purple">
+              <Text $variant="body1" color="purple">
                 {newsItem.user}
               </Text>
             </Text>
-            <Text $variant="body2" color="yellow">
+            <Text $variant="body1" color="yellow">
               {timestampToDate(newsItem.time)}
             </Text>
           </ByTimeWrapper>

@@ -17,6 +17,7 @@ export const ProfileActionsList = styled('ul')`
 
 export const ProfileActionsListItem = styled('li')`
   all: unset;
+  cursor: pointer;
 
   a {
     text-decoration: none;

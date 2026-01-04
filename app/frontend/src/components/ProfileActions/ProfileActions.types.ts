@@ -1,3 +1,3 @@
 export interface ProfileActionsProps {
-  isAuthorized?: boolean;
+  onClose?: () => void;
 }

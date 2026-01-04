@@ -2,7 +2,7 @@ import { COOKIE_NAME } from './auth.const';
 import { AuthService } from './auth.service';
 import { InputLogin, InputRegister } from './auth.types';
 import { NextFunction, Request, Response } from 'express';
-import { JWT_REFRESH_TOKEN_EXPIRES_IN, STATUS_CODES } from '~/constants';
+import { JWT_ACCESS_TOKEN_EXPIRES_IN, JWT_REFRESH_TOKEN_EXPIRES_IN, STATUS_CODES } from '~/constants';
 import { msToMilliseconds } from '~/utils';
 
 const authService = new AuthService();
@@ -13,9 +13,16 @@ export class AuthController {
       const { username, password }: InputRegister = req.body;
       const tokens = await authService.register({ username, password });
 
+      res.cookie(COOKIE_NAME.Access, tokens.accessToken, {
+        maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
+        httpOnly: true,
+        sameSite: 'lax',
+      });
+
       res.cookie(COOKIE_NAME.Refresh, tokens.refreshToken, {
         maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
         httpOnly: true,
+        sameSite: 'lax',
       });
 
       res.status(STATUS_CODES.Success).json(tokens);
@@ -29,9 +36,16 @@ export class AuthController {
       const { username, password }: InputLogin = req.body;
       const tokens = await authService.login({ username, password });
 
+      res.cookie(COOKIE_NAME.Access, tokens.accessToken, {
+        maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
+        httpOnly: true,
+        sameSite: 'lax',
+      });
+
       res.cookie(COOKIE_NAME.Refresh, tokens.refreshToken, {
         maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
         httpOnly: true,
+        sameSite: 'lax',
       });
 
       res.status(STATUS_CODES.Success).json(tokens);
@@ -45,9 +59,16 @@ export class AuthController {
       const { [COOKIE_NAME.Refresh]: refreshToken } = req.cookies;
       const tokens = await authService.refresh(refreshToken);
 
+      res.cookie(COOKIE_NAME.Access, tokens.accessToken, {
+        maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
+        httpOnly: true,
+        sameSite: 'lax',
+      });
+
       res.cookie(COOKIE_NAME.Refresh, tokens.refreshToken, {
         maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
         httpOnly: true,
+        sameSite: 'lax',
       });
 
       res.status(STATUS_CODES.Success).json(tokens);
@@ -60,6 +81,7 @@ export class AuthController {
     try {
       const { [COOKIE_NAME.Refresh]: refreshToken } = req.cookies;
       await authService.logout(refreshToken);
+      res.clearCookie(COOKIE_NAME.Access);
       res.clearCookie(COOKIE_NAME.Refresh);
       res.status(STATUS_CODES.NoContent).json();
     } catch (err) {

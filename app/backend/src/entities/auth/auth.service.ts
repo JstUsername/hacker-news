@@ -20,10 +20,12 @@ export class AuthService {
     await this.throwIfUserAlreadyExists(username);
     const hashPassword = await bcrypt.hash(password, 10);
     const { id: userId } = await UsersModel.create({ username, password: hashPassword });
+
     const { sessionId, accessToken, refreshToken, expiresAt } = await tokensService.generateTokens({
       userId,
       username,
     });
+
     await tokensService.saveToken({ userId, sessionId, refreshToken, expiresAt });
     return { accessToken, refreshToken };
   }
@@ -32,10 +34,12 @@ export class AuthService {
     const user = await UsersModel.findOne({ where: { username } });
     this.throwIfUserNotFound(username, user);
     await this.throwIfPasswordNotEquals(password, user.password);
+
     const { sessionId, accessToken, refreshToken, expiresAt } = await tokensService.generateTokens({
       userId: user.id,
       username,
     });
+
     await tokensService.saveToken({ userId: user.id, sessionId, refreshToken, expiresAt });
     return { accessToken, refreshToken };
   }

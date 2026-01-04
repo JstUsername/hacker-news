@@ -4,7 +4,7 @@ import { ErrorEmoji, ErrorText, ErrorWrapper } from './ErrorHandler.styled';
 import { ErrorHandlerProps } from './ErrorHandler.types';
 import { useErrorBoundary } from 'react-error-boundary';
 import { useNavigate } from 'react-router-dom';
-import { MainWrapper, RefreshButton } from '~/commons';
+import { RefreshButton } from '~/commons';
 import { NOT_FOUND_ERROR } from '~/constants';
 import { useSelectorResetNewsItem } from '~/store';
 
@@ -25,7 +25,7 @@ export const ErrorHandler = ({ error, clearLayout }: ErrorHandlerProps) => {
   };
 
   return (
-    <MainWrapper>
+    <>
       {!clearLayout && <Header resetBoundary={resetBoundary} />}
       <ErrorWrapper>
         <ErrorEmoji>{error.message === NOT_FOUND_ERROR ? '(ó﹏ò｡)' : '(╥﹏╥)'}</ErrorEmoji>
@@ -35,6 +35,6 @@ export const ErrorHandler = ({ error, clearLayout }: ErrorHandlerProps) => {
         </RefreshButton>
       </ErrorWrapper>
       {!clearLayout && <Footer />}
-    </MainWrapper>
+    </>
   );
 };
