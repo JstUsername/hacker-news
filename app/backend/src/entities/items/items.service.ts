@@ -4,7 +4,12 @@ import { GenerateComment, GenerateNews, GenerateReplies } from './items.types';
 import { faker } from '@faker-js/faker';
 import { styleText } from 'node:util';
 import { InferAttributes } from 'sequelize';
-import { NotFoundError } from '~/constants';
+import { ForbiddenError, NotFoundError } from '~/constants';
+import { COOKIE_NAME } from '~/entities/auth/auth.const';
+import { AuthService } from '~/entities/auth/auth.service';
+import { TOKEN_TYPES } from '~/entities/tokens';
+
+const authService = new AuthService();
 
 export class ItemsService {
   async getNewestNews() {
@@ -84,6 +89,65 @@ export class ItemsService {
     }
   }
 
+  async addComment({
+    parentId,
+    content,
+    cookies,
+  }: {
+    parentId: number;
+    content: string;
+    cookies: Record<string, string>;
+  }) {
+    const parentItem = await ItemsModel.findByPk(parentId);
+    if (!parentItem) throw new NotFoundError('No item with the given ID could be found');
+    const { [COOKIE_NAME[TOKEN_TYPES.Access]]: accessToken } = cookies;
+    const { username } = authService.validateAccessToken(accessToken);
+    const commentTime = Date.now();
+    const commentTimestamp = Math.floor(commentTime / 1000);
+
+    const comment = await ItemsModel.create({
+      user: username,
+      time: commentTimestamp,
+      type: 'comment',
+      content,
+      commentsCount: 0,
+      parentId: parentItem.id,
+    });
+
+    comment.url = `item?id=${comment.id}`;
+    await comment.save();
+    parentItem.commentsCount += 1;
+    await parentItem.save();
+    return comment;
+  }
+
+  async deleteComment({ id, cookies }: { id: number; cookies: Record<string, string> }) {
+    const comment = await ItemsModel.findByPk(id);
+
+    if (!comment || comment.type !== 'comment') {
+      throw new NotFoundError('No comment with the given ID could be found');
+    }
+
+    const { [COOKIE_NAME[TOKEN_TYPES.Access]]: accessToken } = cookies;
+    const { username } = authService.validateAccessToken(accessToken);
+
+    if (comment.user !== username) {
+      throw new ForbiddenError('You do not have permission to delete this comment');
+    }
+
+    comment.deleted = true;
+    await comment.save();
+
+    if (comment.parentId) {
+      const parentItem = await ItemsModel.findByPk(comment.parentId);
+
+      if (parentItem && parentItem.commentsCount > 0) {
+        parentItem.commentsCount -= 1;
+        await parentItem.save();
+      }
+    }
+  }
+
   private async generateNews({ timestamp, commentsCount, url }: GenerateNews) {
     return await ItemsModel.create({
       title: faker.hacker.phrase().replace('!', ''),
@@ -104,7 +168,7 @@ export class ItemsService {
       user: faker.internet.username(),
       time: commentTimestamp,
       type: 'comment',
-      content: `<p>${faker.lorem.paragraphs({ min: 1, max: 3 }, '</p><p>')}</p>`,
+      content: faker.lorem.paragraphs({ min: 1, max: 3 }),
       commentsCount: commentRepliesCount,
       parentId: parentId,
     });
@@ -132,6 +196,7 @@ export class ItemsService {
 
       reply.url = `item?id=${reply.id}`;
       await reply.save();
+
       await this.generateReplies({
         parentComment: reply,
         commentRepliesCount,

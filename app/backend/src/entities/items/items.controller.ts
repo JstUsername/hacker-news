@@ -32,4 +32,36 @@ export class ItemsController {
       next(err);
     }
   }
+
+  async addComment(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+      const { content } = req.body;
+
+      const comment = await itemsService.addComment({
+        parentId: +id,
+        content,
+        cookies: req.cookies,
+      });
+
+      res.status(STATUS_CODES.Success).json(comment);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async deleteComment(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.params;
+
+      await itemsService.deleteComment({
+        id: +id,
+        cookies: req.cookies,
+      });
+
+      res.sendStatus(STATUS_CODES.NoContent);
+    } catch (err) {
+      next(err);
+    }
+  }
 }

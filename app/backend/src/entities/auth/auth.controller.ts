@@ -2,8 +2,7 @@ import { COOKIE_NAME, COOKIE_OPTIONS } from './auth.const';
 import { AuthService } from './auth.service';
 import { InputLogin, InputRegister } from './auth.types';
 import { NextFunction, Request, Response } from 'express';
-import { JWT_ACCESS_TOKEN_EXPIRES_IN, JWT_REFRESH_TOKEN_EXPIRES_IN, STATUS_CODES } from '~/constants';
-import { msToMilliseconds } from '~/utils';
+import { STATUS_CODES } from '~/constants';
 
 const authService = new AuthService();
 
@@ -12,17 +11,8 @@ export class AuthController {
     try {
       const { username, password }: InputRegister = req.body;
       const tokens = await authService.register({ username, password });
-
-      res.cookie(COOKIE_NAME.Access, tokens.accessToken, {
-        maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
-        ...COOKIE_OPTIONS,
-      });
-
-      res.cookie(COOKIE_NAME.Refresh, tokens.refreshToken, {
-        maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
-        ...COOKIE_OPTIONS,
-      });
-
+      authService.setAccessTokenCookie(res, tokens.accessToken);
+      authService.setRefreshTokenCookie(res, tokens.refreshToken);
       res.status(STATUS_CODES.Success).json(tokens);
     } catch (err) {
       next(err);
@@ -33,17 +23,8 @@ export class AuthController {
     try {
       const { username, password }: InputLogin = req.body;
       const tokens = await authService.login({ username, password });
-
-      res.cookie(COOKIE_NAME.Access, tokens.accessToken, {
-        maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
-        ...COOKIE_OPTIONS,
-      });
-
-      res.cookie(COOKIE_NAME.Refresh, tokens.refreshToken, {
-        maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
-        ...COOKIE_OPTIONS,
-      });
-
+      authService.setAccessTokenCookie(res, tokens.accessToken);
+      authService.setRefreshTokenCookie(res, tokens.refreshToken);
       res.status(STATUS_CODES.Success).json(tokens);
     } catch (err) {
       next(err);
@@ -54,17 +35,8 @@ export class AuthController {
     try {
       const { [COOKIE_NAME.Refresh]: refreshToken } = req.cookies;
       const tokens = await authService.refresh(refreshToken);
-
-      res.cookie(COOKIE_NAME.Access, tokens.accessToken, {
-        maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
-        ...COOKIE_OPTIONS,
-      });
-
-      res.cookie(COOKIE_NAME.Refresh, tokens.refreshToken, {
-        maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
-        ...COOKIE_OPTIONS,
-      });
-
+      authService.setAccessTokenCookie(res, tokens.accessToken);
+      authService.setRefreshTokenCookie(res, tokens.refreshToken);
       res.status(STATUS_CODES.Success).json(tokens);
     } catch (err) {
       next(err);

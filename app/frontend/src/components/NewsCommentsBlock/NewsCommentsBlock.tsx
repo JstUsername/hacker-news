@@ -12,9 +12,7 @@ export const NewsCommentsBlock = ({ newsItem }: NewsCommentsBlockProps) => {
           <NewsItemTitleAdditional>{' ' + newsItem.commentsCount}</NewsItemTitleAdditional>
         </NewsItemTitle>
         {newsItem.comments?.map((comment) => {
-          if (comment.deleted || comment.dead) {
-            return null;
-          }
+          if (comment.deleted || comment.dead) return null;
           return <CommentsItem key={comment.id} comment={comment} />;
         })}
       </CommentsWrapper>

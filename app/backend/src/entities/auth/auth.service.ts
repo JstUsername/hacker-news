@@ -1,17 +1,22 @@
+import { COOKIE_NAME, COOKIE_OPTIONS } from './auth.const';
 import { InputLogin, InputRegister } from './auth.types';
 import bcrypt from 'bcryptjs';
+import { Response } from 'express';
 import jwt from 'jsonwebtoken';
 import {
   BadRequestError,
   ConflictError,
   JWT_ACCESS_SECRET,
+  JWT_ACCESS_TOKEN_EXPIRES_IN,
   JWT_REFRESH_SECRET,
+  JWT_REFRESH_TOKEN_EXPIRES_IN,
   NotFoundError,
   SERVER_URL,
   UnauthorizedError,
 } from '~/constants';
 import { AccessTokenPayload, RefreshTokenPayload, TokensModel, TokensService } from '~/entities/tokens';
 import { UsersModel } from '~/entities/users';
+import { msToMilliseconds } from '~/utils';
 
 const tokensService = new TokensService();
 
@@ -63,6 +68,20 @@ export class AuthService {
   async logout(refreshToken: string | undefined) {
     this.throwIfRefreshTokenIsMissing(refreshToken);
     await TokensModel.destroy({ where: { refreshToken } });
+  }
+
+  setAccessTokenCookie(res: Response, accessToken: string) {
+    res.cookie(COOKIE_NAME.Access, accessToken, {
+      maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
+      ...COOKIE_OPTIONS,
+    });
+  }
+
+  setRefreshTokenCookie(res: Response, refreshToken: string) {
+    res.cookie(COOKIE_NAME.Refresh, refreshToken, {
+      maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
+      ...COOKIE_OPTIONS,
+    });
   }
 
   validateAccessToken(accessToken: string) {
