@@ -52,9 +52,9 @@ export const SignInPage = () => {
       try {
         await login(data.username, data.password);
         navigate('/', { replace: true });
-      } catch (error) {
-        if (error instanceof Error) {
-          setServerError(error.message);
+      } catch (err) {
+        if (err instanceof Error) {
+          setServerError(err.message);
           return;
         }
 

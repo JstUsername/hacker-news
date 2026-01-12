@@ -19,6 +19,7 @@ export class ItemsService {
   async loadCommentsTree(parentId: number, level = 0): Promise<Array<InferAttributes<ItemsModel>>> {
     const comments = await ItemsModel.findAll({
       where: { parentId },
+      order: [['time', 'DESC']],
       include: [
         {
           model: ItemsModel,
@@ -84,8 +85,8 @@ export class ItemsService {
       }
 
       console.info(styleText('green', 'The database has been successfully filled with test data.'));
-    } catch (error) {
-      console.error(styleText('red', 'Error when filling the database with test data.'), error);
+    } catch (err) {
+      console.error(styleText('red', 'Error when filling the database with test data.'), err);
     }
   }
 

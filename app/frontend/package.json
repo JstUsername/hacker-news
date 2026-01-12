@@ -7,6 +7,7 @@
     "serve:dev": "vite preview",
     "check-build": "tsc --build --noEmit --incremental false",
     "lint": "eslint \"./src/**/*.{js,ts, jsx, tsx}\"",
+    "format": "prettier --write \"**/*.{js,cjs,mjs,jsx,ts,tsx}\"",
     "preview": "vite preview",
     "start": "vite"
   },

@@ -53,12 +53,7 @@ export class ItemsController {
   async deleteComment(req: Request, res: Response, next: NextFunction) {
     try {
       const { id } = req.params;
-
-      await itemsService.deleteComment({
-        id: +id,
-        cookies: req.cookies,
-      });
-
+      await itemsService.deleteComment({ id: +id, cookies: req.cookies });
       res.sendStatus(STATUS_CODES.NoContent);
     } catch (err) {
       next(err);

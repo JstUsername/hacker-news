@@ -1,15 +1,6 @@
-import { AuthResponse, ErrorResponse, MeResponse, UseAuthStateType } from './authState.types';
+import { AuthResponse, MeResponse, UseAuthStateType } from './authState.types';
 import { create } from 'zustand';
-import { WENT_WRONG_ERROR } from '~/constants';
-
-const parseErrorResponse = async (response: Response): Promise<string> => {
-  try {
-    const errorData: ErrorResponse = await response.json();
-    return errorData.message || WENT_WRONG_ERROR;
-  } catch {
-    return WENT_WRONG_ERROR;
-  }
-};
+import { parseErrorResponse } from '~/utils';
 
 const fetchMe = async (): Promise<MeResponse> => {
   const response = await fetch('/api/me', {
