@@ -1,15 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 import { UnauthorizedError } from '~/constants';
-// @NOTE: Избегаю dependency cycle, из - за него падает сборка
+import { COOKIE_NAME } from '~/entities/auth/auth.const';
 import { AuthService } from '~/entities/auth/auth.service';
+import { TOKEN_TYPES } from '~/entities/tokens';
 
 const authService = new AuthService();
 
 export const requireAuth = (req: Request, _res: Response, next: NextFunction) => {
   try {
-    const authorization = req.headers.authorization;
-    if (!authorization) return next(new UnauthorizedError());
-    const accessToken = authorization.split(' ')[1];
+    const { [COOKIE_NAME[TOKEN_TYPES.Access]]: accessToken } = req.cookies;
     if (!accessToken) return next(new UnauthorizedError());
     authService.validateAccessToken(accessToken);
     next();

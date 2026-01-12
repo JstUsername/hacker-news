@@ -22,7 +22,7 @@ export const CommentsItem = ({ comment }: CommentsListProps) => {
           />
           <CommentsItemUser>{comment.user}</CommentsItemUser>
         </ExpandWrapper>
-        <CommentsItemContent dangerouslySetInnerHTML={{ __html: comment.content }} />
+        <CommentsItemContent>{comment.content}</CommentsItemContent>
       </div>
       {isExpand &&
         comment.comments?.map((childComment) => {

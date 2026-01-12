@@ -2,7 +2,7 @@ import esbuild from 'esbuild';
 import fg from 'fast-glob';
 
 (async () => {
-  const DATABASE_FILES =  await fg('src/databases/**/*');
+  const DATABASE_FILES = await fg('src/databases/**/*');
 
   esbuild.buildSync({
     entryPoints: ['./src/server.ts', ...DATABASE_FILES],
