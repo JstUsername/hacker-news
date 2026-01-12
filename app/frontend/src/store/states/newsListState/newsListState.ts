@@ -1,7 +1,7 @@
-import { NOT_FOUND_ERROR, WENT_WRONG_ERROR } from '../../../constants/errorMessages';
-import { createEmptyPromise } from '../../../utils/promises';
 import { UseNewsListStateType } from './newsListState.types';
 import { create } from 'zustand';
+import { NOT_FOUND_ERROR, WENT_WRONG_ERROR } from '~/constants';
+import { createEmptyPromise } from '~/utils';
 
 const newsListUrl = ['/api/newest'];
 

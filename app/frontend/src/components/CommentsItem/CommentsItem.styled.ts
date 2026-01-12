@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import ArrowIcon from '~/assets/icons/arrow-icon.svg?react';
+import ReplyIcon from '~/assets/icons/reply-icon.svg?react';
+import TrashIcon from '~/assets/icons/trash-icon.svg?react';
 
 export const CommentsItemWrapper = styled('div')`
   display: flex;
@@ -40,4 +42,44 @@ export const ExpandIcon = styled(ArrowIcon)<{ $isVisibleIcon: boolean; $isExpand
   cursor: pointer;
   transform: ${({ $isExpand }) => ($isExpand ? 'rotate(-180deg)' : 'rotate(0deg)')};
   transition: transform 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+`;
+
+export const CommentActionsBlock = styled('div')`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+`;
+
+export const ReplyButton = styled('button')`
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+`;
+
+export const StyledReplyIcon = styled(ReplyIcon)`
+  width: 16px;
+  height: 16px;
+
+  path {
+    fill: ${({ theme }) => theme.color.yellow};
+  }
+`;
+
+export const RemoveButton = styled('button')`
+  all: unset;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const StyledTrashIcon = styled(TrashIcon)`
+  width: 20px;
+  height: 20px;
+
+  path {
+    fill: ${({ theme }) => theme.color.error};
+  }
 `;

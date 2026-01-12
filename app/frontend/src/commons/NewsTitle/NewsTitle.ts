@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const NewsItemTitle = styled('h1')`
+export const NewsTitle = styled('h1')`
   ${({ theme }) => theme.typography.h1};
   margin: 0;
   word-break: break-word;
@@ -11,6 +11,6 @@ export const NewsItemTitle = styled('h1')`
   }
 `;
 
-export const NewsItemTitleAdditional = styled('span')`
+export const NewsTitleAdditional = styled('span')`
   color: ${({ theme }) => theme.color.green};
 `;

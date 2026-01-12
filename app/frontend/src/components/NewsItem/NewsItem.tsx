@@ -9,8 +9,12 @@ export const NewsItem = () => {
 
   return (
     <NewsItemWrapper>
-      <NewsContentBlock newsItem={newsItem} />
-      <NewsCommentsBlock newsItem={newsItem} />
+      {newsItem && (
+        <>
+          <NewsContentBlock newsItem={newsItem} />
+          <NewsCommentsBlock newsItem={newsItem} />
+        </>
+      )}
     </NewsItemWrapper>
   );
 };

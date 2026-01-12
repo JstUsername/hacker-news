@@ -13,12 +13,6 @@ export interface AuthResponse {
   refreshToken: string;
 }
 
-export interface ErrorResponse {
-  status: number;
-  message: string;
-  timestamp: string;
-}
-
 export interface UseAuthStateType {
   accessToken: string | null;
   parsedAccessToken: MeResponse | null;

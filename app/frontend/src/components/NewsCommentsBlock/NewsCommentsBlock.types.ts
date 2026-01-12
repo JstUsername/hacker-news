@@ -1,5 +1,5 @@
 import { NewsItemType } from '~/store';
 
 export interface NewsCommentsBlockProps {
-  newsItem: NewsItemType | null;
+  newsItem: NewsItemType;
 }
