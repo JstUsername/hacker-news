@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.1.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v1.0.0...hacker-news-v1.1.0) (2026-01-16)
+
+
+### Features
+
+* **auth:** добавлен backend для авторизации ([da969bb](https://github.com/JstUsername/hacker-news/commit/da969bbebb0549283898e45388dfb93734c20a95))
+* **containerization:** добавлена контейнеризация с помощью Docker, наcтроен docker-compose и k8s, обновлен README ([d8d599c](https://github.com/JstUsername/hacker-news/commit/d8d599c448606e891b6339c2f5530043b0515c02))
+* **gitbugtraq:** добавлен gitbugtraq ([5f7ade1](https://github.com/JstUsername/hacker-news/commit/5f7ade16ff771aeacc11cd1f199b400e98897283))
+* **items, seeders:** добавлена сущность Items, реализованы ендпоинты, сервисные функции, сидеры, подключен cors ([bfbb77c](https://github.com/JstUsername/hacker-news/commit/bfbb77c6246d10c03ee74190a3263dac797b5bc9))
+* **mailmap:** добавлен git mailmap ([8a8c842](https://github.com/JstUsername/hacker-news/commit/8a8c8426e3e079c1183da68c0ba29c4e87f71673))
+* **turborepo, express, sequelize, postgresql, husky:** реализован монорепозиторий, добавлена основа для серверной части, перенастроены конфигурации eslint, prettier, typescript, добавлен docker-compose с БД ([5e76b4f](https://github.com/JstUsername/hacker-news/commit/5e76b4fafcd2b27fe957ef3f1905a13bd285e316))
+
+
+### Bug Fixes
+
+* исправлен lock файл ([858004c](https://github.com/JstUsername/hacker-news/commit/858004c894bea4b906f55552ee951df60bf5b513))
+
 ## 1.0.0 (2026-01-16)
 
 
