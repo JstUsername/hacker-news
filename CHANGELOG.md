@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v2.2.0...hacker-news-v2.3.0) (2026-01-16)
+
+
+### Features
+
+* **HCKN-6:** sonner, обновление store для комментариев, рефакторинг ([cfea916](https://github.com/JstUsername/hacker-news/commit/cfea916fae1520638a1d40e01fc6748554f9d1df))
+* **HCKN-6:** реализована frontend часть для добавления и удаления комментариев ([9da2600](https://github.com/JstUsername/hacker-news/commit/9da2600365f3bd4a2fc64e18a77dde6538843721))
+
 ## [2.2.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v2.1.0...hacker-news-v2.2.0) (2026-01-16)
 
 ### Features
