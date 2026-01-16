@@ -12,30 +12,22 @@ import {
 } from './CommentsItem.styled';
 import { CommentsListProps } from './CommentsItem.types';
 import { useCallback, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { toast } from 'sonner';
 import { Text, Textarea } from '~/commons';
 import { WENT_WRONG_ERROR } from '~/constants';
-import { useSelectorGetNewsItem, useSelectorIsAuthenticated, useSelectorParsedAccessToken } from '~/store';
-import { authenticatedApiRequest } from '~/utils';
-
-const fetchAddComment = async (parentId: number, content: string): Promise<void> => {
-  await authenticatedApiRequest(`/api/items/${parentId}/comments`, {
-    method: 'POST',
-    body: JSON.stringify({ content }),
-  });
-};
-
-const fetchRemoveComment = async (commentId: number): Promise<void> => {
-  await authenticatedApiRequest(`/api/items/comments/${commentId}`, {
-    method: 'DELETE',
-  });
-};
+import {
+  useSelectorAddComment,
+  useSelectorIsAuthenticated,
+  useSelectorParsedAccessToken,
+  useSelectorRemoveComment,
+} from '~/store';
+import { fetchAddComment, fetchRemoveComment } from '~/utils';
 
 export const CommentsItem = ({ comment }: CommentsListProps) => {
-  const { id: newsId } = useParams();
   const parsedAccessToken = useSelectorParsedAccessToken();
   const isAuthenticated = useSelectorIsAuthenticated();
-  const getNewsItem = useSelectorGetNewsItem();
+  const addComment = useSelectorAddComment();
+  const removeComment = useSelectorRemoveComment();
 
   const [isExpand, setIsExpand] = useState(false);
   const [isReplyFormOpen, setIsReplyFormOpen] = useState(false);
@@ -46,6 +38,7 @@ export const CommentsItem = ({ comment }: CommentsListProps) => {
 
   const handleReplyCancel = () => {
     setReplyText('');
+    setError('');
     setIsReplyFormOpen(false);
   };
 
@@ -54,29 +47,30 @@ export const CommentsItem = ({ comment }: CommentsListProps) => {
     setIsReplyLoading(true);
 
     try {
-      await fetchAddComment(comment.id, replyText);
+      const addedComment = await fetchAddComment(comment.id, replyText);
+      await addComment({ parentId: comment.id, comment: addedComment });
       setReplyText('');
       setIsReplyFormOpen(false);
-      getNewsItem(+(newsId || 0));
     } catch {
       setError(WENT_WRONG_ERROR);
     } finally {
       setIsReplyLoading(false);
     }
-  }, [comment.id, getNewsItem, isReplyLoading, newsId, replyText]);
+  }, [addComment, comment.id, isReplyLoading, replyText]);
 
   const handleRemoveComment = useCallback(async () => {
     setIsRemoveLoading(true);
 
     try {
       await fetchRemoveComment(comment.id);
-      getNewsItem(+(newsId || 0));
+      await removeComment(comment.id);
     } catch (err) {
       console.error('Error when trying to delete a comment', err);
+      toast.error(WENT_WRONG_ERROR);
     } finally {
       setIsRemoveLoading(false);
     }
-  }, [comment.id, getNewsItem, newsId]);
+  }, [comment.id, removeComment]);
 
   const isCurrentUserAuthor = useMemo(() => {
     if (!parsedAccessToken?.username || !comment.user) return false;
@@ -88,7 +82,7 @@ export const CommentsItem = ({ comment }: CommentsListProps) => {
       <div>
         <ExpandWrapper>
           <ExpandIcon
-            $isVisibleIcon={comment.comments.length !== 0}
+            $isVisibleIcon={!!comment.comments?.length}
             $isExpand={isExpand}
             onClick={() => setIsExpand(!isExpand)}
           />

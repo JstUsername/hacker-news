@@ -11,8 +11,6 @@ export interface ErrorResponse {
   timestamp: string;
 }
 
-export const createEmptyPromise = <T>(value: T): Promise<T> => Promise.resolve(value);
-
 const refreshState = {
   promise: null as Promise<boolean> | null,
   isRefreshing: false,
@@ -50,6 +48,7 @@ const attemptRefresh = async (): Promise<boolean> => {
       await useAuthState.getState().refresh();
       return true;
     } catch {
+      await useAuthState.getState().logout();
       return false;
     } finally {
       refreshState.isRefreshing = false;
