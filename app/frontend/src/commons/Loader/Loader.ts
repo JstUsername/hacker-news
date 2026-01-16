@@ -1,4 +1,4 @@
-import HourGlass from '../../assets/hour-glass.svg?react';
+import HourGlass from '../../assets/icons/hour-glass-icon.svg?react';
 import styled from 'styled-components';
 
 export const NewsListWrapper = styled('div')`
