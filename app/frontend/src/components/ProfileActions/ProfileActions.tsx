@@ -2,7 +2,9 @@ import { ProfileActionsList, ProfileActionsListItem, ProfileActionsWrapper } fro
 import { ProfileActionsProps } from './ProfileActions.types';
 import { useCallback, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'sonner';
 import { Text } from '~/commons';
+import { WENT_WRONG_ERROR } from '~/constants';
 import { useSelectorIsAuthenticated, useSelectorLogout } from '~/store';
 
 export const ProfileActions = ({ onClose }: ProfileActionsProps) => {
@@ -24,6 +26,7 @@ export const ProfileActions = ({ onClose }: ProfileActionsProps) => {
       onClose?.();
     } catch (err) {
       console.error(err);
+      toast.error(WENT_WRONG_ERROR);
     }
   }, [logout, onClose]);
 

@@ -1,5 +1,6 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Toaster } from 'sonner';
 import { ThemeProvider } from 'styled-components';
 import { ErrorHandler } from '~/components/ErrorHandler';
 import { Layout } from '~/components/Layout';
@@ -34,6 +35,18 @@ export const App = () => {
               <Route path="*" element={<ErrorHandler error={new Error('Page not found')} clearLayout />} />
             </Route>
           </Routes>
+          <Toaster
+            richColors
+            toastOptions={{
+              style: {
+                borderRadius: 0,
+                color: theme.color.error,
+                backgroundColor: theme.color.errorLight,
+                border: 0,
+                backdropFilter: 'blur(6px)',
+              },
+            }}
+          />
         </ErrorBoundary>
       </ThemeProvider>
     </BrowserRouter>

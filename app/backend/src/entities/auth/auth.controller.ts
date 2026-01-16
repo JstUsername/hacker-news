@@ -1,4 +1,4 @@
-import { COOKIE_NAME, COOKIE_OPTIONS } from './auth.const';
+import { COOKIE_NAME } from './auth.const';
 import { AuthService } from './auth.service';
 import { InputLogin, InputRegister } from './auth.types';
 import { NextFunction, Request, Response } from 'express';

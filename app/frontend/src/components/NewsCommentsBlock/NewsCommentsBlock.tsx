@@ -4,19 +4,13 @@ import { NewsCommentsBlockProps } from './NewsCommentsBlock.types';
 import { useState } from 'react';
 import { NewsTitle, NewsTitleAdditional, Text, Textarea } from '~/commons';
 import { WENT_WRONG_ERROR } from '~/constants';
-import { useSelectorGetNewsItem, useSelectorIsAuthenticated } from '~/store';
-import { authenticatedApiRequest } from '~/utils';
-
-const fetchAddComment = async (parentId: number, content: string): Promise<void> => {
-  await authenticatedApiRequest(`/api/items/${parentId}/comments`, {
-    method: 'POST',
-    body: JSON.stringify({ content }),
-  });
-};
+import { useSelectorAddComment, useSelectorCommentsCount, useSelectorIsAuthenticated } from '~/store';
+import { fetchAddComment } from '~/utils';
 
 export const NewsCommentsBlock = ({ newsItem }: NewsCommentsBlockProps) => {
   const isAuthenticated = useSelectorIsAuthenticated();
-  const getNewsItem = useSelectorGetNewsItem();
+  const commentsCount = useSelectorCommentsCount();
+  const addComment = useSelectorAddComment();
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [commentText, setCommentText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -32,10 +26,10 @@ export const NewsCommentsBlock = ({ newsItem }: NewsCommentsBlockProps) => {
     setIsLoading(true);
 
     try {
-      await fetchAddComment(newsItem.id, commentText);
+      const addedComment = await fetchAddComment(newsItem.id, commentText);
+      await addComment({ parentId: newsItem.id, comment: addedComment });
       setCommentText('');
       setShowCommentForm(false);
-      getNewsItem(newsItem.id);
     } catch {
       setError(WENT_WRONG_ERROR);
     } finally {
@@ -53,7 +47,7 @@ export const NewsCommentsBlock = ({ newsItem }: NewsCommentsBlockProps) => {
       <NewsTitleContainer>
         <NewsTitle>
           Comments
-          <NewsTitleAdditional>{' ' + newsItem.commentsCount}</NewsTitleAdditional>
+          <NewsTitleAdditional>{' ' + commentsCount}</NewsTitleAdditional>
         </NewsTitle>
         {isAuthenticated && !showCommentForm && (
           <AddCommentButton onClick={handleAddCommentClick}>

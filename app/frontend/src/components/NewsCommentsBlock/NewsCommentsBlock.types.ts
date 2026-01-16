@@ -1,4 +1,4 @@
-import { NewsItemType } from '~/store';
+import { NewsItemType } from '~/types';
 
 export interface NewsCommentsBlockProps {
   newsItem: NewsItemType;

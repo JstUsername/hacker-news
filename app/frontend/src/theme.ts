@@ -12,6 +12,7 @@ const theme = {
     yellow: '#F2E63C',
     green: '#41BF9A',
     error: '#DA626B',
+    errorLight: 'rgba(150, 98, 107, 0.5)',
   },
   typography: {
     h1: {
