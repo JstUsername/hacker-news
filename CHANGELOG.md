@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.1.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v2.0.0...hacker-news-v2.1.0) (2026-01-16)
+
+
+### Features
+
+* **auth:** добавлен backend для авторизации ([210e6b6](https://github.com/JstUsername/hacker-news/commit/210e6b663bc4842022462a1fc2bab4a171194287))
+* **HCKN-4:** бизнес логика авторизации и регистрации, добавлены формы ([117e8b9](https://github.com/JstUsername/hacker-news/commit/117e8b9e2708f20af7ed73d060de32028a465cc6))
+* **items, seeders:** добавлена сущность Items, реализованы ендпоинты, сервисные функции, сидеры, подключен cors ([69f8004](https://github.com/JstUsername/hacker-news/commit/69f80046bff959b167ae7908d2355cf90bf180d5))
+* **turborepo, express, sequelize, postgresql, husky:** реализован монорепозиторий, добавлена основа для серверной части, перенастроены конфигурации eslint, prettier, typescript, добавлен docker-compose с БД ([342ce6d](https://github.com/JstUsername/hacker-news/commit/342ce6debcf70584c9144a03c93356727a83a3cb))
+
+
+### Bug Fixes
+
+* **HCKN-4:** закрытие меню после logout, консистентность auth state ([510fb28](https://github.com/JstUsername/hacker-news/commit/510fb283b07faa2b7686510bd636a9e49b7c4acd))
+* **HCKN-4:** исправлен импорт HourGlass в Loader ([6e18482](https://github.com/JstUsername/hacker-news/commit/6e18482ac768d241ba5264a50b906205fbeea6d5))
+
 ## [2.0.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v1.0.0...hacker-news-v2.0.0) (2026-01-16)
 
 
