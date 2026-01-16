@@ -21,10 +21,11 @@ export const ProfileActions = ({ onClose }: ProfileActionsProps) => {
   const handleLogout = useCallback(async () => {
     try {
       await logout();
+      onClose?.();
     } catch (err) {
       console.error(err);
     }
-  }, [logout]);
+  }, [logout, onClose]);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);

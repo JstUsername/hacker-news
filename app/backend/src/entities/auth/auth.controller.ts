@@ -1,4 +1,4 @@
-import { COOKIE_NAME } from './auth.const';
+import { COOKIE_NAME, COOKIE_OPTIONS } from './auth.const';
 import { AuthService } from './auth.service';
 import { InputLogin, InputRegister } from './auth.types';
 import { NextFunction, Request, Response } from 'express';
@@ -15,14 +15,12 @@ export class AuthController {
 
       res.cookie(COOKIE_NAME.Access, tokens.accessToken, {
         maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
-        httpOnly: true,
-        sameSite: 'lax',
+        ...COOKIE_OPTIONS,
       });
 
       res.cookie(COOKIE_NAME.Refresh, tokens.refreshToken, {
         maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
-        httpOnly: true,
-        sameSite: 'lax',
+        ...COOKIE_OPTIONS,
       });
 
       res.status(STATUS_CODES.Success).json(tokens);
@@ -38,14 +36,12 @@ export class AuthController {
 
       res.cookie(COOKIE_NAME.Access, tokens.accessToken, {
         maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
-        httpOnly: true,
-        sameSite: 'lax',
+        ...COOKIE_OPTIONS,
       });
 
       res.cookie(COOKIE_NAME.Refresh, tokens.refreshToken, {
         maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
-        httpOnly: true,
-        sameSite: 'lax',
+        ...COOKIE_OPTIONS,
       });
 
       res.status(STATUS_CODES.Success).json(tokens);
@@ -61,14 +57,12 @@ export class AuthController {
 
       res.cookie(COOKIE_NAME.Access, tokens.accessToken, {
         maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
-        httpOnly: true,
-        sameSite: 'lax',
+        ...COOKIE_OPTIONS,
       });
 
       res.cookie(COOKIE_NAME.Refresh, tokens.refreshToken, {
         maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
-        httpOnly: true,
-        sameSite: 'lax',
+        ...COOKIE_OPTIONS,
       });
 
       res.status(STATUS_CODES.Success).json(tokens);

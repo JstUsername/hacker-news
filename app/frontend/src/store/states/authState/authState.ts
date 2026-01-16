@@ -106,12 +106,14 @@ export const useAuthState = create<UseAuthStateType>((set) => ({
 
   login: async (username, password) => {
     const { accessToken } = await fetchLogin(username, password);
-    set({ accessToken, isAuthenticated: true });
+    const meResponse = await fetchMe();
+    set({ accessToken, parsedAccessToken: meResponse, isAuthenticated: !!meResponse?.userId });
   },
 
   register: async (username, password) => {
     const { accessToken } = await fetchRegister(username, password);
-    set({ accessToken, isAuthenticated: true });
+    const meResponse = await fetchMe();
+    set({ accessToken, parsedAccessToken: meResponse, isAuthenticated: !!meResponse?.userId });
   },
 
   logout: async () => {
@@ -120,8 +122,14 @@ export const useAuthState = create<UseAuthStateType>((set) => ({
   },
 
   refresh: async () => {
-    const { accessToken } = await fetchRefresh();
-    set({ accessToken, isAuthenticated: true });
+    try {
+      const { accessToken } = await fetchRefresh();
+      const meResponse = await fetchMe();
+      set({ accessToken, parsedAccessToken: meResponse, isAuthenticated: !!meResponse?.userId });
+    } catch {
+      set({ accessToken: null, parsedAccessToken: null, isAuthenticated: false });
+      throw new Error('Unauthorized');
+    }
   },
 }));
 
