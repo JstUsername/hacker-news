@@ -4,10 +4,10 @@ import { StyledLink, Text } from '~/commons';
 export const Footer = () => {
   return (
     <StyledFooter>
-      <StyledLink to="https://github.com/JstUsername">
+      <StyledLink to="https://github.com/JstUsername" target="_blank" rel="noopener noreferrer">
         <Text $variant="body2">/github</Text>
       </StyledLink>
-      <StyledLink to="https://t.me/JstUser">
+      <StyledLink to="https://t.me/JstUser" target="_blank" rel="noopener noreferrer">
         <Text $variant="body2">/telegram</Text>
       </StyledLink>
     </StyledFooter>
