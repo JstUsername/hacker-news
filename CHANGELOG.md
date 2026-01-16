@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v2.1.0...hacker-news-v2.2.0) (2026-01-16)
+
+
+### Features
+
+* **HCKN-5:** добавлены ендпоинты для создания и удаления комментариев, модифицирован /me ([9e2dad3](https://github.com/JstUsername/hacker-news/commit/9e2dad3bdf52f6dc221b16e59ba5ea464e4148e3))
+
+
+### Bug Fixes
+
+* **HCKN-5:** добавлена обработка deleted items ([7e0786b](https://github.com/JstUsername/hacker-news/commit/7e0786b8fa8512e6b670c362473b6e58dd1c44a9))
+
 ## [2.1.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v2.0.0...hacker-news-v2.1.0) (2026-01-16)
 
 
