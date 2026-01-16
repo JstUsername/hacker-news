@@ -13,7 +13,7 @@ const authService = new AuthService();
 
 export class ItemsService {
   async getNewestNews() {
-    return ItemsModel.findAll({ where: { type: 'link' }, order: [['time', 'DESC']] });
+    return ItemsModel.findAll({ where: { type: 'link', deleted: false }, order: [['time', 'DESC']] });
   }
 
   async loadCommentsTree(parentId: number, level = 0): Promise<Array<InferAttributes<ItemsModel>>> {
@@ -37,7 +37,7 @@ export class ItemsService {
   }
 
   async getItemById(id: number) {
-    const item = await ItemsModel.findOne({ where: { id } });
+    const item = await ItemsModel.findOne({ where: { id, deleted: false } });
     if (!item) throw new NotFoundError('No item with the given ID could be found');
     item.setDataValue('comments', await this.loadCommentsTree(item.id));
     return item;
@@ -124,7 +124,7 @@ export class ItemsService {
   async deleteComment({ id, cookies }: { id: number; cookies: Record<string, string> }) {
     const comment = await ItemsModel.findByPk(id);
 
-    if (!comment || comment.type !== 'comment') {
+    if (!comment || comment.type !== 'comment' || comment.deleted) {
       throw new NotFoundError('No comment with the given ID could be found');
     }
 
