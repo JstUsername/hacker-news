@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v2.3.0...hacker-news-v2.4.0) (2026-01-18)
+
+
+### Features
+
+* **HCKN-7:** добавлен Jenkinsfile, корректировка расположения файлов ([8c5f082](https://github.com/JstUsername/hacker-news/commit/8c5f0823556c31a47f4cb6074b27ca8f5adaae07))
+
 ## [2.3.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v2.2.0...hacker-news-v2.3.0) (2026-01-16)
 
 
