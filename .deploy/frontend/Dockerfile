@@ -10,13 +10,14 @@ RUN npm ci -w=@hacker-news/frontend --include-workspace-root
 FROM deps AS build
 ARG API_URL
 ENV API_URL=${API_URL}
+COPY .deploy/frontend .deploy/frontend
 COPY packages packages
 COPY tsconfig.base.json tsconfig.base.json
 COPY app/frontend app/frontend
 RUN npm run build -w=@hacker-news/frontend
 
 FROM nginx:stable-alpine AS production
-COPY --from=build /app/app/frontend/nginx/nginx.template /etc/nginx/templates/nginx.template
+COPY --from=build /app/.deploy/frontend/nginx.template /etc/nginx/templates/nginx.template
 COPY --from=build /app/app/frontend/dist /usr/share/nginx/html
 
 EXPOSE 80
