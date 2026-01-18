@@ -8,7 +8,7 @@ services:
       context: .
       args:
         API_URL: ${API_URL}
-      dockerfile: ./app/frontend/Dockerfile
+      dockerfile: .deploy/frontend/Dockerfile
     environment:
       - NODE_ENV=production
     env_file:
@@ -23,7 +23,7 @@ services:
     container_name: hacker-news-backend
     build:
       context: .
-      dockerfile: ./app/backend/Dockerfile
+      dockerfile: .deploy/backend/Dockerfile
     environment:
       - NODE_ENV=production
     env_file:
@@ -32,6 +32,11 @@ services:
       - '3001:3001'
     depends_on:
       - database
+    command: >
+      sh -c "
+      npm run migration:run:production -w=@hacker-news/backend &&
+      npm run serve:docker -w=@hacker-news/backend
+      "
 
   database:
     image: postgres:16-alpine
