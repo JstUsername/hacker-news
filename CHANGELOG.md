@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v2.4.0...hacker-news-v2.5.0) (2026-01-19)
+
+
+### Features
+
+* добавлена валидация env для backend ([f004954](https://github.com/JstUsername/hacker-news/commit/f004954e6639ad975116e1b4431921be44f08922))
+
 ## [2.4.0](https://github.com/JstUsername/hacker-news/compare/hacker-news-v2.3.0...hacker-news-v2.4.0) (2026-01-19)
 
 
