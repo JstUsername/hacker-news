@@ -1,16 +1,12 @@
-const DATABASE = process.env.POSTGRES_DB || '';
-const USER = process.env.POSTGRES_USER || '';
-const PASSWORD = process.env.POSTGRES_PASSWORD || '';
-const HOST = process.env.POSTGRES_HOST || 'localhost';
-const PORT = parseInt(process.env.POSTGRES_PORT || '5432');
+import { env } from '../../config/env';
 
 const BASE_DATABASE_CONFIG = {
   dialect: 'postgres',
-  database: DATABASE,
-  username: USER,
-  password: PASSWORD,
-  host: HOST,
-  port: PORT,
+  database: env.POSTGRES_DB,
+  username: env.POSTGRES_USER,
+  password: env.POSTGRES_PASSWORD,
+  host: env.EXPRESS_HOST,
+  port: env.POSTGRES_PORT,
   logging: false,
   define: {
     underscored: true,

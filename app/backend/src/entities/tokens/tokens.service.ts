@@ -2,15 +2,11 @@ import { TOKEN_TYPES } from './tokens.const';
 import { TokensModel, TokensModelCreate } from './tokens.model';
 import { AccessTokenPayload, CreateAccessToken, RefreshTokenPayload } from './tokens.types';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { StringValue } from 'ms';
 import { Op } from 'sequelize';
 import { v4 as uuidV4 } from 'uuid';
-import {
-  JWT_ACCESS_SECRET,
-  JWT_ACCESS_TOKEN_EXPIRES_IN,
-  JWT_REFRESH_SECRET,
-  JWT_REFRESH_TOKEN_EXPIRES_IN,
-  SERVER_URL,
-} from '~/constants';
+import { env } from '~/config/env';
+import { SERVER_URL } from '~/constants';
 
 export class TokensService {
   async generateTokens({ userId, username, sessionId }: CreateAccessToken) {
@@ -31,8 +27,14 @@ export class TokensService {
       sid,
     };
 
-    const accessToken = jwt.sign(payloadAccessToken, JWT_ACCESS_SECRET, { expiresIn: JWT_ACCESS_TOKEN_EXPIRES_IN });
-    const refreshToken = jwt.sign(payloadRefreshToken, JWT_REFRESH_SECRET, { expiresIn: JWT_REFRESH_TOKEN_EXPIRES_IN });
+    const accessToken = jwt.sign(payloadAccessToken, env.JWT_ACCESS_SECRET, {
+      expiresIn: env.JWT_ACCESS_TOKEN_EXPIRES_IN as unknown as StringValue,
+    });
+
+    const refreshToken = jwt.sign(payloadRefreshToken, env.JWT_REFRESH_SECRET, {
+      expiresIn: env.JWT_REFRESH_TOKEN_EXPIRES_IN as unknown as StringValue,
+    });
+
     const expiresAt = new Date((jwt.decode(refreshToken) as JwtPayload).exp! * 1000);
     return { sessionId: sid, accessToken, refreshToken, expiresAt };
   }

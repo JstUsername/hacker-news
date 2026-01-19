@@ -3,7 +3,8 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import { styleText } from 'node:util';
-import { CORS_WHITE_LIST, SERVER_PORT, SERVER_URL } from '~/constants';
+import { env } from '~/config/env';
+import { CORS_WHITE_LIST, SERVER_URL } from '~/constants';
 import { sequelize } from '~/databases';
 import { CronService } from '~/entities/cron';
 import { ItemsService } from '~/entities/items';
@@ -29,7 +30,7 @@ const start = async () => {
     await itemsService.generateItems();
     await tokensService.deleteAllExpiredTokens();
     await cronService.initCron();
-    app.listen(SERVER_PORT, () => console.info(styleText('green', `Express started: ${SERVER_URL}`)));
+    app.listen(env.EXPRESS_PORT, () => console.info(styleText('green', `Express started: ${SERVER_URL}`)));
   } catch (err) {
     console.error(err);
   }

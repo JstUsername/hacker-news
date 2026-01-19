@@ -1,9 +1,9 @@
-import { MAX_COMMENT_LEVEL, MAX_COMMENT_PER_NEWS, MAX_COMMENT_REPLIES, NEWS_COUNT } from './items.const';
 import { ItemsModel } from './items.model';
 import { GenerateComment, GenerateNews, GenerateReplies } from './items.types';
 import { faker } from '@faker-js/faker';
 import { styleText } from 'node:util';
 import { InferAttributes } from 'sequelize';
+import { env } from '~/config/env';
 import { ForbiddenError, NotFoundError } from '~/constants';
 import { COOKIE_NAME } from '~/entities/auth/auth.const';
 import { AuthService } from '~/entities/auth/auth.service';
@@ -59,15 +59,15 @@ export class ItemsService {
 
       await ItemsModel.destroy({ truncate: true, cascade: true });
 
-      for (let i = 0; i < NEWS_COUNT; i++) {
+      for (let i = 0; i < env.NEWS_COUNT; i++) {
         const newsTime = faker.date.recent({ days: 7 }).getTime();
         const timestamp = Math.floor(newsTime / 1000);
         const url = faker.internet.url();
-        const commentsCount = faker.number.int({ min: 0, max: MAX_COMMENT_PER_NEWS });
+        const commentsCount = faker.number.int({ min: 0, max: env.MAX_COMMENT_PER_NEWS });
         const news = await this.generateNews({ timestamp, commentsCount, url });
 
         for (let i = 0; i < commentsCount; i++) {
-          const commentRepliesCount = faker.number.int({ min: 0, max: MAX_COMMENT_REPLIES });
+          const commentRepliesCount = faker.number.int({ min: 0, max: env.MAX_COMMENT_REPLIES });
           const commentTime = faker.date.between({ from: newsTime, to: new Date() }).getTime();
           const comment = await this.generateComment({ commentTime, commentRepliesCount, parentId: news.id });
           comment.url = `item?id=${comment.id}`;
@@ -77,9 +77,9 @@ export class ItemsService {
             parentComment: comment,
             commentRepliesCount,
             level: 1,
-            maxLevel: MAX_COMMENT_LEVEL,
+            maxLevel: env.MAX_COMMENT_LEVEL,
             baseTime: commentTime,
-            maxCommentsReplies: MAX_COMMENT_REPLIES,
+            maxCommentsReplies: env.MAX_COMMENT_REPLIES,
           });
         }
       }

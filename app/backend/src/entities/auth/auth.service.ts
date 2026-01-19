@@ -3,17 +3,9 @@ import { InputLogin, InputRegister } from './auth.types';
 import bcrypt from 'bcryptjs';
 import { Response } from 'express';
 import jwt from 'jsonwebtoken';
-import {
-  BadRequestError,
-  ConflictError,
-  JWT_ACCESS_SECRET,
-  JWT_ACCESS_TOKEN_EXPIRES_IN,
-  JWT_REFRESH_SECRET,
-  JWT_REFRESH_TOKEN_EXPIRES_IN,
-  NotFoundError,
-  SERVER_URL,
-  UnauthorizedError,
-} from '~/constants';
+import { StringValue } from 'ms';
+import { env } from '~/config/env';
+import { BadRequestError, ConflictError, NotFoundError, SERVER_URL, UnauthorizedError } from '~/constants';
 import { AccessTokenPayload, RefreshTokenPayload, TokensModel, TokensService } from '~/entities/tokens';
 import { UsersModel } from '~/entities/users';
 import { msToMilliseconds } from '~/utils';
@@ -72,21 +64,21 @@ export class AuthService {
 
   setAccessTokenCookie(res: Response, accessToken: string) {
     res.cookie(COOKIE_NAME.Access, accessToken, {
-      maxAge: msToMilliseconds(JWT_ACCESS_TOKEN_EXPIRES_IN),
+      maxAge: msToMilliseconds(env.JWT_ACCESS_TOKEN_EXPIRES_IN as unknown as StringValue),
       ...COOKIE_OPTIONS,
     });
   }
 
   setRefreshTokenCookie(res: Response, refreshToken: string) {
     res.cookie(COOKIE_NAME.Refresh, refreshToken, {
-      maxAge: msToMilliseconds(JWT_REFRESH_TOKEN_EXPIRES_IN),
+      maxAge: msToMilliseconds(env.JWT_REFRESH_TOKEN_EXPIRES_IN as unknown as StringValue),
       ...COOKIE_OPTIONS,
     });
   }
 
   validateAccessToken(accessToken: string) {
     try {
-      return jwt.verify(accessToken, JWT_ACCESS_SECRET, { issuer: SERVER_URL }) as AccessTokenPayload;
+      return jwt.verify(accessToken, env.JWT_ACCESS_SECRET, { issuer: SERVER_URL }) as AccessTokenPayload;
     } catch {
       throw new UnauthorizedError();
     }
@@ -113,7 +105,7 @@ export class AuthService {
 
   private validateRefreshToken(refreshToken: string) {
     try {
-      return jwt.verify(refreshToken, JWT_REFRESH_SECRET, { issuer: SERVER_URL }) as RefreshTokenPayload;
+      return jwt.verify(refreshToken, env.JWT_REFRESH_SECRET, { issuer: SERVER_URL }) as RefreshTokenPayload;
     } catch (err) {
       throw new UnauthorizedError();
     }

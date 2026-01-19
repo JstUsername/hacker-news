@@ -3,5 +3,4 @@ export * from './cron';
 export * from './errors';
 export * from './server';
 export * from './statusCodes';
-export * from './tokens';
 export * from './validation';
