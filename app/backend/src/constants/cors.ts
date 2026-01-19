@@ -1,3 +1,3 @@
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+import { env } from '~/config/env';
 
-export const CORS_WHITE_LIST = [FRONTEND_URL];
+export const CORS_WHITE_LIST = [env.FRONTEND_URL];
