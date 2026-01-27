@@ -8,7 +8,7 @@ pipeline {
         DEPLOY_ENV           = 'production'
         BACKEND_IMAGE        = 'hacker-news-backend:20-alpine'
         FRONTEND_IMAGE       = 'hacker-news-frontend:20-alpine'
-        APP_URL              = 'http://89.23.102.251'
+        APP_URL              = 'http://45.144.220.219'
     }
 
     stages {
